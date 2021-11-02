@@ -11,37 +11,7 @@
         "location": {
             "type": "string"
         },
-        "hostingPlanName": {
-            "type": "string"
-        },
         "serverFarmResourceGroup": {
-            "type": "string"
-        },
-        "alwaysOn": {
-            "type": "bool"
-        },
-        "use32BitWorkerProcess": {
-            "type": "bool"
-        },
-        "storageAccountName": {
-            "type": "string"
-        },
-        "powerShellVersion": {
-            "type": "string"
-        },
-        "sku": {
-            "type": "string"
-        },
-        "skuCode": {
-            "type": "string"
-        },
-        "workerSize": {
-            "type": "string"
-        },
-        "workerSizeId": {
-            "type": "string"
-        },
-        "numberOfWorkers": {
             "type": "string"
         }
     },
