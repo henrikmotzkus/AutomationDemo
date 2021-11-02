@@ -1,11 +1,11 @@
 {
-    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "subscriptionId": {
             "type": "string"
         },
-        "name": {
+        "FunctionName": {
             "type": "string"
         },
         "location": {
@@ -14,22 +14,31 @@
         "serverFarmResourceGroup": {
             "type": "string"
         }
+       
     },
-    "variables": {},
+    "variables": {
+        "uniquestring": "[uniqueString(resourceGroup().id, subscription().id)]",
+        "hostingPlanName": "[concat(variables('uniquestring'),'plan' )]",
+        "storageaccountname": "[concat(variables('uniquestring'), 'sa')]",
+        "identityname": "spforfunction",
+        "roleassignmentname": "[guid(variables('identityName'),variables('roleDefinitionId'),resourceGroup().id)]",
+        "roleDefinitionId":"[resourceId('microsoft.authorization/roleDefinitions', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')]",
+        "tenantid":"[subscription().tenantId]"
+    },
     "resources": [
         {
             "apiVersion": "2018-11-01",
-            "name": "[parameters('name')]",
+            "name": "[parameters('FunctionName')]",
             "type": "Microsoft.Web/sites",
             "kind": "functionapp",
             "location": "[parameters('location')]",
             "tags": {},
             "dependsOn": [
-                "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
-                "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]"
+                "[concat('Microsoft.Web/serverfarms/', variables('hostingPlanName'))]",
+                "[concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]"
             ],
             "properties": {
-                "name": "[parameters('name')]",
+                "name": "[parameters('FunctionName')]",
                 "siteConfig": {
                     "appSettings": [
                         {
@@ -42,47 +51,54 @@
                         },
                         {
                             "name": "AzureWebJobsStorage",
-                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value,';EndpointSuffix=','core.windows.net')]"
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2019-06-01').keys[0].value,';EndpointSuffix=','core.windows.net')]"
                         },
                         {
                             "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value,';EndpointSuffix=','core.windows.net')]"
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2019-06-01').keys[0].value,';EndpointSuffix=','core.windows.net')]"
                         },
                         {
                             "name": "WEBSITE_CONTENTSHARE",
-                            "value": "[concat(toLower(parameters('name')), '9f3d')]"
+                            "value": "[concat(toLower(parameters('FunctionName')), '9f3d')]"
+                        },
+                        {
+                            "name":"tenantid",
+                            "value":"[variables('tenantid')]"
+                        },
+                        {
+                            "name":"Accountid",
+                            "value":"[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityname'))).principalId]"
                         }
                     ],
-                    "use32BitWorkerProcess": "[parameters('use32BitWorkerProcess')]",
-                    "powerShellVersion": "[parameters('powerShellVersion')]"
+                    "powerShellVersion": "~7"
                 },
-                "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
+                "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', variables('hostingPlanName'))]",
                 "clientAffinityEnabled": false
             }
         },
         {
-            "apiVersion": "2018-11-01",
-            "name": "[parameters('hostingPlanName')]",
+            "apiVersion": "2020-12-01",
+            "name": "[variables('hostingPlanName')]",
             "type": "Microsoft.Web/serverfarms",
             "location": "[parameters('location')]",
             "kind": "",
             "tags": {},
             "dependsOn": [],
             "properties": {
-                "name": "[parameters('hostingPlanName')]",
-                "workerSize": "[parameters('workerSize')]",
-                "workerSizeId": "[parameters('workerSizeId')]",
-                "numberOfWorkers": "[parameters('numberOfWorkers')]"
+                "workerSize": "0",
+                "workerSizeId": "0",
+                "numberOfWorkers": "1"
             },
             "sku": {
-                "Tier": "[parameters('sku')]",
-                "Name": "[parameters('skuCode')]"
+                "Tier": "Dynamic",
+                "Name": "Y1"
             }
         },
         {
             "apiVersion": "2019-06-01",
             "type": "Microsoft.Storage/storageAccounts",
-            "name": "[parameters('storageAccountName')]",
+            "name": "[variables('storageAccountName')]",
+            "kind": "StorageV2",
             "location": "[parameters('location')]",
             "tags": {},
             "sku": {
@@ -92,6 +108,25 @@
                 "supportsHttpsTrafficOnly": true,
                 "minimumTlsVersion": "TLS1_2"
             }
+        },
+         {
+            "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+            "name": "[variables('identityname')]",
+            "apiVersion": "2018-11-30",
+            "location": "[resourceGroup().location]"
+        },
+        {
+            "type": "Microsoft.Authorization/roleAssignments",
+            "apiVersion": "2020-04-01-preview",
+            "name": "[variables('roleAssignmentName')]",
+            "properties": {
+                "roleDefinitionId": "[variables('roleDefinitionId')]",
+                "principalId": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityname'))).principalId]",
+                "principalType": "ServicePrincipal"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityname'))]"
+            ]
         }
     ]
 }
