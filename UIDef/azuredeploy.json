@@ -38,13 +38,6 @@
         "metadata": {
           "description": "Size of the virtual machine."
         }
-      },
-      "location": {
-        "type": "string",
-        "defaultValue": "[resourceGroup().location]",
-        "metadata": {
-          "description": "Location for all resources."
-        }
       }
     },
     "functions": [],
@@ -59,14 +52,15 @@
       "vmname": "[concat(variables('uniquestring'),'vm')]",
       "adminusername": "adminlocal",
       "dnslabelprefix": "[toLower(format('{0}-{1}', variables('vmname'), uniqueString(resourceGroup().id, variables('vmname'))))]",
-      "publicipname": "[concat(variables('uniquestring'),'pubip')]"
+      "publicipname": "[concat(variables('uniquestring'),'pubip')]",
+      "location":"[resourceGroup().location]"
     },
     "resources": [
       {
         "type": "Microsoft.Network/publicIPAddresses",
         "apiVersion": "2021-02-01",
         "name": "[variables('publicipname')]",
-        "location": "[parameters('location')]",
+        "location": "[variables('location')]",
         "sku": {
           "name": "Basic"
         },
@@ -81,7 +75,7 @@
         "type": "Microsoft.Network/networkSecurityGroups",
         "apiVersion": "2021-02-01",
         "name": "[variables('networkSecurityGroupName')]",
-        "location": "[parameters('location')]",
+        "location": "[variables('location')]",
         "properties": {
           "securityRules": [
             {
@@ -104,7 +98,7 @@
         "type": "Microsoft.Network/virtualNetworks",
         "apiVersion": "2021-02-01",
         "name": "[variables('virtualNetworkName')]",
-        "location": "[parameters('location')]",
+        "location": "[variables('location')]",
         "properties": {
           "addressSpace": {
             "addressPrefixes": [
@@ -131,7 +125,7 @@
         "type": "Microsoft.Network/networkInterfaces",
         "apiVersion": "2021-02-01",
         "name": "[variables('nicName')]",
-        "location": "[parameters('location')]",
+        "location": "[variables('location')]",
         "properties": {
           "ipConfigurations": [
             {
@@ -157,7 +151,7 @@
         "type": "Microsoft.Compute/virtualMachines",
         "apiVersion": "2021-03-01",
         "name": "[variables('vmName')]",
-        "location": "[parameters('location')]",
+        "location": "[variables('location')]",
         "properties": {
           "hardwareProfile": {
             "vmSize": "[parameters('vmSize')]"
