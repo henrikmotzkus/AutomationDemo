@@ -105,7 +105,6 @@
 		"outputs": {
 			"adminpassword":"[steps('vmsettings').passwordBox1]",
 			"OSVersion":"[steps('vmsettings').dropDown1]",
-			"tagsByResource": "[steps('tags').tagsByResource]",
 			"vmSize":"[steps('vmsettings').vmSizeSelector1]",
 			"locatin":"[location()]"
 		} 
