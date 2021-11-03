@@ -1,40 +1,10 @@
 {
-    "handler": "Microsoft.Compute.MultiVm",
+	"$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
+    "handler": "Microsoft.Azure.CreateUIDef",
     "version": "0.1.2-preview",
     "parameters": {
-		"config": {
-            "isWizard": false,
-            "basics": { }
-        },
         "basics": [
-			{
-                "name": "section1",
-                "label": "Dieser Wizard erstellt eine Virtuelle Maschine nach Unternehmensvorgaben",
-                "elements": [
-                    {
-						"name": "textBlock1",
-						"type": "Microsoft.Common.TextBlock",
-						"visible": true,
-						"options": {
-							"text": "Hier findest Du weitere Informationen zu diesem Prozess.",
-							"link": {
-								"label": "Hier mehr",
-								"uri": "https://github.com/henrikmotzkus/AutomationDemo"
-							}
-						}
-					},
-					{
-						"name": "legalAccept",
-						"type": "Microsoft.Common.CheckBox",
-						"label": "Ich stimme den Bedingungen zu.",
-						"constraints": {
-							"required": true,
-							"validationMessage": "Please acknowledge the legal conditions."
-						}
-					}
-                ],
-                "visible": true
-            }
+			
         ],
         "steps": [
 			{
