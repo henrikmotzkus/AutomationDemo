@@ -66,10 +66,7 @@
 							"Standard_D3"
 						],
 						"constraints": {
-							"allowedSizes": [],
-							"excludedSizes": [],
-							"numAvailabilityZonesRequired": 3,
-							"zone": "3"
+							"allowedSizes": []
 						},
 						"options": {
 							"hideDiskTypeFilter": false
