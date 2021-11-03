@@ -162,7 +162,7 @@
           },
           "kind": "ResourceGroup",
           "location": "[steps('basics').resourceScope.location.name]",
-          "subscriptionId": "[steps('basics').resourceScope.resourceGroup.id]"
+          "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]"
       }
   } 
 }
