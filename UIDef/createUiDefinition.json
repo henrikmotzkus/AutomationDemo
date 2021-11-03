@@ -131,13 +131,10 @@
             }
         ],
         "outputs": {
-            "parameters":{
-                "location": "[location()]",
-                "tagsByResource": "[steps('tags').tagsByResource]",
-                "OSVersion":"[steps('vmsettings').dropDown1]",
-                "vmSize":"[steps('vmsettings').vmSizeSelector1]"
-            }
-
-        }
+			"location": "[location()]",
+			"tagsByResource": "[steps('tags').tagsByResource]",
+			"OSVersion":"[steps('vmsettings').dropDown1]",
+			"vmSize":"[steps('vmsettings').vmSizeSelector1]"
+        } 
     }
 }
