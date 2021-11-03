@@ -103,9 +103,11 @@
 			}
         ],
 		"outputs": {
-			"adminPassword":"[steps('vmsettings').passwordBox1]",
-			"OSVersion":"[steps('vmsettings').dropDown1]",
-			"vmSize":"[steps('vmsettings').vmSizeSelector1]"
+			"parameters":{
+				"adminPassword":"[steps('vmsettings').passwordBox1]",
+				"OSVersion":"[steps('vmsettings').dropDown1]",
+				"vmSize":"[steps('vmsettings').vmSizeSelector1]"
+			}
 		} 
 	}
 }
