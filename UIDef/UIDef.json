@@ -6,14 +6,54 @@
           "title": "VM nach Unternehmensvorgaben",
           "steps": [
               {
-                  "name": "basics",
-                  "label": "Deployment location",
-                  "elements": [
-                      {
-                          "name": "resourceScope",
-                          "type": "Microsoft.Common.ResourceScope"
-                      }
-                  ]
+                "name": "basics",
+                "label": "Basics",
+                "elements": [
+                  {
+                    "name": "resourceScope",
+                    "type": "Microsoft.Common.ResourceScope",
+                    "subscription": {
+                      "constraints": {
+                        "validations": [
+                          {
+                            "isValid": "[expression for checking]",
+                            "message": "Please select a valid subscription."
+                          },
+                          {
+                            "permission": "<Resource Provider>/<Action>",
+                            "message": "Must have correct permission to complete this step."
+                          }
+                        ]
+                      },
+                      "resourceProviders": [
+                        "<Resource Provider>"
+                      ]
+                    },
+                    "resourceGroup": {
+                      "constraints": {
+                        "validations": [
+                          {
+                            "isValid": "[expression for checking]",
+                            "message": "Please select a valid resource group."
+                          }
+                        ]
+                      },
+                      "allowExisting": true
+                    },
+                    "location": {
+                      "label": "Custom label for location",
+                      "toolTip": "provide a useful tooltip",
+                      "resourceTypes": [
+                        "Microsoft.Compute/virtualMachines"
+                      ],
+                      "allowedValues": [
+                        "eastus",
+                        "westus2"
+                      ]
+                    }
+                  }
+                ],
+                "description": "Customized description with **markdown**, see [more](https://www.microsoft.com)."
               },
               {
                 "name":"Text",
