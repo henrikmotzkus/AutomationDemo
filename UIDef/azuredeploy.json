@@ -48,7 +48,7 @@
     },
     "functions": [],
     "variables": {
-      "uniquestring": "[uniqueString(subscription().subscriptionId, 'BlahBlah')]",
+      "uniquestring": "[uniqueString(subscription().subscriptionId, variables('vmname'))]",
       "nicName": "[concat(variables('uniquestring'),'nic')]",
       "addressPrefix": "10.0.0.0/16",
       "subnetName": "Subnet",
@@ -57,7 +57,7 @@
       "networkSecurityGroupName": "[concat(variables('uniquestring'),'nsg')]",
       "vmname": "[concat(variables('uniquestring'),'vm')]",
       "adminusername": "adminlocal",
-      "dnslabelprefix": "[toLower(format('{0}-{1}', variables('vmname'), uniqueString(resourceGroup().id, variables('vmname'))))]",
+      "dnslabelprefix": "[toLower(format('{0}-{1}', variables('vmname'), uniqueString(variables('vmname'))))]",
       "publicipname": "[concat(variables('uniquestring'),'pubip')]",
       "location":"[resourceGroup().location]"
     },
