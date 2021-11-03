@@ -48,7 +48,7 @@
     },
     "functions": [],
     "variables": {
-      "uniquestring": "[uniqueString(subscription().subscriptionId, resourceGroup().id)]",
+      "uniquestring": "[uniqueString(subscription().subscriptionId, 'BlahBlah')]",
       "nicName": "[concat(variables('uniquestring'),'nic')]",
       "addressPrefix": "10.0.0.0/16",
       "subnetName": "Subnet",
