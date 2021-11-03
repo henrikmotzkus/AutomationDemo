@@ -120,9 +120,9 @@
             "OSVersion":"[steps('vmsettings').dropDown1]",
             "vmSize":"[steps('vmsettings').vmSizeSelector1]"
           },
-          "kind": "ResoureGroup",
+          "kind": "Subscription",
           "location": "[steps('basics').resourceScope.location.name]",
-          "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]"
+          "subscriptionId": "[steps('basics').resourceScope.subscription.id]"
       }
   } 
 }
