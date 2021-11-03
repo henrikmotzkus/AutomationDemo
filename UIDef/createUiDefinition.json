@@ -103,7 +103,7 @@
 			}
         ],
 		"outputs": {
-			"adminpassword":"[steps('vmsettings').passwordBox1]",
+			"adminPassword":"[steps('vmsettings').passwordBox1]",
 			"OSVersion":"[steps('vmsettings').dropDown1]",
 			"vmSize":"[steps('vmsettings').vmSizeSelector1]"
 		} 
