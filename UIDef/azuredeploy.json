@@ -59,7 +59,7 @@
       "adminusername": "adminlocal",
       "dnslabelprefix": "[toLower(format('{0}-{1}', variables('vmname'), uniqueString(variables('vmname'))))]",
       "publicipname": "[concat(variables('uniquestring'),'pubip')]",
-      "location":"[resourceGroup().location]"
+      "location":"[parameters('location')]"
     },
     "resources": [
       {
