@@ -140,8 +140,8 @@
                     "toolTip": "",
                     "constraints": {
                       "required": true,
-                      "regex": "^[a-zA-Z0-9]{8,}$",
-                      "validationMessage": "Password must be at least 8 characters long, contain only numbers and letters"
+                      "regex": "^[a-zA-Z0-9]{12,}$",
+                      "validationMessage": "Password must be at least 12 characters long, contain only numbers and letters"
                     },
                     "options": {
                       "hideConfirmation": false
@@ -155,7 +155,7 @@
       },
       "outputs": {
           "parameters": {
-            "location":"Test",
+            "location":"[steps('basics').resourceScope.location.name]",
             "adminPassword":"[steps('vmsettings').passwordBox1]",
             "OSVersion":"[steps('vmsettings').dropDown1]",
             "vmSize":"[steps('vmsettings').vmSizeSelector1]"
