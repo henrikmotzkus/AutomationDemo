@@ -3,6 +3,10 @@
     "handler": "Microsoft.Azure.CreateUIDef",
     "version": "0.1.2-preview",
     "parameters": {
+		"config": {
+            "isWizard": false,
+            "basics": { }
+        },
         "basics": [
 			{
                 "name": "section1",
@@ -130,11 +134,12 @@
                 ]
             }
         ],
-        "outputs": {
-			"location": "[location()]",
-			"tagsByResource": "[steps('tags').tagsByResource]",
-			"OSVersion":"[steps('vmsettings').dropDown1]",
-			"vmSize":"[steps('vmsettings').vmSizeSelector1]"
-        } 
-    }
+		
+		"outputs": {
+				"location": "[location()]",
+				"tagsByResource": "[steps('tags').tagsByResource]",
+				"OSVersion":"[steps('vmsettings').dropDown1]",
+				"vmSize":"[steps('vmsettings').vmSizeSelector1]"
+		} 
+	}
 }
