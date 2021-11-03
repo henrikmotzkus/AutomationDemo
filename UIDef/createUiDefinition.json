@@ -9,7 +9,6 @@
         "basics": [
 			{
                 "name": "section1",
-                "type": "Microsoft.Common.Section",
                 "label": "Dieser Wizard erstellt eine Virtuelle Maschine nach Unternehmensvorgaben",
                 "elements": [
                     {
