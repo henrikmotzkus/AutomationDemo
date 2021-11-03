@@ -116,6 +116,24 @@
 						},
 						"count": 1,
 						"visible": true
+					},
+					{
+						"name": "passwordBox1",
+						"type": "Microsoft.Common.PasswordBox",
+						"label": {
+							"password": "Password",
+							"confirmPassword": "Confirm password"
+						},
+						"toolTip": "",
+						"constraints": {
+							"required": true,
+							"regex": "^[a-zA-Z0-9]{8,}$",
+							"validationMessage": "Password must be at least 8 characters long, contain only numbers and letters"
+						},
+						"options": {
+							"hideConfirmation": false
+						},
+						"visible": true
 					}
 					
 				]
@@ -136,10 +154,11 @@
         ],
 		
 		"outputs": {
-				"location": "[location()]",
-				"tagsByResource": "[steps('tags').tagsByResource]",
-				"OSVersion":"[steps('vmsettings').dropDown1]",
-				"vmSize":"[steps('vmsettings').vmSizeSelector1]"
+			"adminpassword":"[steps('vmsettings').passwordBox1]",
+			"OSVersion":"[steps('vmsettings').dropDown1]",
+			"tagsByResource": "[steps('tags').tagsByResource]",
+			"vmSize":"[steps('vmsettings').vmSizeSelector1]",
+			"locatin":"[location()]"
 		} 
 	}
 }
