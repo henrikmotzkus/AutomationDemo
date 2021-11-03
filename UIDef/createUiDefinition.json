@@ -69,7 +69,7 @@
 						"label": "Windows Betriebssystem",
 						"placeholder": "",
 						"defaultValue": "2016-Datacenter",
-						"toolTip": "Wähle Dein Betriebssystem Image aus.",
+						"toolTip": "Waehle Dein Betriebssystem Image aus.",
 						"constraints": {
 							"allowedValues": [
 								{
@@ -140,7 +140,7 @@
 			},
             {
                 "name": "tags",
-                "label": "Zusätzliche Tags",
+                "label": "Zusaetzliche Tags",
                 "elements": [
                     {
                         "name": "tagsByResource",
