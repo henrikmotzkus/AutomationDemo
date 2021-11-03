@@ -115,16 +115,12 @@
       },
       "outputs": {
           "parameters": {
-            "location":"[steps('basics').resourceScope.location.name]",
             "adminPassword":"[steps('vmsettings').passwordBox1]",
             "OSVersion":"[steps('vmsettings').dropDown1]",
             "vmSize":"[steps('vmsettings').vmSizeSelector1]"
           },
           "kind": "Tenant",
-          "location": "[steps('basics').resourceScope.location.name]",
-          "adminPassword":"[steps('vmsettings').passwordBox1]",
-          "OSVersion":"[steps('vmsettings').dropDown1]",
-          "vmSize":"[steps('vmsettings').vmSizeSelector1]"
+          "location": "[steps('basics').resourceScope.location.name]"
       }
   } 
 }
