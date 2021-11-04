@@ -76,8 +76,8 @@
                 ]
               },
               {
-                "name": "simpleControls",
-                "label": "Simple Controls",
+                "name": "domainjoin",
+                "label": "Domain Join",
                 "elements": [
                     {
                         "name": "infoMessage",
@@ -91,8 +91,8 @@
                     {
                         "name": "jointype",
                         "type": "Microsoft.Common.DropDown",
-                        "label": "jointype",
-                        "defaultValue": "online",
+                        "label": "Join type",
+                        "defaultValue": "Online",
                         "toolTip": "",
                         "constraints": {
                             "allowedValues": [
@@ -112,7 +112,7 @@
                     {
                         "name": "domain",
                         "type": "Microsoft.Common.OptionsGroup",
-                        "label": "domain",
+                        "label": "Domain",
                         "defaultValue": "ottogroup.net",
                         "toolTip": "",
                         "constraints": {
