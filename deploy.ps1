@@ -59,13 +59,15 @@ New-AzResourceGroupDeployment `
     -location $location `
     -serverFarmResourceGroup $funcrgname
     
+# Manuell System assigned identity setzen
+
 Invoke-WebRequest -Uri "https://azuredeployfunction.azurewebsites.net/api/deploy?name=TESTUEBERURL"
 
 <#
     Deployment über eine eigene UI Definition und automatisch Übergabe ans Azure Portal
     Vorsicht dieses Feature ist nahezu undokumentiert!
 #>
-https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2FUIDef%2Fazuredeploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2FUIDef%2FUIDef.json
+https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2FUIDef%2Fazuredeploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2FUIDef%2FUIDefRG.json
 PasswordPassword_
 
 <#
@@ -92,10 +94,10 @@ New-AzSubscriptionDeployment `
 
 
 <#
-    Deployment of a VM to a resource group and a Custom Script Extension 
+    Deployment of a VM to a resource group and a (Custom Script Extension )
     With a linked template
 #>
-$rgname = "DeployVMandCSE3"
+$rgname = "DeployVMandCSE5"
 $location = "westeurope"
 New-AzResourceGroup -Name $rgname -Location $location
 New-AzResourceGroupDeployment `

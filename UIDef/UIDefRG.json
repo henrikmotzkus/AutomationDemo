@@ -76,6 +76,109 @@
                 ]
               },
               {
+                "name": "simpleControls",
+                "label": "Simple Controls",
+                "elements": [
+                    {
+                        "name": "infoMessage",
+                        "type": "Microsoft.Common.InfoBox",
+                        "visible": true,
+                        "options": {
+                            "icon": "Info",
+                            "text": "In welche Domain soll die VM gejoint werden?"
+                        }
+                    },
+                    {
+                        "name": "jointype",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "jointype",
+                        "defaultValue": "online",
+                        "toolTip": "",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "label": "Online",
+                                    "value": "online"
+                                },
+                                {
+                                    "label": "Offline",
+                                    "value": "offline"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "domain",
+                        "type": "Microsoft.Common.OptionsGroup",
+                        "label": "domain",
+                        "defaultValue": "ottogroup.net",
+                        "toolTip": "",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "label": "ottogroup.net",
+                                    "value": "ottogroup.net"
+                                },
+                                {
+                                    "label": "ottogroup.test",
+                                    "value": "ottogroup.test"
+                                },
+                                {
+                                    "label": "sandbox.lab",
+                                    "value": "sandbox.lab"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "newsletter",
+                        "type": "Microsoft.Common.Section",
+                        "label": "Monthly Newsletter",
+                        "elements": [
+                            {
+                                "name": "announcement",
+                                "type": "Microsoft.Common.TextBlock",
+                                "visible": true,
+                                "options": {
+                                    "text": "Erhalte unseren monatlichen Newsletter aus dem Cloud Competence Center",
+                                    "link": {
+                                        "label": "Learn more",
+                                        "uri": "https://www.microsoft.com"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "emailAddress",
+                                "type": "Microsoft.Common.TextBox",
+                                "label": "Email",
+                                "defaultValue": "",
+                                "toolTip": "Please enter a valid email account",
+                                "constraints": {
+                                    "required": false,
+                                    "regex": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
+                                    "validationMessage": "Email is not valid. Please re-enter."
+                                },
+                                "visible": true
+                            },
+                            {
+                                "name": "legalAccept",
+                                "type": "Microsoft.Common.CheckBox",
+                                "label": "I agree to the terms and conditions.",
+                                "constraints": {
+                                    "required": true,
+                                    "validationMessage": "Please acknowledge the legal conditions."
+                                }
+                            }
+                        ],
+                        "visible": true
+                    }
+                ]
+              },
+              {
                 "name":"vmsettings",
                 "label":"Virtuelle Maschine",
                 "elements":[
