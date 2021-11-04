@@ -47,7 +47,7 @@
             "name": "[concat(parameters('vmname'),'/config-app')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-              
+              "[resourceId('Microsoft.Resources/deployments', 'linkedTemplate')]"
             ],
             "tags": {
                 "displayName": "configapp"
@@ -61,11 +61,10 @@
                     "timestamp":123456789
                 },
                 "protectedSettings": {
-                    "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File installscript.ps1",
+                    "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File script.ps1",
                     "managedIdentity" : {},
                     "fileUris": [
-                        "https://raw.githubusercontent.com/henrikmotzkus/CSE-AzureVMShutdown/main/installscript.ps1",
-                        "https://raw.githubusercontent.com/henrikmotzkus/CSE-AzureVMShutdown/main/shutdown.ps1"
+                        "https://raw.githubusercontent.com/henrikmotzkus/CSE-AzureVMShutdown/main/script.ps1"
                     ]
                 }
             }
