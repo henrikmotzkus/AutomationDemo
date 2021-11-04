@@ -39,7 +39,7 @@
                 "settings": {
                     "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File script.ps1",
                     "fileUris": [
-                        "https://raw.githubusercontent.com/henrikmotzkus/CSE-AzureVMShutdown/main/script.ps1"
+                        "https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/CSEandDSC/script.ps1"
                     ]
                 },
                 "protectedSettings": {

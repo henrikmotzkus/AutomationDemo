@@ -95,7 +95,7 @@ New-AzSubscriptionDeployment `
     Deployment of a VM to a resource group and a Custom Script Extension 
     With a linked template
 #>
-$rgname = "DeployVMandCSE2"
+$rgname = "DeployVMandCSE3"
 $location = "westeurope"
 New-AzResourceGroup -Name $rgname -Location $location
 New-AzResourceGroupDeployment `
