@@ -45,6 +45,12 @@
         "metadata": {
           "description": "Location for all resources."
         }
+      },
+      "vmname": {
+        "type": "string",
+        "metadata": {
+          "description": "description"
+        }
       }
     },
     "functions": [],
@@ -56,7 +62,8 @@
       "subnetPrefix": "10.0.0.0/24",
       "virtualNetworkName": "[concat(variables('uniquestring'),'VNET')]",
       "networkSecurityGroupName": "[concat(variables('uniquestring'),'nsg')]",
-      "vmname": "[concat(variables('uniquestring'),'vm')]",
+      //"vmname": "[concat(variables('uniquestring'),'vm')]",
+      "vmname": "[if(empty(parameters('vmname')), concat(variables('uniquestring'),'vm'), parameters('vmname'))]",
       "adminusername": "adminlocal",
       "dnslabelprefix": "[toLower(format('{0}-{1}', variables('vmname'), uniqueString(resourceGroup().id, variables('vmname'))))]",
       "publicipname": "[concat(variables('uniquestring'),'pubip')]"
@@ -211,6 +218,10 @@
       "hostname": {
         "type": "string",
         "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicipname'))).dnsSettings.fqdn]"
+      },
+      "vmname": {
+        "type": "string",
+        "value": "[variables('vmname')]"
       }
     }
   }

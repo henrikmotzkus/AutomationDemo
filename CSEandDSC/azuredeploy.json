@@ -1,0 +1,76 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Password of the VM admin user"
+            }
+        },
+        "vmname": {
+            "type": "string",
+            "defaultValue":"TestVMHenrik",
+            "metadata": {
+                "description": "Name der VM"
+            }
+        }
+    },
+    "functions": [],
+    "variables": {
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "linkedTemplate",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri":"https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/ResourceGroup/azuredeploy.json",
+                    "contentVersion":"1.0.0.0"
+                },
+                "parameters": {
+                    "adminPassword": {
+                        "value": "[parameters('adminPassword')]"
+                    },
+                    "vmname": {
+                        "value": "[parameters('vmname')]"
+                    }
+                }
+                
+            }
+        },
+        {
+            "apiVersion": "2018-06-01",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('vmname'),'/config-app')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+              
+            ],
+            "tags": {
+                "displayName": "configapp"
+            },
+            "properties": {
+                "publisher": "Microsoft.Compute",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.10",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "timestamp":123456789
+                },
+                "protectedSettings": {
+                    "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File installscript.ps1",
+                    "managedIdentity" : {},
+                    "fileUris": [
+                        "https://raw.githubusercontent.com/henrikmotzkus/CSE-AzureVMShutdown/main/installscript.ps1",
+                        "https://raw.githubusercontent.com/henrikmotzkus/CSE-AzureVMShutdown/main/shutdown.ps1"
+                    ]
+                }
+            }
+        }
+
+    ],
+    "outputs": {}
+}

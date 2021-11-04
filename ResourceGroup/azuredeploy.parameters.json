@@ -9,6 +9,9 @@
           },
           "secretName": "vmAdminPassword"
         }
+      },
+      "vmname": {
+          "value": "" 
       }
       
     }

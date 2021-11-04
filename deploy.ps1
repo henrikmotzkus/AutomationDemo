@@ -52,7 +52,8 @@ New-AzResourceGroupDeployment `
  
 
 <#
-    Deployment auf ResourceGroup und Subscription Ebene mit einem nested Template
+    Deployment auf ResourceGroup und Subscription Ebene mit einem nested Template.
+    Nutzung von Keyvault als Passwort Speicher
 #>
 New-AzSubscriptionDeployment `
     -TemplateFile '.\SubscriptionNested\azuredeploy.json' `
@@ -69,16 +70,33 @@ Invoke-WebRequest -Uri "https://azuredeployfunction.azurewebsites.net/api/deploy
 <#
     Deployment über eine eigene UI Definition
 #>
+https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2FUIDef%2Fazuredeploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2FUIDef%2FUIDef.json
+PasswordPassword_
+
+<#
+    Enterprise Scale landing zone Demo
+    Look: https://github.com/Azure/Enterprise-Scale
+#>
 
 
-# Demo 
-https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2FeslzArm.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2Feslz-portal.json
+<# 
+    Managed Application Demo
+    Look: https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/
+#>
 
-# UI Def für VM
-https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2FUIDef%2Fazuredeploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2FUIDef%2FcreateUiDefinition.json
 
-# UI Def mit Demo Elementen
-https://portal.azure.com/?feature.customPortal=false#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2FUIDef%2Fazuredeploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2FUIDef%2FdemoUI.json
+<#
+    Blueprint Demo
+#>
+New-AzSubscriptionDeployment `
+  -Name demoDeployment `
+  -Location "westeurope" `
+  -TemplateFile .\Blueprints\DeployBlueprint\azuredeploy.json `
+  -blueprintName "TestBlueprint"
 
-# Original Link aus ESLZ
-https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2FeslzArm.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2Feslz-portal.json
+
+<#
+    Custom Script Extension and Desired State Configuration
+    Mit modularisiertem Deployment "Linked Template"
+#>
+
