@@ -1,4 +1,15 @@
 <#
+    Author: Henrik Motzkus
+    Date: 11/2021
+    Description: This is a demo for all the apsects of automating Azure.
+#>
+
+<#
+    Requirements: AZ Module 6.0 and Powershell 7
+#>
+
+
+<#
   Mit Azure Verbinden und Subscription setzen
 #>
 $location = "westeurope"
@@ -9,7 +20,7 @@ Set-AzContext $subscriptionid
 
 
 <#
-    Deployment auf Subscription Ebene
+    Step 1. Deployment auf Subscription Ebene
 #>
 $subrgname = "Deplytosubscription"
 New-AzSubscriptionDeployment `
@@ -19,8 +30,8 @@ New-AzSubscriptionDeployment `
 
 
 <#
-    Deployment auf ResourceGroup Ebene. Deployt eine VM mit Reference auf einen Keyvault.
-    With conditional varaiables
+    Step 2: Deployment auf ResourceGroup Ebene. Deployt eine VM mit Reference auf einen Keyvault.
+    - With conditional varaiables
 #>
 New-AzResourceGroup -Name "Keyvault" -Location $location
 New-AzResourceGroupDeployment `
@@ -36,8 +47,9 @@ New-AzResourceGroupDeployment `
     
 
 <#
-    Deployment auf ResourceGroup UND Subscription Ebene mit einem nested Template. Inline
-    Nutzung von Keyvault als Passwort Speicher
+    Step 3. Deployment auf ResourceGroup UND Subscription Ebene mit einem nested Template. 
+    - Inline
+    - Nutzung von Keyvault als Passwort Speicher
 #>
 New-AzSubscriptionDeployment `
     -TemplateFile '.\SubscriptionNested\azuredeploy.json' `
@@ -46,9 +58,10 @@ New-AzSubscriptionDeployment `
       
 
 <#
-    Deployment eines Templates über eine individuelle REST API. Die Url ist in der Function ersichtlich. 
-    Vorher muss erst die Function angelegt werden.
-    Übergabe der Parameter per Befehl
+    Step 4: Deployment eines Templates über eine individuelle REST API. Die Url ist in der Function ersichtlich. 
+    - Vorher muss erst die Function angelegt werden
+    - Übergabe der Deployment Parameter per PSBefehl
+    - Github Action pipeline für den function code
 #>
 $funcrgname = "DeployFunction"
 New-AzResourceGroup -Name $funcrgname -Location $location
@@ -65,26 +78,26 @@ New-AzResourceGroupDeployment `
 Invoke-WebRequest -Uri "https://azuredeployfunction.azurewebsites.net/api/deploy?name=TESTUEBERURL"
 
 <#
-    Deployment über eine eigene UI Definition und automatisch Übergabe ans Azure Portal
+    Step 5: Deployment über eine eigene UI Definition und automatisch Übergabe ans Azure Portal
     Vorsicht dieses Feature ist nahezu undokumentiert!
 #>
 https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2FUIDef%2Fazuredeploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2FUIDef%2FUIDefRG.json
 PasswordPassword_
 
 <#
-    Enterprise Scale landing zone Demo
+    Step 6: Enterprise Scale landing zone Demo
     Look: https://github.com/Azure/Enterprise-Scale
 #>
 
 
 <# 
-    Managed Application Demo
+    Step 7: Managed Application Demo
     Look: https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/
 #>
 # TODO
 
 <#
-    Deploy of a blueprint out of a ARM template.
+    Step 8: Deploy of a blueprint out of a ARM template.
     Than manual assigment
 #>
 New-AzSubscriptionDeployment `
@@ -95,7 +108,7 @@ New-AzSubscriptionDeployment `
 
 
 <#
-    Deployment of a VM to a resource group and a (Custom Script Extension )
+    Step 9: Deployment of a VM to a resource group and a (Custom Script Extension )
     With a linked template
 #>
 $rgname = "DeployVMandCSE5"
@@ -109,7 +122,7 @@ New-AzResourceGroupDeployment `
 
 
 <#
-    Deploy a Template Specs
+    Step 10: Deploy a Template Specs
 #>
 
 # Plain template
@@ -130,7 +143,7 @@ New-AzResourceGroupDeployment `
   -ResourceGroupName $rgname
 
 
-# Linked Template
+# Linked Template and own UI
 
 $name = "SimpleVMnested3"
 $rgname = "Specs"
