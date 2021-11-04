@@ -1,0 +1,73 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Password of the VM admin user"
+            }
+        },
+        "vmname": {
+            "type": "string",
+            "defaultValue":"TestVMHenrik",
+            "metadata": {
+                "description": "Name der VM"
+            }
+        }
+    },
+    "functions": [],
+    "variables": {
+    },
+    "resources": [
+        {
+            "apiVersion": "2018-06-01",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('vmname'),'/','config-app')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+              "[resourceId('Microsoft.Resources/deployments', 'linkedTemplate')]"
+            ],
+            "tags": {
+                "displayName": "configapp"
+            },
+            "properties": {
+                "publisher": "Microsoft.Compute",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.7",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File script.ps1",
+                    "fileUris": [
+                        "https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/CSEandDSC/script.ps1"
+                    ]
+                },
+                "protectedSettings": {
+                   
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "linkedTemplate",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "relativePath": "artifacts/azuredeploy.json"
+                },
+                "parameters": {
+                    "adminPassword": {
+                        "value": "[parameters('adminPassword')]"
+                    },
+                    "vmname": {
+                        "value": "[parameters('vmname')]"
+                    }
+                }
+                
+            }
+        }
+
+    ],
+    "outputs": {}
+}

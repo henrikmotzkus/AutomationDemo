@@ -48,6 +48,7 @@ New-AzSubscriptionDeployment `
 <#
     Deployment eines Templates über eine individuelle REST API. Die Url ist in der Function ersichtlich. 
     Vorher muss erst die Function angelegt werden.
+    Übergabe der Parameter per Befehl
 #>
 $funcrgname = "DeployFunction"
 New-AzResourceGroup -Name $funcrgname -Location $location
@@ -110,3 +111,40 @@ New-AzResourceGroupDeployment `
 <#
     Deploy a Template Specs
 #>
+
+# Plain template
+$name = "SimpleVM"
+$rgname = "Specs"
+$templatefile = ".\ResourceGroup\azuredeploy.json"
+$Version = "1.0"
+New-AzTemplateSpec -Name $name `
+    -Version $Version `
+    -ResourceGroupName $rgname `
+    -Location $location `
+    -TemplateFile $templatefile
+
+$templatespecid = (Get-AzTemplateSpec -name "SimpleVM" -ResourceGroupName $rgname -version $Version).Versions.Id
+
+New-AzResourceGroupDeployment `
+  -TemplateSpecId $templatespecid `
+  -ResourceGroupName $rgname
+
+
+# Linked Template
+
+$name = "SimpleVMnested3"
+$rgname = "Specs"
+$templatefile = ".\TemplateSpecs\azuredeploy.json"
+$Version = "2.0"
+New-AzTemplateSpec -Name $name `
+    -Version $Version `
+    -ResourceGroupName $rgname `
+    -Location $location `
+    -TemplateFile $templatefile `
+    -UIFormDefinitionFile ".\TemplateSpecs\UIDefRG.json"
+
+$templatespecid = (Get-AzTemplateSpec -name $name -ResourceGroupName $rgname -version $Version).Versions.Id
+
+New-AzResourceGroupDeployment `
+  -TemplateSpecId $templatespecid `
+  -ResourceGroupName $rgname
