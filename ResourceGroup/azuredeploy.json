@@ -53,7 +53,6 @@
         }
       }
     },
-    "functions": [],
     "variables": {
       "uniquestring": "[uniqueString(subscription().subscriptionId, resourceGroup().id)]",
       "nicName": "[concat(variables('uniquestring'),'nic')]",
