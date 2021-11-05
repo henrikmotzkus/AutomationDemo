@@ -34,6 +34,9 @@ This is a alpha release
     1. Shows Sharing in the whole enterprise
     1. Shows Modularization
     1. Shows the use of own UIs in the portal in order to create a perfect user experience
+1. Deployment of a Managed App out of a service catalog
+    1. Shows the service catalog
+    1. 
     
     
 

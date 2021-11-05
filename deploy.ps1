@@ -13,33 +13,39 @@
   Mit Azure Verbinden und Subscription setzen
 #>
 $location = "westeurope"
+
+# Internal
 $subscriptionid = "2abc2ec1-2238-430d-bf52-40cb7dc8b652"
+
+# Visual Studio MCT
+$subscriptionid = "1f6dba4f-8ad7-40d1-a562-6d78365dc81e"
+
 Connect-AzAccount
 Set-AzContext $subscriptionid
-
-
 
 <#
     Step 1. Deployment auf Subscription Ebene
 #>
-$subrgname = "Deplytosubscription"
+$subrgname = "AAAAAAAAAAAA"
 New-AzSubscriptionDeployment `
     -Name $subrgname `
     -Location $location `
-    -TemplateFile ".\Subscription\azuredeploy.json"
+    -TemplateFile ".\Subscription\azuredeploy.json" `
+    -ResourceGroupName $subrgname
 
 
 <#
     Step 2: Deployment auf ResourceGroup Ebene. Deployt eine VM mit Reference auf einen Keyvault.
     - With conditional varaiables
 #>
-New-AzResourceGroup -Name "Keyvault" -Location $location
+New-AzResourceGroup -Name "Keyvault2" -Location $location
 New-AzResourceGroupDeployment `
-    -ResourceGroupName "Keyvault" `
+    -ResourceGroupName "Keyvault2" `
     -TemplateFile '.\Keyvault\azuredeploy.json' `
     -adUseriD '49c9b64d-6d4c-4da0-a501-a0d701e1fdf4'
 
-$deployrgname = "DeploytoRG"
+$deployrgname = "DeploytoRG2"
+New-AzResourceGroup -Name $deployrgname -Location $location
 New-AzResourceGroupDeployment `
     -ResourceGroupName $deployrgname `
     -TemplateFile '.\ResourceGroup\azuredeploy.json' `
@@ -51,6 +57,7 @@ New-AzResourceGroupDeployment `
     - Inline
     - Nutzung von Keyvault als Passwort Speicher
 #>
+
 New-AzSubscriptionDeployment `
     -TemplateFile '.\SubscriptionNested\azuredeploy.json' `
     -TemplateParameterFile '.\SubscriptionNested\azuredeploy.parameters.json' `
@@ -161,3 +168,49 @@ $templatespecid = (Get-AzTemplateSpec -name $name -ResourceGroupName $rgname -ve
 New-AzResourceGroupDeployment `
   -TemplateSpecId $templatespecid `
   -ResourceGroupName $rgname
+
+
+<#
+    Step 11: Managed Application (Service Catalog)
+#>
+
+# Upload Package in an Storage Account
+$margname = "ManagedApp"
+$saname = "managedappsahenrik"
+New-AzResourceGroup -Name $margname -Location $location
+
+$storageAccount = New-AzStorageAccount `
+  -ResourceGroupName $margname `
+  -Name $saname `
+  -Location $location `
+  -SkuName Standard_LRS `
+  -Kind StorageV2
+
+$ctx = $storageAccount.Context
+
+New-AzStorageContainer -Name appcontainer -Context $ctx -Permission blob
+
+Set-AzStorageBlobContent `
+  -File ".\ManagedApplication\app.zip" `
+  -Container appcontainer `
+  -Blob "app.zip" `
+  -Context $ctx
+
+ # Prepare Azure AD
+$groupID=(Get-AzADGroup -DisplayName "ManagedApp").Id
+
+$ownerID=(Get-AzRoleDefinition -Name Owner).Id
+
+New-AzResourceGroup -Name $margname -Location $location
+
+$blob = Get-AzStorageBlob -Container appcontainer -Blob app.zip -Context $ctx
+
+New-AzManagedApplicationDefinition `
+  -Name "ManagedAppSimpleVM" `
+  -Location $location `
+  -ResourceGroupName $margname `
+  -LockLevel ReadOnly `
+  -DisplayName "SimpleVM Enterprise Ready" `
+  -Description "This is the enterprise wide standard VM template." `
+  -Authorization "${groupID}:$ownerID" `
+  -PackageFileUri $blob.ICloudBlob.StorageUri.PrimaryUri.AbsoluteUri
