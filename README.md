@@ -1,5 +1,5 @@
 # AzureAutomationDemo
-This is a tutorial to try out many aspects of automating Azure management tasks. The deploy.ps1 is the command center to roll out all steps  scripts.
+This is a tutorial to try out many aspects of automating Azure management tasks. The deploy.ps1 is the command center to roll out all demo steps.
 
 # Contact
 henrik.motzkus@microsoft.com
@@ -9,10 +9,11 @@ This is a alpha release
 
 # Demo steps
    
-Use the deploy.ps1 for using this demo. 
-
 1. Deployment of an ARM Template on the subscription level
-    1. This shows the different scopes of a ARM deployment
+    
+This shows the different scopes of a ARM deployment
+
+
 1. Deployment on an ARM Template on the resource group level
     1. This shows the different scopes of a ARM deployment
     1. This shows the safe handling of passwords while an ARM deployment
@@ -39,7 +40,8 @@ Use the deploy.ps1 for using this demo.
 1. Deployment of a Managed App out of a service catalog
     1. Shows the service catalog
 1. Deployment with Terraform
-    1. 
-    
-    
 
+
+# Official documentation urls
+
+1. 
