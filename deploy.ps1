@@ -10,7 +10,7 @@
 
 
 <#
-  Mit Azure Verbinden und Subscription setzen
+  Step 0: Connect with Azure and set defaults
 #>
 $location = "westeurope"
 
@@ -24,57 +24,60 @@ Connect-AzAccount
 Set-AzContext $subscriptionid
 
 <#
-    Step 1. Deployment auf Subscription Ebene
+    Step 1. Deployment on subscription scope
 #>
 $subrgname = "AAAAAAAAAAAA"
 New-AzSubscriptionDeployment `
     -Name $subrgname `
     -Location $location `
-    -TemplateFile ".\Subscription\azuredeploy.json" `
+    -TemplateFile ".\1_Subscription\azuredeploy.json" `
     -ResourceGroupName $subrgname
 
 
 <#
-    Step 2: Deployment auf ResourceGroup Ebene. Deployt eine VM mit Reference auf einen Keyvault.
-    - With conditional varaiables
+    Step 2: Deployment on resource group scope. 
+    - Deploys a VM with a secret from a keyvault
+    - With conditional variables
 #>
 New-AzResourceGroup -Name "Keyvault2" -Location $location
 New-AzResourceGroupDeployment `
     -ResourceGroupName "Keyvault2" `
-    -TemplateFile '.\Keyvault\azuredeploy.json' `
+    -TemplateFile '.\2_Keyvault\azuredeploy.json' `
     -adUseriD '49c9b64d-6d4c-4da0-a501-a0d701e1fdf4'
 
 $deployrgname = "DeploytoRG2"
 New-AzResourceGroup -Name $deployrgname -Location $location
 New-AzResourceGroupDeployment `
     -ResourceGroupName $deployrgname `
-    -TemplateFile '.\ResourceGroup\azuredeploy.json' `
-    -TemplateParameterFile '.\ResourceGroup\azuredeploy.parameters.json'
+    -TemplateFile '.\2_ResourceGroup\azuredeploy.json' `
+    -TemplateParameterFile '.\2_ResourceGroup\azuredeploy.parameters.json'
     
 
 <#
-    Step 3. Deployment auf ResourceGroup UND Subscription Ebene mit einem nested Template. 
-    - Inline
-    - Nutzung von Keyvault als Passwort Speicher
+    Step 3. Deployment on ResourceGroup AND Subscription scope 
+    - With a nested template
+    - Inline in the script
+    - Using the keyvault as secret store 
 #>
 
 New-AzSubscriptionDeployment `
-    -TemplateFile '.\SubscriptionNested\azuredeploy.json' `
-    -TemplateParameterFile '.\SubscriptionNested\azuredeploy.parameters.json' `
+    -TemplateFile '.\3_SubscriptionNested\azuredeploy.json' `
+    -TemplateParameterFile '.\3_SubscriptionNested\azuredeploy.parameters.json' `
     -Location $location
       
 
 <#
-    Step 4: Deployment eines Templates über eine individuelle REST API. Die Url ist in der Function ersichtlich. 
-    - Vorher muss erst die Function angelegt werden
-    - Übergabe der Deployment Parameter per PSBefehl
-    - Github Action pipeline für den function code
+    Step 4: Deployment of an ARM templates via REST API. 
+    - Get the url from the Azure function first 
+    - Beforehand you need to deploy deplyoment runner function 
+    - Handing over parameter vi Powershell dpeloyment 
+    - Github Action pipeline for deploing the function code to the funtion
 #>
 $funcrgname = "DeployFunction"
 New-AzResourceGroup -Name $funcrgname -Location $location
 New-AzResourceGroupDeployment `
     -ResourceGroupName $funcrgname `
-    -TemplateFile '.\Function\azuredeploy.json' `
+    -TemplateFile '.\4_Function\azuredeploy.json' `
     -subscriptionId $subscriptionid `
     -FunctionName "AzureDeployFunction" `
     -location $location `
@@ -85,14 +88,16 @@ New-AzResourceGroupDeployment `
 Invoke-WebRequest -Uri "https://azuredeployfunction.azurewebsites.net/api/deploy?name=TESTUEBERURL"
 
 <#
-    Step 5: Deployment über eine eigene UI Definition und automatisch Übergabe ans Azure Portal
-    Vorsicht dieses Feature ist nahezu undokumentiert!
+    Step 5: Deployment with own UI definition
+    - Handing over parameter with URL 
 #>
-https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2FUIDef%2Fazuredeploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2FUIDef%2FUIDefRG.json
+
+https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2F5_UIDef%2Fazuredeploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2F5_UIDef%2FUIDefRG.json
+
 PasswordPassword_
 
 <#
-    Step 6: Enterprise Scale landing zone Demo
+    Step 6: Enterprise Scale landing zone demo
     Look: https://github.com/Azure/Enterprise-Scale
 #>
 
@@ -105,26 +110,26 @@ PasswordPassword_
 
 <#
     Step 8: Deploy of a blueprint out of a ARM template.
-    Than manual assigment
+    Than manual assigment in the portal
 #>
 New-AzSubscriptionDeployment `
   -Name demoDeployment `
   -Location $location `
-  -TemplateFile .\Blueprints\DeployBlueprint\azuredeploy.json `
+  -TemplateFile .\8_Blueprints\DeployBlueprint\azuredeploy.json `
   -blueprintName "TestBlueprint"
 
 
 <#
     Step 9: Deployment of a VM to a resource group and a (Custom Script Extension )
-    With a linked template
+    - With a linked template
 #>
 $rgname = "DeployVMandCSE5"
 $location = "westeurope"
 New-AzResourceGroup -Name $rgname -Location $location
 New-AzResourceGroupDeployment `
     -ResourceGroupName $rgname `
-    -TemplateUri "https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/CSEandDSC/azuredeploy.json" `
-    -TemplateParameterUri "https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/CSEandDSC/azuredeploy.parameters.json"
+    -TemplateUri "https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/9_CSEandDSC/azuredeploy.json" `
+    -TemplateParameterUri "https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/9_CSEandDSC/azuredeploy.parameters.json"
 
 
 
@@ -135,7 +140,7 @@ New-AzResourceGroupDeployment `
 # Plain template
 $name = "SimpleVM"
 $rgname = "Specs"
-$templatefile = ".\ResourceGroup\azuredeploy.json"
+$templatefile = ".\2_ResourceGroup\azuredeploy.json"
 $Version = "1.0"
 New-AzTemplateSpec -Name $name `
     -Version $Version `
@@ -149,19 +154,18 @@ New-AzResourceGroupDeployment `
   -TemplateSpecId $templatespecid `
   -ResourceGroupName $rgname
 
-
 # Linked Template and own UI
 
 $name = "SimpleVMnested3"
 $rgname = "Specs"
-$templatefile = ".\TemplateSpecs\azuredeploy.json"
+$templatefile = ".\10_TemplateSpecs\azuredeploy.json"
 $Version = "2.0"
 New-AzTemplateSpec -Name $name `
     -Version $Version `
     -ResourceGroupName $rgname `
     -Location $location `
     -TemplateFile $templatefile `
-    -UIFormDefinitionFile ".\TemplateSpecs\UIDefRG.json"
+    -UIFormDefinitionFile ".\10_TemplateSpecs\UIDefRG.json"
 
 $templatespecid = (Get-AzTemplateSpec -name $name -ResourceGroupName $rgname -version $Version).Versions.Id
 
@@ -191,7 +195,7 @@ $ctx = $storageAccount.Context
 New-AzStorageContainer -Name appcontainer -Context $ctx -Permission blob
 
 Set-AzStorageBlobContent `
-  -File ".\ManagedApplication\app.zip" `
+  -File ".\11_ManagedApplication\app.zip" `
   -Container appcontainer `
   -Blob "app.zip" `
   -Context $ctx
@@ -214,3 +218,21 @@ New-AzManagedApplicationDefinition `
   -Description "This is the enterprise wide standard VM template." `
   -Authorization "${groupID}:$ownerID" `
   -PackageFileUri $blob.ICloudBlob.StorageUri.PrimaryUri.AbsoluteUri
+
+
+  <#
+    Step 12: Deploy with Terraform
+  #>
+
+  cd .\12_Terraform
+
+  az login
+
+  terraform init
+  terraform validate
+  terraform apply
+
+
+
+
+  
