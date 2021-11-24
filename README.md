@@ -1,15 +1,33 @@
-# AzureAutomationDemo
+# Azure Automation Demo tl;dr
 This is a tutorial to try out many aspects of automating Azure management tasks. The deploy.ps1 is the command center to roll out all demo steps.
+
+# Problem statement
+In huge environments (i. e. a world wide company) automation in the IT is KEY. Automation enables efficiency and fast development cycles. Cloud is an enabler technology. Azure has tons of technologies that could help to automate. This guide is a uncompleted and ever evolving tutorial on the automation aspect of Azure.
+
+# With this guide you learn about 
+
+1. Deployment basics like: scopes, ARM scripts, linked templates, secret handling, custom script extensions
+1. Where to store my deployment scripts
+1. Building a sofisticated deployment environments with an Azure function
+1. Reference to the enterprise scale landing zone
+1. Use of built in management tool like: Blueprints, Managed Apps, Custom UIs
+1. A little bit of terraform
+
 
 # Contact
 henrik.motzkus@microsoft.com
 
 # Status
-This is a alpha release
+This is work in progress and infinitely evolving 
 
 # Demo steps
    
 ## Step 1: Deployment of an ARM Template on the subscription level
+A deployment scope is the place where the deployment is running in Azure.
+
+More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-resource-group?tabs=azure-cli
+
+
     
 This shows the different scopes of a ARM deployment
 
