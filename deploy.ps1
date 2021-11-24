@@ -102,16 +102,20 @@ Invoke-WebRequest -Uri "https://azuredeployfunction.azurewebsites.net/api/deploy
 
 <#
     Step 5: Deployment with own UI definition
-    - Handing over parameter with URL 
+    
 #>
+# How to construc this URL
+# You need Azure, the deployment scipt and UI definition
+# Url need to be encoded
 
 https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2F5_UIDef%2Fazuredeploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2F5_UIDef%2FUIDefRG.json
 
 
-<#
-    Step 6: Enterprise Scale landing zone demo
-    Look: https://github.com/Azure/Enterprise-Scale
+<# 
+    Step 6: Azure Dev Test Labs
+    
 #>
+
 
 
 <# 
@@ -247,5 +251,8 @@ New-AzManagedApplicationDefinition `
 
 
 
-
+<#
+    Step 16: Enterprise Scale landing zone demo
+    Look: https://github.com/Azure/Enterprise-Scale
+#>
   
