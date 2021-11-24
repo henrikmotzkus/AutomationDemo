@@ -24,9 +24,11 @@ henrik.motzkus@microsoft.com
 # Status
 This is work in progress and infinitely evolving 
 
-# Demo steps description
-   
-## Step 1: Deployment of an ARM Template on different scopes 
+# Demo instructions
+
+## Basics
+
+### Step 1: Deployment of an ARM Template on different scopes 
 
 A deployment scope is the place where the deployment is running and placing the resources your're about to deploy in Azure.
 
@@ -54,10 +56,11 @@ This deployment shows a combined deployment that is beeing rolled out on differe
 More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/linked-templates?tabs=azure-powershell
 
 Deployments:
-1. One Deployment on subscription level
+1. Deployment on subscription level
     
 
 ## Step 4: Deployment of a script with a deployment runner like Azure function. This Azure function can deploy a ARM script
+
 
 
 
@@ -112,5 +115,13 @@ Deployments:
     TODO
 
 ## Step 14: Deployment with Azure DevOps
+
+    TODO
+
+## Step 15: The Azure TeamCloud
+
+    TODO
+
+## Step 16: Azure DevTestLabs
 
     TODO
