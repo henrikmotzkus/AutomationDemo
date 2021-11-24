@@ -24,8 +24,12 @@ Connect-AzAccount
 Set-AzContext $subscriptionid
 
 <#
-    Step 1. Deployment on subscription scope
+    Step 1. Deployment on different scopes
 #>
+
+# Subscription scope
+# This deploys a resourcegroup on a subscription scope
+
 $subrgname = "AAAAAAAAAAAA"
 New-AzSubscriptionDeployment `
     -Name $subrgname `
@@ -33,12 +37,21 @@ New-AzSubscriptionDeployment `
     -TemplateFile ".\1_Subscription\azuredeploy.json" `
     -ResourceGroupName $subrgname
 
+# Tenant scope
+# This deploys a new subscription in the tenant
+
+New-AzTenantDeployment `
+    -TemplateFile ".\1_SubscriptionCreation\azuredeploy.json"
+    -TemplateParameterFile ".\1_SubscriptionCreation\azuredeploy.parameters.json"
+       
 
 <#
     Step 2: Deployment on resource group scope. 
     - Deploys a VM with a secret from a keyvault
     - With conditional variables
 #>
+
+
 New-AzResourceGroup -Name "Keyvault2" -Location $location
 New-AzResourceGroupDeployment `
     -ResourceGroupName "Keyvault2" `
@@ -94,7 +107,6 @@ Invoke-WebRequest -Uri "https://azuredeployfunction.azurewebsites.net/api/deploy
 
 https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2F5_UIDef%2Fazuredeploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2F5_UIDef%2FUIDefRG.json
 
-PasswordPassword_
 
 <#
     Step 6: Enterprise Scale landing zone demo
@@ -106,6 +118,7 @@ PasswordPassword_
     Step 7: Managed Application Demo
     Look: https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/
 #>
+
 # TODO
 
 <#
@@ -134,7 +147,7 @@ New-AzResourceGroupDeployment `
 
 
 <#
-    Step 10: Deploy a Template Specs
+    Step 10: Deploy a Template Spec
 #>
 
 # Plain template

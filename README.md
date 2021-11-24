@@ -13,6 +13,10 @@ In huge environments (i. e. a world wide company) automation in the IT is KEY. A
 1. Use of built in management tool like: Blueprints, Managed Apps, Custom UIs
 1. A little bit of terraform
 
+# How to use
+
+Clone the repository to your local workstation. Open it with Visual Studio Code. Every step is scripted with powershell. Open deploy.ps1 every step will be rolled out with the script. Change your the subscription id 
+
 
 # Contact
 henrik.motzkus@microsoft.com
@@ -20,29 +24,42 @@ henrik.motzkus@microsoft.com
 # Status
 This is work in progress and infinitely evolving 
 
-# Demo steps
+# Demo steps description
    
-## Step 1: Deployment of an ARM Template on the subscription level
-A deployment scope is the place where the deployment is running in Azure.
+## Step 1: Deployment of an ARM Template on different scopes 
+
+A deployment scope is the place where the deployment is running and placing the resources your're about to deploy in Azure.
 
 More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-resource-group?tabs=azure-cli
 
-
-    
-This shows the different scopes of a ARM deployment
+Deployments:    
+1. Deployment on Subscription scope
+1. Deployment on Tenant scope
 
 
 ## Step 2: Deployment on an ARM Template on the resource group level
 
-    1. This shows the different scopes of a ARM deployment
-    1. This shows the safe handling of passwords while an ARM deployment
-    1. This shows the handling of parameters while executing the PS command
+This deployment deploys a VM on the resource group scope. The VM password is securely stored in a kevault and not hardcoded in the script. First you need to deploy that keyvault and its secret. And it shows a different method of parameter handling. 
+
+More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/key-vault-parameter?tabs=azure-cli
+
+Deployments: 
+1. Deploys a keyvault
+1. Deploy a VM
     
 ## Step 3: Deployment of a nested ARM template
-    1. This shows the deployments can be on different level at the same time
-    1. This shows that a templated can be nested inline with the main code
+
+This deployment shows a combined deployment that is beeing rolled out on different scopes at the same time. And it shows that this can be achieved with a nested ARM script
+
+More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/linked-templates?tabs=azure-powershell
+
+Deployments:
+1. One Deployment on subscription level
+    
 
 ## Step 4: Deployment of a script with a deployment runner like Azure function. This Azure function can deploy a ARM script
+
+
 
     1. Shows a Github Action to deploy Function Code to the Azure Function
     1. This shows that you can create a public REST API for template deployment
@@ -90,3 +107,10 @@ This shows the different scopes of a ARM deployment
 
     1. This deploys a small terraform script
 
+## Step 13: Deployment with Github Actions
+
+    TODO
+
+## Step 14: Deployment with Azure DevOps
+
+    TODO
