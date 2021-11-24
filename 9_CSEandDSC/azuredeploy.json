@@ -39,7 +39,7 @@
                 "settings": {
                     "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File script.ps1",
                     "fileUris": [
-                        "https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/CSEandDSC/script.ps1"
+                        "https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/9_CSEandDSC/script.ps1"
                     ]
                 },
                 "protectedSettings": {
@@ -54,7 +54,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri":"https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/ResourceGroup/azuredeploy.json",
+                    "uri":"https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/2_ResourceGroup/azuredeploy.json",
                     "contentVersion":"1.0.0.0"
                 },
                 "parameters": {

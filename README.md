@@ -22,7 +22,9 @@ Clone the repository to your local workstation. Open it with Visual Studio Code.
 henrik.motzkus@microsoft.com
 
 # 6. Status
-This is work in progress and infinitely evolving 
+This is work in progress and infinitely evolving.
+
+Disclaimer: This demo doesn't explains the concepts itself. It combines the various features and demonstrates the value. For education please visit the official documentation. 
 
 # 7. Demo steps
 
@@ -87,67 +89,98 @@ Instructions:
 
 ### 7.2.3 (Step 6) Azure DevTestLabs
 
-    TODO
+A DevTestLab in Azure is a currated environment where you as a central uni can offer your customers cloud environments. 
+
+More: https://docs.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview
+
+Instructions:    
+
+ TODO
     
 ### 7.2.3 (Step 7) Managed applications
+A managed app is a offering you can make on the Azure marketplace. 
 
-    TOOO
-
-    1. This is a demonstration of how a central unit can provide managed apps
-    1. A managed app is a app where the customer is only consuming it. And not managing it.
-    
-### 7.2.4 (Step 8) Deploy a blueprint
-
-With blueprints a central unit can provide ARM templates, assigned policies, assign roles, and assigned management groups as a UNIT. A "customer" can use the blueprint in order to roll out that blueprint.
+More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/overview
 
 Instructions: 
-1. Run the commands in the powershell. This loads up the blueprint
+
+    TODO
+    
+### 7.2.4 (Step 8) Deploy a blueprint
+With blueprints a central unit can provide ARM templates, assigned policies, assign roles, and assigned management groups as a UNIT. A "customer" can use the blueprint in order to roll out that blueprint.
+
+More: https://docs.microsoft.com/en-us/azure/governance/blueprints/
+
+Instructions: 
+1. Run the commands in the powershell. 
 1. Go to the portal an assign the blueprint manually
     
 ### 7.2.5 (Step 9) Deployment of a Custom script Extension
+This deploys a VM from step 2. And sthe a custom scription extension into the VM.
 
-
-    1. Shows a Linked template 
-    1. Shows Dependencies
-    1. Shows the CSE
-    
-### 7.2.6 (Step 10) Deployment of a template spec
-
-    1. Shows the template spec
-    1. Shows Sharing in the whole enterprise
-    1. Shows Modularization
-    1. Shows the use of own UIs in the portal in order to create a perfect user experience
-    
-### 7.2.7 (Step 11) Deployment of a Managed App out of a service catalog
-
-    1. This is a demonstration of how a central unit can provide managed apps
-    1. A managed app is a app where the customer is only consuming it. And not managing it.
-    1. Managed apps are protected IP of the central unit.
-    
-## 7.3 Other tools and frameworks
-
-### 7.3.1 Enterprise Scale Landing Zone Showcase
-
-    1. This is a comprehensive showcase of deploying an ARM template that is complex
-
-### 7.3.2 (Step 12) Deployment with Terraform
-
-    1. This deploys a small terraform script
-
-### 7.3.3 (Step 13) Deployment with Github Actions
-
-In step 4 you deployed a Azure function. The code deployment onto the Azure function is achieved with Github actions. In \.github\workflows you'll find a workflow to deploy code from Github to the function. 
+More: https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows
 
 Instructions: 
+1. Run the commands in the powershell
+
+
+### 7.2.6 (Step 10) Deployment of a template spec
+This uploads a template Spec to Azure and deploys it then. A template spec can be used to modularize the ARM template and share it in the whole company. This demo uses the script from step 2. And it uses a nested template out of step 10. You can provide a own UI definition.
+
+More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs?tabs=azure-powershell
+
+
+Instructions:
+1. Run the commands in the powershell.
+2. GO to the portal an use the template spec there
+    
+### 7.2.7 (Step 11) Deployment of a Managed App out of a service catalog
+This uploads a managed app to the service catalog of a Azure environment. 
+
+More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/deploy-service-catalog-quickstart
+ 
+Instructions: 
+1. Run the commands in the powershell
+2. Go to the portal and deploy a app out of the service catalog
+    
+## 7.3 Other tools and frameworks
+New we're entering the world of additional tools and frameworks that deliver more value and help to automate Azure management tasks as much as possible.
+
+### 7.3.1 Enterprise Scale Landing Zone Showcase
+This is a comprehensive showcase of deploying an ARM template that is complex
+
+More: https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture
+
+Instructions:
+
+
+### 7.3.2 (Step 12) Deployment with Terraform
+This deploys a small terraform script
+
+More: https://docs.microsoft.com/en-us/azure/developer/terraform/
+
+Instructions:
+
+### 7.3.3 (Step 13) Deployment with Github Actions
+In step 4 you deployed a Azure function. The code deployment onto the Azure function is achieved with Github actions. In \.github\workflows you'll find a workflow to deploy code from Github to the function. 
+
+More: 
+
+Instructions: 
+
     TODO
 
 ### 7.3.4 (Step 14) Deployment with Azure DevOps
 
-    TODO
+
+More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/add-template-to-azure-pipelines
+
+TODO
 
 ### 7.3.5 (Step 15) The Azure TeamCloud
 
-    TODO
+More: https://github.com/microsoft/TeamCloud
+
 
 ### 7.3.6 
 
