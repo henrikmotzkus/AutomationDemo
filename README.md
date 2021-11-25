@@ -151,7 +151,7 @@ This is a comprehensive showcase of deploying an ARM template that is complex. T
 More: https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture
 
     Instructions:
-    n/a
+    Visit the github project 
 
 ### 7.3.2 (Step 12) Deployment with Terraform
 This deploys a small terraform script
@@ -168,18 +168,20 @@ In step 4 you deployed a Azure function. The code deployment onto the Azure func
 More: https://docs.microsoft.com/en-us/azure/developer/github/github-actions
 
     Instructions: 
-    1. Download the publish profile from the function
+    1. Download the publish profile from the function. Created in step 4
     2. Create a secret an the project with the name "AZUREAPPSERVICE_PUBLISHPROFILE_5DC798FB4A2C4E18A92AC6A29A7C3462" and insert the publish profile text into it.
-    3. Push the workflow definiton to your github account
-    4. See magic things    
+    3. Push the workflow definiton (.github/) to your github account
+    
 
 ### 7.3.4 (Step 14) Deployment with Azure DevOps
-
+You can deploy ARM script within the boundary of a development project with the help of Azure DevOps.
 
 More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/add-template-to-azure-pipelines
 
     Instructions:
-    TODO
+    1. Create a Azure DevOps project 
+    2. Upload Code
+    3. Create a pipeline
 
 ### 7.3.5 (Step 15) The Azure TeamCloud
 
@@ -187,9 +189,9 @@ More: https://github.com/microsoft/TeamCloud
 
 
     Instructions:
-    TODO
+    1. Visit the github project!
 
-### 7.3.6 
+### 7.3.6 (step 17) Azure Automanage for Virtual machines
     
     Instructions
     TODO

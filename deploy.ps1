@@ -249,6 +249,24 @@ New-AzManagedApplicationDefinition `
   terraform validate
   terraform apply
 
+<#
+    Step 13 Github Actions
+#>
+
+# Install-Module -Name PowerShellForGitHub
+# Manual work
+
+# git push
+
+
+<#
+    Step 14 Deployment with Azure DevOps
+#>
+
+<#
+    Step 15 What is the Azure Team Cloud?
+#>
+
 
 
 <#
@@ -256,3 +274,7 @@ New-AzManagedApplicationDefinition `
     Look: https://github.com/Azure/Enterprise-Scale
 #>
   
+
+<#
+    Step 17 Roll out Azure automanage
+#>
