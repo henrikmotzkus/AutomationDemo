@@ -17,8 +17,8 @@ $location = "westeurope"
 # Internal
 $subscriptionid = "2abc2ec1-2238-430d-bf52-40cb7dc8b652"
 
-# Visual Studio MCT
-$subscriptionid = "1f6dba4f-8ad7-40d1-a562-6d78365dc81e"
+# Visual Studio FTE
+$subscriptionid = "a70316fd-0761-4d1d-aa6a-743ef1133f7a"
 
 Connect-AzAccount
 Set-AzContext $subscriptionid
@@ -237,17 +237,30 @@ New-AzManagedApplicationDefinition `
   -PackageFileUri $blob.ICloudBlob.StorageUri.PrimaryUri.AbsoluteUri
 
 
-  <#
-    Step 12: Deploy with Terraform
-  #>
+<#
+   Step 12: Deploy with Terraform
+#>
 
-  cd .\12_Terraform
+# Deploy a resource group 
 
-  az login
+cd .\12_Terraform
 
-  terraform init
-  terraform validate
-  terraform apply
+az login
+az account set --subscription $subscriptionid
+
+terraform init
+terraform validate
+terraform apply
+
+
+# Deploy a VM with AD domain join
+cd .\12_Terraform_ADJoin
+terraform init
+terraform validate
+terraform plan
+terraform apply
+
+
 
 <#
     Step 13 Github Actions

@@ -159,7 +159,7 @@ This deploys a small terraform script
 More: https://docs.microsoft.com/en-us/azure/developer/terraform/
 
     Instructions:
-    0. Install terraform
+    0. Install terraform on your workstatopm 
     1. Run the commands in the powershell
 
 ### 7.3.3 (Step 13) Deployment with Github Actions
