@@ -242,18 +242,24 @@ New-AzManagedApplicationDefinition `
 #>
 
 # Deploy a resource group 
+# Install Azure CLI on your workstation
+# Install terraform on your workstation
+
 
 cd .\12_Terraform
-
 az login
 az account set --subscription $subscriptionid
-
 terraform init
 terraform validate
+terraform plan
 terraform apply
 
 
 # Deploy a VM with AD domain join
+# Reference: https://github.com/hashicorp/terraform-provider-azurerm/tree/main/examples
+# This script consists of modules
+
+
 cd .\12_Terraform_ADJoin
 terraform init
 terraform validate
