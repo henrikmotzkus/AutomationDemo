@@ -48,7 +48,7 @@ try {
     } else {
         
         # When caller wants a name for a prod system 
-        $body = $prod[rnd]
+        $body = $prod[$rnd]
         Write-Host "Host name for prod host " $body
 
     }
