@@ -1,8 +1,8 @@
 # 1. Azure Automation Demo tl;dr
-This is a tutorial to try out many aspects of automating Azure management tasks. The deploy.ps1 is the command center to roll out all demo steps.
+This is a tutorial to try out many aspects of automating Azure management tasks. The deploy.ps1 is the command center to roll out all demo steps. This is totally tech focussed. ;-)
 
 # 2. Problem statement
-In huge environments (i. e. a world wide company) automation in the IT is KEY. Automation enables efficiency and fast development cycles. Cloud is an enabler technology. Azure has tons of technologies that could help to automate. This guide is a uncompleted and ever evolving tutorial on the automation aspect of Azure.
+In huge cloud environments (i. e. from a world wide distributed company) automation in IT is KEY. Automation enables efficiency and fast development cycles. Cloud is an enabler technology. Azure has tons of technologies that could help to automate. This guide is a uncompleted and ever evolving tutorial on the automation aspect of Azure.
 
 # 3. With this guide you learn about 
 THe world of automation is dominated by declarative languages. Declarative means that you describe your status and move your infrastructure toward this status. ARM, Terraform, YAML, you name it. Declarative languages are fundamental different in comparison to imperative languages. 
@@ -162,6 +162,10 @@ Terraform is the defacto industry standard when it comes to cloud management wit
 
 Part 1 (simple) : This TF deploys a resourceg roup
 Part 2 (complex): This TF deploys a VNET, domain controller and a domain member
+Part 3 (own TF module): This TF uses a custom TF provider. The custom TF provider is providing a VM name. The backend REST API in implemented with a Azure from step 4. 
+
+https://azuredeployfunction.azurewebsites.net/api/resourcename&env=prod
+
 
 
 More: https://docs.microsoft.com/en-us/azure/developer/terraform/
