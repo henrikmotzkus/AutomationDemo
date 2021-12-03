@@ -266,6 +266,32 @@ terraform validate
 terraform plan
 terraform apply
 
+# Deploy Gaia on Azure
+
+
+az container create \
+    --resource-group Gaia \
+    --name gaiaapp \
+    --image gaiaapp/gaia \
+    --restart-policy OnFailure \
+    --environment-variables 'GAIA_MONGODB_URI'='mongodb://gaia1:T1OK5zh6SHHcPyPe2sETJzMpUeuWmGFbgteBbrt6dy6g2XWib3iNitPes6Dl3ytIJFLUhWUeE7lCZLkBnkk5Uw==@gaia1.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@gaia1@' 'GAIA_RUNNER_API_PASSWORD'='123456' \
+    --location westeurope
+
+
+gaiaapp/runner
+
+
+
+az container create \
+    --resource-group Gaia \
+    --name gaiarunner \
+    --image gaiaapp/runner \
+    --restart-policy OnFailure \
+    --environment-variables 'GAIA_URL=http://gaia:8080' 'GAIA_RUNNER_API_PASSWORD'='123456' \
+    --location westeurope
+
+
+
 
 
 <#
