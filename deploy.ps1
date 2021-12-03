@@ -266,7 +266,14 @@ terraform validate
 terraform plan
 terraform apply
 
+# Writing an own Terraform provider
+# Tutorial: https://boxboat.com/2020/02/04/writing-a-custom-terraform-provider/
+
+
+
+
 # Deploy Gaia on Azure
+# Documentation: https://docs.gaia-app.io/
 
 
 az container create \
@@ -289,9 +296,6 @@ az container create \
     --restart-policy OnFailure \
     --environment-variables 'GAIA_URL=http://gaia:8080' 'GAIA_RUNNER_API_PASSWORD'='123456' \
     --location westeurope
-
-
-
 
 
 <#
