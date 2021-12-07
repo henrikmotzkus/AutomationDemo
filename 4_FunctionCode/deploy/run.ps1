@@ -4,7 +4,7 @@ using namespace System.Net
 param($Request, $TriggerMetadata)
 
 # Write to the Azure Functions log stream.
-Write-Host "PowerShell HTTP trigger function processed a request."
+Write-Host "Custom deployment run started"
 
 # Interact with query parameters or the body of the request.
 $name = $Request.Query.Name
@@ -28,7 +28,7 @@ try {
 
     Connect-AzAccount -Identity 
     
-    Write-Host "connected to Azure"
+    Write-Host "Connected to Azure"
 
     New-AzSubscriptionDeployment `
         -Name $name `
@@ -37,7 +37,6 @@ try {
         -ResourceGroupName $name
 
     Write-Host "Deployed template"
-      
     
     $body = "Deployment was successfull"
 
