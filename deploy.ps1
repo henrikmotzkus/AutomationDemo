@@ -98,7 +98,7 @@ New-AzResourceGroupDeployment `
     
 # Manuell System assigned identity setzen
 
-Invoke-WebRequest -Uri "https://azuredeployfunction.azurewebsites.net/api/deploy?name=TESTUEBERURL"
+Invoke-WebRequest -Uri "https://azuredeployfunction.azurewebsites.net/deploy?name=TESTUEBERURL"
 
 <#
     Step 5: Deployment with own UI definition

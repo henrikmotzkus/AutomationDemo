@@ -2,7 +2,7 @@
   "bindings": [
     {
       "authLevel": "anonymous",
-      "route": "/resourcename/v1",
+      "route": "v1/resourcename",
       "type": "httpTrigger",
       "direction": "in",
       "name": "Request",
