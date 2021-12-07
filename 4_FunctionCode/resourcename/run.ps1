@@ -17,14 +17,21 @@ using namespace System.Net
 # Input bindings are passed in via param block.
 param($Request, $TriggerMetadata)
 
+########################################################
+#
+#     // HTTP GET - https://azuredeployfunction.azurewebsites.net/api/resourcename?env=$env
+
 # Write to the Azure Functions log stream.
-Write-Host "PowerShell HTTP trigger function processed a request."
+Write-Host "Request for resourcename received"
 
 # Interact with query parameters or the body of the request.
 $env = $Request.Query.Env
 if (-not $env) {
     $env = $Request.Body.Env
 }
+
+# Getting the API version from the URL
+$apiversion = $Request.Url
 
 
 try {
