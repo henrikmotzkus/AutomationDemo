@@ -47,7 +47,7 @@ try {
         
         # When caller wants a name for a test system
         $obj | Add-Member -MemberType NoteProperty -Name name -Value $test[$rnd]
-        $obj | Add-Member -MemberType NoteProperty -Name name -Value "Test"
+        $obj | Add-Member -MemberType NoteProperty -Name env -Value "Test"
         $body = $obj
         Write-Host "Host name for test host " $body
 
@@ -55,7 +55,7 @@ try {
         
         # When caller wants a name for a prod system 
         $obj | Add-Member -MemberType NoteProperty -Name name -Value $prod[$rnd]
-        $obj | Add-Member -MemberType NoteProperty -Name name -Value "Prod"
+        $obj | Add-Member -MemberType NoteProperty -Name env -Value "Prod"
 
         $body = $obj
         Write-Host "Host name for prod host " $body
