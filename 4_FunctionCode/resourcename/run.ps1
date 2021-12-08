@@ -30,10 +30,6 @@ if (-not $env) {
     $env = $Request.Body.Env
 }
 
-# Getting the API version from the URL
-$apiversion = $Request.Url
-
-
 try {
 
     # Setting an array of random strings for the test system names
@@ -45,17 +41,21 @@ try {
     # Generate a random 
     $rnd = get-random -minimum -1 -maximum 5
 
-    
+    $obj = New-Object -TypeName psobject
+
+
     if ($env -eq "Test") {
         
         # When caller wants a name for a test system
-        $body = $test[$rnd]
+        $obj | Add-Member -MemberType NoteProperty -Name name -Value $test[$rnd]
+        $body = $obj
         Write-Host "Host name for test host " $body
 
     } else {
         
         # When caller wants a name for a prod system 
-        $body = $prod[$rnd]
+        $obj | Add-Member -MemberType NoteProperty -Name name -Value $prod[$rnd]
+        $body = $obj
         Write-Host "Host name for prod host " $body
 
     }

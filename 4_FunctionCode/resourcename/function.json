@@ -7,7 +7,7 @@
       "direction": "in",
       "name": "Request",
       "methods": [
-        "get"
+        "put"
       ]
     },
     {
