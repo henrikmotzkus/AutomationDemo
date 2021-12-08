@@ -9,8 +9,6 @@
 #   This is a demo API for tutorial step 12
 #   Please provide a parameter named "env" set to either "prod" or "test"
 #   
-#
-
 
 using namespace System.Net
 
@@ -20,6 +18,7 @@ param($Request, $TriggerMetadata)
 ########################################################
 #
 #     // HTTP GET - https://azuredeployfunction.azurewebsites.net/api/resourcename?env=$env
+#
 
 # Write to the Azure Functions log stream.
 Write-Host "Request for resourcename received"
@@ -41,13 +40,14 @@ try {
     # Generate a random 
     $rnd = get-random -minimum -1 -maximum 5
 
+    # Create a object 
     $obj = New-Object -TypeName psobject
-
 
     if ($env -eq "Test") {
         
         # When caller wants a name for a test system
         $obj | Add-Member -MemberType NoteProperty -Name name -Value $test[$rnd]
+        $obj | Add-Member -MemberType NoteProperty -Name name -Value "Test"
         $body = $obj
         Write-Host "Host name for test host " $body
 
@@ -55,6 +55,8 @@ try {
         
         # When caller wants a name for a prod system 
         $obj | Add-Member -MemberType NoteProperty -Name name -Value $prod[$rnd]
+        $obj | Add-Member -MemberType NoteProperty -Name name -Value "Prod"
+
         $body = $obj
         Write-Host "Host name for prod host " $body
 
