@@ -1,16 +1,13 @@
 # Description of the REST API
 ## Test Url
-https://azuredeployfunction.azurewebsites.net/api
+https://azuredeployfunction.azurewebsites.net/v1/details
+https://azuredeployfunction.azurewebsites.net/v1/name
 
 
-## Request format - Retrieving a name for the VM deployment in test
+## Used API
 
-HTTP GET - /resourcename?env=test
+Look into the API in 4_FunctionCode
 
-Response: $name plain text in the body
 
-## Request format - Retrieving a name for the VM deployment in prod
 
-HTTP GET - /resourcename?env=prod
 
-Response: $name plain text in the body
