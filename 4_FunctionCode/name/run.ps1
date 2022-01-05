@@ -59,7 +59,7 @@ try {
     $name = $region + $prod[$rnd]
       
     # set obj member 
-    $obj | Add-Member -MemberType NoteProperty -Name allocated_name -Value $name
+    $obj | Add-Member -MemberType NoteProperty -Name Name -Value $name
 
     $body = $obj
     Write-Host "Host name for prod host " $body
