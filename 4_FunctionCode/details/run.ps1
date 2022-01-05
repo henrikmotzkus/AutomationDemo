@@ -47,7 +47,7 @@ try {
 
         
     # When caller wants a name for a prod system 
-    $obj | Add-Member -MemberType NoteProperty -Name resoure_type -Value $type[$rnd]
+    $obj | Add-Member -MemberType NoteProperty -Name resource_type -Value $type[$rnd]
     $obj | Add-Member -MemberType NoteProperty -Name Region -Value "westeurope"
 
     $body = $obj
