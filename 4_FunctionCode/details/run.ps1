@@ -47,7 +47,7 @@ try {
 
         
     # When caller wants a name for a prod system 
-    $obj | Add-Member -MemberType NoteProperty -Name name -Value $type[$rnd]
+    $obj | Add-Member -MemberType NoteProperty -Name resoure_type -Value $type[$rnd]
     $obj | Add-Member -MemberType NoteProperty -Name Region -Value "westeurope"
 
     $body = $obj
@@ -62,5 +62,6 @@ try {
 # Associate values to output bindings by calling 'Push-OutputBinding'.
 Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
     StatusCode = [HttpStatusCode]::OK
+
     Body = $body
 })
