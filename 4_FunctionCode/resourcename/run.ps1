@@ -17,8 +17,10 @@ param($Request, $TriggerMetadata)
 
 ########################################################
 #
-#     // HTTP GET - https://azuredeployfunction.azurewebsites.net/api/resourcename?env=$env
+#     // HTTP GET - https://azuredeployfunction.azurewebsites.net/v1/resourcename?env=Test
 #
+
+
 
 # Write to the Azure Functions log stream.
 Write-Host "Request for resourcename received"
