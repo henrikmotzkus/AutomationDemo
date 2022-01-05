@@ -18,7 +18,7 @@ param($Request, $TriggerMetadata)
 ########################################################
 #
 #     Request format
-#     // HTTP GET - https://azuredeployfunction.azurewebsites.net/v1//details?name=${name}
+#     // HTTP GET - https://azuredeployfunction.azurewebsites.net/v1/details?name=${name}
 ##
 #     Response format 
 #     {"resource_type": "${resource_type}", "region": "${region}"}
@@ -37,7 +37,7 @@ if (-not $env) {
 try {
 
     # Array of resource types
-    $type = @("VM", "Storage", "Network")
+    $type = @("VM", "Storage", "Network", "Loadbalancer", "IpAdress")
     
     # Generate a random 
     $rnd = get-random -minimum -1 -maximum 5
