@@ -48,7 +48,7 @@ try {
         
     # When caller wants a name for a prod system 
     $obj | Add-Member -MemberType NoteProperty -Name resource_type -Value $type[$rnd]
-    $obj | Add-Member -MemberType NoteProperty -Name Region -Value "westeurope"
+    $obj | Add-Member -MemberType NoteProperty -Name region -Value "westeurope"
 
     $body = $obj
     Write-Host "Host name for prod host " $body
