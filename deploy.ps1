@@ -24,7 +24,7 @@ Connect-AzAccount
 Set-AzContext $subscriptionid
 
 <#
-    Step 1. Deployment on different scopes
+    Folder prefix 1. Deployment on different scopes
 #>
 
 # Subscription scope
@@ -46,7 +46,7 @@ New-AzTenantDeployment `
        
 
 <#
-    Step 2: Deployment on resource group scope. 
+    Folder prefix 2: Deployment on resource group scope. 
     - Deploys a VM with a secret from a keyvault
     - With conditional variables
 #>
@@ -67,7 +67,7 @@ New-AzResourceGroupDeployment `
     
 
 <#
-    Step 3. Deployment on ResourceGroup AND Subscription scope 
+    Folder prefix 3. Deployment on ResourceGroup AND Subscription scope 
     - With a nested template
     - Inline in the script
     - Using the keyvault as secret store 
@@ -80,7 +80,7 @@ New-AzSubscriptionDeployment `
       
 
 <#
-    Step 4: Deployment of an ARM templates via REST API. 
+    Folder prefix 4: Deployment of an ARM templates via REST API. 
     - Get the url from the Azure function first 
     - Beforehand you need to deploy deplyoment runner function 
     - Handing over parameter vi Powershell dpeloyment 
@@ -101,7 +101,7 @@ New-AzResourceGroupDeployment `
 Invoke-WebRequest -Uri "https://azuredeployfunction.azurewebsites.net/deploy?name=TESTUEBERURL"
 
 <#
-    Step 5: Deployment with own UI definition
+    Folder prefix 5: Deployment with own UI definition
     
 #>
 # How to construc this URL
@@ -112,21 +112,21 @@ https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlad
 
 
 <# 
-    Step 6: Azure Dev Test Labs
+    Folder prefix 6: Azure Dev Test Labs
     
 #>
 
 #   TODO
 
 <# 
-    Step 7: Managed Application Demo
+    Folder prefix 7: Managed Application Demo
     Look: https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/
 #>
 
 # TODO
 
 <#
-    Step 8: Deploy of a blueprint out of a ARM template.
+    Folder prefix 8: Deploy of a blueprint out of a ARM template.
     Than manual assigment in the portal
 #>
 New-AzSubscriptionDeployment `
@@ -137,7 +137,7 @@ New-AzSubscriptionDeployment `
 
 
 <#
-    Step 9: Deployment of a VM to a resource group and a (Custom Script Extension )
+    Folder prefix 9: Deployment of a VM to a resource group and a (Custom Script Extension )
     - With a linked template
 #>
 $rgname = "DeployVMandCSE5"
@@ -151,7 +151,7 @@ New-AzResourceGroupDeployment `
 
 
 <#
-    Step 10: Deploy a Template Spec
+    Folder prefix 10: Deploy a Template Spec
 #>
 
 # Plain template
@@ -192,7 +192,7 @@ New-AzResourceGroupDeployment `
 
 
 <#
-    Step 11: Managed Application (Service Catalog)
+    Folder prefix 11: Managed Application (Service Catalog)
 #>
 
 # Upload Package in an Storage Account
@@ -237,10 +237,12 @@ New-AzManagedApplicationDefinition `
   -PackageFileUri $blob.ICloudBlob.StorageUri.PrimaryUri.AbsoluteUri
 
 
-<#
-   Step 12: Deploy with Terraform
+<###########################################################
+   Folder prefix 12: Deploy with Terraform
 #>
 
+
+################################
 # Deploy a resource group 
 # Install Azure CLI on your workstation
 # Install terraform on your workstation
@@ -254,7 +256,7 @@ terraform validate
 terraform plan
 terraform apply
 
-
+###############################
 # Deploy a VM with AD domain join
 # Reference: https://github.com/hashicorp/terraform-provider-azurerm/tree/main/examples
 # This script consists of modules
@@ -266,12 +268,23 @@ terraform validate
 terraform plan
 terraform apply
 
+###############################
 # Writing an own Terraform provider
 # Tutorial: https://boxboat.com/2020/02/04/writing-a-custom-terraform-provider/
+# First you need to build the binary on your windows PC.
 
 
+1. Delete the folder .terraform\plugins
+2. set TF_LOG=TRACE
+3. go build -o terraform-provider-cmdb_v1.0.0
+4. del terraform-provider-cmdb_v1.0.0.exe
+5. rename terraform-provider-cmdb_v1.0.0 terraform-provider-cmdb_v1.0.0.exe
+6. copy terraform-provider-cmdb_v1.0.0.exe C:\Users\<your user profile directory>\AppData\Roaming\terraform.d\plugins\registry.terraform.io\hashicorp\cmdb\1.0.0\windows_amd64\
+7. del .terraform.lock.hcl
+8. terraform init
+9. terraform plan
 
-
+###############################
 # Deploy Gaia on Azure
 # Documentation: https://docs.gaia-app.io/
 
@@ -286,6 +299,35 @@ az container create \
 
 
 gaiaapp/runner
+
+
+############  NEW
+
+
+# Deploy a AKS cluster in Azure
+
+$resourcegroup = "GaiaApp"
+$location = "westeurope"
+$clusterName = "GaiaApp"
+
+az login
+az account set --subscription $subscriptionid
+
+az group create --resource-group $resourcegroup --location $location
+az aks create --resource-group $resourcegroup --name $clusterName --node-count 1 --enable-addons monitoring --generate-ssh-keys
+az aks get-credentials --resource-group $resourcegroup --name $clusterName
+kubectl get nodes
+
+
+cd ./12_Terraform_Gaia
+kubectl apply -f gaia.yaml
+kubectl delete deployment gaiaapp
+kubectl delete deployment mongo
+kubectl delete deployment runner
+kubectl delete service gaiaapplb
+kubectl delete service gaiaapp
+
+
 
 
 

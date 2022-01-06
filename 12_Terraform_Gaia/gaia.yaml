@@ -1,0 +1,119 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gaiaapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gaiaapp
+  template:
+    metadata:
+      labels:
+        app: gaiaapp
+    spec:
+      containers:
+      - name: gaiaapp
+        image: gaiaapp/gaia
+        env:
+        - name:  GAIA_MONGODB_URI
+          value: "mongodb://mongo/gaia"
+        - name: GAIA_RUNNER_API_PASSWORD
+          value: "123456"
+        resources:
+          requests:
+            cpu: 250m
+            memory: 512Mi
+          limits:
+            cpu: 250m
+            memory: 1024Mi
+        ports:
+        - containerPort: 8080
+          name: gaiaapp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gaiaapp
+spec:
+  ports:
+  - port: 8080
+  selector:
+    app: gaiaapp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: runner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: runner
+  template:
+    metadata:
+      labels:
+        app: runner
+    spec:
+      containers:
+      - name: runner
+        image: gaiaapp/runner
+        resources:
+          requests:
+            cpu: 350m
+            memory: 512Mi
+          limits:
+            cpu: 350m
+            memory: 1024Mi
+        env:
+        - name: GAIA_URL
+          value: "http://gaiaapp:8080"
+        - name: GAIA_RUNNER_API_PASSWORD
+          value: "123456"
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - name: mongo
+        image: mongo:4.4
+        resources:
+          requests:
+            cpu: 250m
+            memory: 512Mi
+          limits:
+            cpu: 250m
+            memory: 1024Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo
+spec:
+  ports:
+  - port: 27017
+  selector:
+    app: mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gaiaapplb
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+  selector:
+    app: gaiaapp
