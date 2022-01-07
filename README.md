@@ -6,21 +6,23 @@ This is a technical demonstration to try out many aspects of automating Azure ma
 
 When you in front of your first  Azure project please have a look at the official Microsoft "Cloud adoption framework" first.
 
-![Azure Automation](http://partsolutions.com/wp-content/uploads/2014/03/Timo-Boll-vs.-KUKA-Robot_LG.png)
+
 
 ## 2. Problem statement
 
-In huge cloud environments (i. e. a world wide distributed company) automation in IT is KEY. Automation enables efficiency and fast development cycles. Cloud is an enabler technology. Azure has tons of technologies that could help you to automate operation. This guide is a uncompleted and ever evolving tech tutorial.
+In huge cloud environments (i. e. a world wide distributed company IT) automation in IT is KEY. Automation enables efficiency and fast development cycles. Cloud is an enabler technology. Azure has tons of technologies that could help you to automate operation. This guide is a uncompleted but ever evolving tech tutorial. This is a result of my consulting role at my customer. 
 
 ## 3. With this guide you learn about
 
-The world of automation is dominated by declarative languages. Declarative means that you describe your status and move your infrastructure toward this status. ARM, Terraform, YAML, you name it. Declarative languages are fundamental different in comparison to imperative languages.
+The world of automation is dominated by declarative languages. Declarative means that you describe your status and move your infrastructure toward this status. ARM, Terraform HCL, YAML,  you name it. Declarative languages are fundamental different in comparison to imperative languages. But you wouldn't miss also imperative languages like Powershell and Bash-Scripts. Be flexible and choose alway according to your needs. 
 
 This guide helps you to leverage modern IaC in regards to Azure.
 
-You can work with it like a tutorial. Start with the basic steps. And work through the step.
+You can work with it like a tutorial. Start with the basic steps. And work through all the way down the steps.
 
-## Topics
+This guide is also leveraging technologies from Non-Microsoft parties. This guide isn't meant as a pro-microsoft brainwashing.
+
+### Topics
 
 1. Deployment basics like: scopes, ARM scripts, linked templates, secret handling, custom script extensions
 1. Where to store my deployment scripts
@@ -30,7 +32,7 @@ You can work with it like a tutorial. Start with the basic steps. And work throu
 1. A little bit of terraform
 1. A lot of other techniques for automating Azure
 
-### 4. How to use
+## 4. How to use
 
     1. Clone the repository to your local workstation.
     2. Open it with Visual Studio Code. 
@@ -46,9 +48,9 @@ henrik.motzkus@microsoft.com
 
 This is work in progress and infinitely evolving.
 
-Disclaimer: This demo doesn't explain the concepts itself. It combines the various features and demonstrates the value. For education please visit the official documentation.
+Disclaimer: This demo doesn't explain the concepts itself. It combines the various features and demonstrates the value. For education please visit the official documentation of Microsoft.
 
-Disclaimer 2: This is not a explanation of the AZure Server "Azure Automation". THe service "Azure Automation" is a tool. This demo here is a comprehensive overview about all aspects of automation the Azure cloud.
+Disclaimer 2: This is not an explanation of the Azure Service "Azure Automation". The service "Azure Automation" is a tool. This demo here is a comprehensive overview about all aspects of automating the Azure cloud.
 
 ## 7 Demo steps
 
@@ -206,7 +208,9 @@ Terraform is the defacto industry standard when it comes to cloud management wit
 
 #### 7.3.3 (Folder prefix 13) Deployment with Github Actions
 
-In step 4 you deployed a Azure function. The code deployment onto the Azure function is achieved with Github actions. In \.github\workflows you'll find a workflow to deploy code from Github to the function.
+Github action is a pipeline enginge that could be leveraged for code push to your hosting environment like Azure functions.
+
+In step 4 you deployed a Azure function. The code deployment onto the Azure function is achieved with Github actions. In the folder **\.github\workflows** you'll find a workflow definition to deploy code from Github to the function. The file is called **main_powershelldeployfunction.yaml**
 
 [Docs](https://docs.microsoft.com/en-us/azure/developer/github/github-actions/)
 
@@ -228,10 +232,16 @@ You can deploy ARM script within the boundary of a development project with the 
 
 ### 7.3.5 (Folder prefix 15) The Azure TeamCloud
 
-[Docs](https://github.com/microsoft/TeamCloud)
+The TeamCloud is a community project spinned up by Markus Heiliger a colleague from me. Purpose is to provide development teams a self-service for provisioning compliant cloud development environments.
+
+[Github project](https://github.com/microsoft/TeamCloud)
+
+
 
     Instructions:
-    1. Visit the github project!
+    1. Install the Azure CLI extension for TeamCloud
+    1. Run the commands in the powershell
+    
 
 ### 7.3.6 (Folder prefix 17) Azure Automanage for Virtual machines
 
