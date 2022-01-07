@@ -288,22 +288,6 @@ terraform apply
 # Deploy Gaia on Azure
 # Documentation: https://docs.gaia-app.io/
 
-
-az container create \
-    --resource-group Gaia \
-    --name gaiaapp \
-    --image gaiaapp/gaia \
-    --restart-policy OnFailure \
-    --environment-variables 'GAIA_MONGODB_URI'='mongodb://gaia1:T1OK5zh6SHHcPyPe2sETJzMpUeuWmGFbgteBbrt6dy6g2XWib3iNitPes6Dl3ytIJFLUhWUeE7lCZLkBnkk5Uw==@gaia1.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@gaia1@' 'GAIA_RUNNER_API_PASSWORD'='123456' \
-    --location westeurope
-
-
-gaiaapp/runner
-
-
-############  NEW
-
-
 # Deploy a AKS cluster in Azure
 
 $resourcegroup = "GaiaApp"
@@ -312,13 +296,13 @@ $clusterName = "GaiaApp"
 
 az login
 az account set --subscription $subscriptionid
-
 az group create --resource-group $resourcegroup --location $location
 az aks create --resource-group $resourcegroup --name $clusterName --node-count 1 --enable-addons monitoring --generate-ssh-keys
 az aks get-credentials --resource-group $resourcegroup --name $clusterName
 kubectl get nodes
 
 
+# Roll out the yaml on the new cluster
 cd ./12_Terraform_Gaia
 kubectl apply -f gaia.yaml
 kubectl delete deployment gaiaapp
@@ -326,18 +310,6 @@ kubectl delete deployment mongo
 kubectl delete deployment runner
 kubectl delete service gaiaapplb
 kubectl delete service gaiaapp
-
-
-
-
-
-az container create \
-    --resource-group Gaia \
-    --name gaiarunner \
-    --image gaiaapp/runner \
-    --restart-policy OnFailure \
-    --environment-variables 'GAIA_URL=http://gaia:8080' 'GAIA_RUNNER_API_PASSWORD'='123456' \
-    --location westeurope
 
 
 <#
