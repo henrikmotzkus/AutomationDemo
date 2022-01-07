@@ -10,6 +10,8 @@
         AZ Module 6.0 
         Powershell 7
         Latest Azure CLI
+
+    Make sure to always update to the latest modules and runtimes.
 #>
 
 
@@ -366,11 +368,16 @@ kubectl delete service gaiaapp
 
 #>
 
-<#
+<###########################################################
 
     Step 15 What is the Azure Team Cloud?
 
 #>
+
+az --version 
+az upgrade
+az extension add --source https://github.com/microsoft/TeamCloud/releases/latest/download/tc-0.4.1-py2.py3-none-any.whl -y
+
 
 
 
