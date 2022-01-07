@@ -1,20 +1,30 @@
-<#
+<###########################################################
     Author: Henrik Motzkus
     Date: 11/2021
     Description: This is a demo for all the apsects of automating Azure.
+    <https://github.com/henrikmotzkus/AutomationDemo>
 #>
 
 <#
-    Requirements: AZ Module 6.0 and Powershell 7
+    Requirements: 
+        AZ Module 6.0 
+        Powershell 7
+        Latest Azure CLI
 #>
 
 
-<#
+<###########################################################
+
   Step 0: Connect with Azure and set defaults
+
 #>
+
 $location = "westeurope"
 
 # Internal
+
+. "$PSScriptRoot\env.ps1"
+
 $subscriptionid = "2abc2ec1-2238-430d-bf52-40cb7dc8b652"
 
 # Visual Studio FTE
@@ -23,7 +33,8 @@ $subscriptionid = "a70316fd-0761-4d1d-aa6a-743ef1133f7a"
 Connect-AzAccount
 Set-AzContext $subscriptionid
 
-<#
+<###########################################################
+
     Folder prefix 1. Deployment on different scopes
 #>
 
@@ -45,12 +56,11 @@ New-AzTenantDeployment `
     -TemplateParameterFile ".\1_SubscriptionCreation\azuredeploy.parameters.json"
        
 
-<#
+<###########################################################
     Folder prefix 2: Deployment on resource group scope. 
     - Deploys a VM with a secret from a keyvault
     - With conditional variables
 #>
-
 
 New-AzResourceGroup -Name "Keyvault2" -Location $location
 New-AzResourceGroupDeployment `
@@ -66,11 +76,14 @@ New-AzResourceGroupDeployment `
     -TemplateParameterFile '.\2_ResourceGroup\azuredeploy.parameters.json'
     
 
-<#
-    Folder prefix 3. Deployment on ResourceGroup AND Subscription scope 
+<###########################################################
+
+    Folder prefix 3: Deployment on ResourceGroup AND Subscription scope 
+
     - With a nested template
     - Inline in the script
     - Using the keyvault as secret store 
+
 #>
 
 New-AzSubscriptionDeployment `
@@ -79,13 +92,17 @@ New-AzSubscriptionDeployment `
     -Location $location
       
 
-<#
+<###########################################################
+
     Folder prefix 4: Deployment of an ARM templates via REST API. 
+
     - Get the url from the Azure function first 
-    - Beforehand you need to deploy deplyoment runner function 
-    - Handing over parameter vi Powershell dpeloyment 
-    - Github Action pipeline for deploing the function code to the funtion
+    - Beforehand you need to deploy the deployment runner function 
+    - Handing over parameter via Powershell deoloyment 
+    - Github Action pipeline for deployng the function code to the funtion
+
 #>
+
 $funcrgname = "DeployFunction"
 New-AzResourceGroup -Name $funcrgname -Location $location
 New-AzResourceGroupDeployment `
@@ -96,39 +113,46 @@ New-AzResourceGroupDeployment `
     -location $location `
     -serverFarmResourceGroup $funcrgname
     
-# Manuell System assigned identity setzen
+# Manuall set System assigned identity in the Azure function
 
 Invoke-WebRequest -Uri "https://azuredeployfunction.azurewebsites.net/deploy?name=TESTUEBERURL"
 
-<#
+<###########################################################
+
     Folder prefix 5: Deployment with own UI definition
     
 #>
-# How to construc this URL
+
+# How to construct this URL
 # You need Azure, the deployment scipt and UI definition
 # Url need to be encoded
 
 https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2F5_UIDef%2Fazuredeploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2F5_UIDef%2FUIDefRG.json
 
 
-<# 
+<###########################################################
+
     Folder prefix 6: Azure Dev Test Labs
     
 #>
 
-#   TODO
+# TODO
 
-<# 
+<###########################################################
+
     Folder prefix 7: Managed Application Demo
     Look: https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/
 #>
 
 # TODO
 
-<#
+<###########################################################
+
     Folder prefix 8: Deploy of a blueprint out of a ARM template.
     Than manual assigment in the portal
+
 #>
+
 New-AzSubscriptionDeployment `
   -Name demoDeployment `
   -Location $location `
@@ -136,10 +160,13 @@ New-AzSubscriptionDeployment `
   -blueprintName "TestBlueprint"
 
 
-<#
+<###########################################################
+
     Folder prefix 9: Deployment of a VM to a resource group and a (Custom Script Extension )
     - With a linked template
+
 #>
+
 $rgname = "DeployVMandCSE5"
 $location = "westeurope"
 New-AzResourceGroup -Name $rgname -Location $location
@@ -150,11 +177,14 @@ New-AzResourceGroupDeployment `
 
 
 
-<#
+<###########################################################
+
     Folder prefix 10: Deploy a Template Spec
+
 #>
 
 # Plain template
+
 $name = "SimpleVM"
 $rgname = "Specs"
 $templatefile = ".\2_ResourceGroup\azuredeploy.json"
@@ -191,8 +221,10 @@ New-AzResourceGroupDeployment `
   -ResourceGroupName $rgname
 
 
-<#
+<###########################################################
+
     Folder prefix 11: Managed Application (Service Catalog)
+
 #>
 
 # Upload Package in an Storage Account
@@ -218,6 +250,7 @@ Set-AzStorageBlobContent `
   -Context $ctx
 
  # Prepare Azure AD
+
 $groupID=(Get-AzADGroup -DisplayName "ManagedApp").Id
 
 $ownerID=(Get-AzRoleDefinition -Name Owner).Id
@@ -238,9 +271,10 @@ New-AzManagedApplicationDefinition `
 
 
 <###########################################################
-   Folder prefix 12: Deploy with Terraform
-#>
 
+   Folder prefix 12: Deploy with Terraform
+
+#>
 
 ################################
 # Deploy a resource group 
@@ -261,7 +295,6 @@ terraform apply
 # Reference: https://github.com/hashicorp/terraform-provider-azurerm/tree/main/examples
 # This script consists of modules
 
-
 cd .\12_Terraform_ADJoin
 terraform init
 terraform validate
@@ -272,7 +305,6 @@ terraform apply
 # Writing an own Terraform provider
 # Tutorial: https://boxboat.com/2020/02/04/writing-a-custom-terraform-provider/
 # First you need to build the binary on your windows PC.
-
 
 1. Delete the folder .terraform\plugins
 2. set TF_LOG=TRACE
@@ -287,7 +319,6 @@ terraform apply
 ###############################
 # Deploy Gaia on Azure
 # Documentation: https://docs.gaia-app.io/
-
 # Deploy a AKS cluster in Azure
 
 $resourcegroup = "GaiaApp"
@@ -301,8 +332,8 @@ az aks create --resource-group $resourcegroup --name $clusterName --node-count 1
 az aks get-credentials --resource-group $resourcegroup --name $clusterName
 kubectl get nodes
 
-
 # Roll out the yaml on the new cluster
+
 cd ./12_Terraform_Gaia
 kubectl apply -f gaia.yaml
 kubectl delete deployment gaiaapp
@@ -311,10 +342,15 @@ kubectl delete deployment runner
 kubectl delete service gaiaapplb
 kubectl delete service gaiaapp
 
+# The login to your public service
 
-<#
+<###########################################################
+
     Step 13 Github Actions
+
 #>
+
+
 
 # Install-Module -Name PowerShellForGitHub
 # Manual work
@@ -322,22 +358,32 @@ kubectl delete service gaiaapp
 # git push
 
 
-<#
+
+
+<###########################################################
+
     Step 14 Deployment with Azure DevOps
+
 #>
 
 <#
+
     Step 15 What is the Azure Team Cloud?
+
 #>
 
 
 
-<#
+<###########################################################
+
     Step 16: Enterprise Scale landing zone demo
     Look: https://github.com/Azure/Enterprise-Scale
+
 #>
   
 
-<#
+<###########################################################
+
     Step 17 Roll out Azure automanage
+
 #>
