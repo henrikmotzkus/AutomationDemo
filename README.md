@@ -24,7 +24,7 @@ You can work with it like a tutorial. Start with the basic steps. And work throu
 
 1. Deployment basics like: scopes, ARM scripts, linked templates, secret handling, custom script extensions
 2. Where to store my deployment scripts
-3. Building a sofisticated deployment environments with an Azure function
+3. Building a sophisticated deployment environments with an Azure function
 4. Reference to the enterprise scale landing zone
 5. Use of built in management tool like: Blueprints, Managed Apps, Custom UIs
 6. A little bit of terraform
@@ -33,9 +33,10 @@ You can work with it like a tutorial. Start with the basic steps. And work throu
 ### 4. How to use
 
     1. Clone the repository to your local workstation. 
-    2. Open it with Visual Studio Code. 
-    4. "deploy.ps1" is the command center. Open deploy.ps1, every step will be rolled out with this script.
-    5. Then change your subscription ID and location in the deploy.ps1
+    1. Open it with Visual Studio Code. 
+    1. "deploy.ps1" is the command center. Open deploy.ps1, every step will be rolled out with this script.
+    1. Change your subscription ID and location in the deploy.ps1
+    1. The "Folder prefix" in the heading marks accordingly the folder where the scripts exists
 
 ## 5. Contact
 
@@ -46,6 +47,8 @@ henrik.motzkus@microsoft.com
 This is work in progress and infinitely evolving.
 
 Disclaimer: This demo doesn't explain the concepts itself. It combines the various features and demonstrates the value. For education please visit the official documentation.
+
+Disclaimer 2: This is not a explanation of the AZure Server "Azure Automation". THe service "Azure Automation" is a tool. This demo here is a comprehensive overview about all aspects of automation the Azure cloud.
 
 ## 7 Demo steps
 
@@ -64,9 +67,9 @@ More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/d
 
 #### 7.1.2 (Folder prefix 2) Deployment an ARM Template on the resource group level
 
-This deployment deploys a VM on the resource group scope. The VM password is securely stored in a kevvault and not hardcoded in the script. First you need to deploy that keyvault and its secret. And it shows a different method of parameter handling. 
+This deployment deploys a VM on the resource group scope. The VM password is securely stored in a kevvault and not hardcoded in the script. First you need to deploy that keyvault and its secret. And it shows a different method of parameter handling.
 
-More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/key-vault-parameter?tabs=azure-cli
+More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/key-vault-parameter?tabs=azure-cli>
 
     Instructions:
     1. Run the commands in the powershell
@@ -75,7 +78,7 @@ More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/ke
 
 This deployment shows a combined deployment that is beeing rolled out on different scopes at the same time. And it shows that this can be achieved with a nested ARM script. Nesting script is a way to modularize your scripts.
 
-More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/linked-templates?tabs=azure-powershell
+More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/linked-templates?tabs=azure-powershell>
 
     Instructions: 
     1. Run the commands in the powershell
@@ -84,7 +87,7 @@ More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/li
 
 These features use the basics and extends the basic layers with more functionality.
 
-#### 7.2.1 (Folder prefix 4) Deployment of a script with a deployment runner like Azure function.
+#### 7.2.1 (Folder prefix 4) Deployment of a script with a deployment runner like Azure function
 
 This Azure function can deploy a ARM script
 
@@ -94,14 +97,14 @@ Purpose of is to demonstrate that you could leverage Azure function for nearly e
 
     Instructions: 
     1. Run the commands in the powershell
-    2. Assining a 'System assigned' identity to the Azure function
+    2. Assigning a 'System assigned' identity to the Azure function
     3. Assign 'contributor rights' to that identity
     4. Get the URL of the function
     5. Call the function via REST Call 
 
 #### 7.2.2 (Folder prefix 5) Own UI definitions
 
-Arm templates need to ingest parameters. With a UI defintion you're able to create beautiful UIs on Azure to customize the customer experience. Especially in big companies a lot of information needs to be incorporated at the time of deployment. 
+Arm templates need to ingest parameters. With a UI definition you're able to create beautiful UIs on Azure to customize the customer experience. Especially in big companies a lot of information needs to be incorporated at the time of deployment.
 
 As a central unit you can provide a self service UI for your customers.
 
@@ -110,27 +113,27 @@ As a central unit you can provide a self service UI for your customers.
 
 #### 7.2.3 (Folder prefix 6) Azure DevTestLabs
 
-A DevTestLab in Azure is a currated environment where you as a central uni can offer your customers cloud environments in a self service fashion. Fully controlled and with budgets activated.
+A DevTestLab in Azure is a curated environment where you as a central uni can offer your customers cloud environments in a self service fashion. Fully controlled and with budgets activated.
 
-More: https://docs.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview
+More: <https://docs.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview>
 
     Instructions:    
     TODO
 
 #### 7.2.3 (Folder prefix 7) Managed applications
 
-A managed app is a offering you can make on the Azure marketplace. You as a company can offer your software solution a managed service provider. Potential customer can deploy your solution in their subscription by a click. 
+A managed app is a offering you can make on the Azure marketplace. You as a company can offer your software solution a managed service provider. Potential customer can deploy your solution in their subscription by a click.
 
-More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/overview
+More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/overview>
 
     Instructions: 
     TODO
 
 #### 7.2.4 (Folder prefix 8) Deploy a blueprint
 
-With blueprints a central unit can provide ARM templates, assigned policies, assign roles, and assigned management groups as a UNIT. A internal "customer" can use the blueprint in order to roll out that blueprint. Blueprints are currated deployment. 
+With blueprints a central unit can provide ARM templates, assigned policies, assign roles, and assigned management groups as a UNIT. A internal "customer" can use the blueprint in order to roll out that blueprint. Blueprints are curated deployment.
 
-More: https://docs.microsoft.com/en-us/azure/governance/blueprints/
+More: <https://docs.microsoft.com/en-us/azure/governance/blueprints/>
 
     Instructions: 
     1. Run the commands in the powershell. 
@@ -138,9 +141,9 @@ More: https://docs.microsoft.com/en-us/azure/governance/blueprints/
 
 #### 7.2.5 (Folder prefix 9) Deployment of a Custom script Extension
 
-This deploys a VM from the script out of step 2. And a custom scription extension into the VM. A CSE is a deployment script that can be used to deploy additional scripts after the deployment of the VM itself. 
+This deploys a VM from the script out of step 2. And a custom script extension into the VM. A CSE is a deployment script that can be used to deploy additional scripts after the deployment of the VM itself.
 
-More: https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows
+More: <https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows>
 
     Instructions: 
     1. Run the commands in the powershell
@@ -149,7 +152,7 @@ More: https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-
 
 This uploads a template Spec to Azure and deploys it. A template spec can be used to modularize the ARM template and share it in the whole company. This demo uses the script from step 2. And it uses a nested template out of step 10. You can provide a own UI definition.
 
-More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs?tabs=azure-powershell
+More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs?tabs=azure-powershell>
 
     Instructions:
     1. Run the commands in the powershell.
@@ -157,9 +160,9 @@ More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/te
 
 #### 7.2.7 (Folder prefix 11) Deployment of a Managed App out of a service catalog
 
-This uploads a managed app to the service catalog of a Azure environment. 
+This uploads a managed app to the service catalog of a Azure environment.
 
-More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/deploy-service-catalog-quickstart
+More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/deploy-service-catalog-quickstart>
 
     Instructions: 
     1. Run the commands in the powershell
@@ -173,37 +176,39 @@ Now we're entering the world of additional tools and frameworks that deliver mor
 
 This is a comprehensive showcase of deploying an ARM template that is complex. This shows a full working template deployment for big environments.
 
-More: https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture
+More: <https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture>
 
     Instructions:
     Visit the github project 
 
 #### 7.3.2 (Folder prefix 12) Deployment in Azure with Terraform
 
-Terraform is the defacto industry standard when it comes to cloud management with IaC. In this chapter I want to demo the various possibilities with Terraform and Azure. At the moment we have 4 demo steps. 
+Terraform is the defacto industry standard when it comes to cloud management with IaC. In this chapter I want to demo the various possibilities with Terraform and Azure. At the moment we have 4 demo steps.
 
-Part 1 (Folder: 12_Terraform) : This TF deploys a resource group
+**Part 1 (Folder: 12_Terraform):** This TF deploys a resource group. This is the simple case. But not like the real world. ;-)
 
-Part 2 (Folder: 12_Terraform_ADJoin): This TF deploys a VNET, domain controller and a domain member. And it joins the VM to the domain. With this you can even automate inside the VM.
+**Part 2 (Folder: 12_Terraform_ADJoin):** This TF deploys a VNET, a domain controller and a domain member. It spans up the forest. And it joins the VM to the domain. Outcome: It automates the infrastructure deployment and the VM configuration.
 
-Part 3 (Folder: 12_Terraform_Own_provider): This TF uses a custom TF provider. The custom TF provider is providing a VM name. Imagine you act like a internal CMDB and you like to automatically issue VM-names for the purpose of deployment. The backend REST API is implemented with a Azure function that is deployed in folder 4_FunctionCode. With this you could offer company internal cloud fashioned services. Easily write your own Terraform provider for all purposes.
+**Part 3 (Folder: 12_Terraform_Own_provider):** This TF uses a custom TF provider. The custom TF provider is providing a VM name. It is a data resource. Imagine you act like a internal CMDB-manager and you like to automatically issue VM-names for the purpose of deployment. The backend REST API is implemented with a Azure function that is deployed in folder 4_FunctionCode. With this you could offer company internal cloud fashioned services. Easily write your own Terraform provider for all purposes.
 
-More: https://boxboat.com/2020/02/04/writing-a-custom-terraform-provider/  (I copied a lot out of this blog post.)
+More: <https://boxboat.com/2020/02/04/writing-a-custom-terraform-provider/>  (I copied a lot out of this blog post.)
 
-Part 4 (Folder: 12_Terraform_Gaia):
+**Part 4 (Folder: 12_Terraform_Gaia):** Gaia is a UI on top of TF. With this step you could span up a AKS cluster in Azure and install Gaia on top of that. You could find the Gaia project here <https://github.com/gaia-app>
+
+[API Details](https://github.com/henrikmotzkus/AutomationDemo/blob/main/12_Terraform_Own_provider/README.md)
 
 More: <https://docs.microsoft.com/en-us/azure/developer/terraform/>
 
     Instructions:
     1. Install Azure CLI on your workstation
-    2. Install terraform on your workstation 
+    2. Install terraform on your workstation
     3. Run the commands in the powershell
 
 #### 7.3.3 (Folder prefix 13) Deployment with Github Actions
 
 In step 4 you deployed a Azure function. The code deployment onto the Azure function is achieved with Github actions. In \.github\workflows you'll find a workflow to deploy code from Github to the function.
 
-More: https://docs.microsoft.com/en-us/azure/developer/github/github-actions
+More: <https://docs.microsoft.com/en-us/azure/developer/github/github-actions>
 
     Instructions: 
     1. Download the publish profile from the function. Created in step 4
@@ -214,7 +219,7 @@ More: https://docs.microsoft.com/en-us/azure/developer/github/github-actions
 
 You can deploy ARM script within the boundary of a development project with the help of Azure DevOps.
 
-More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/add-template-to-azure-pipelines
+More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/add-template-to-azure-pipelines>
 
     Instructions:
     1. Create a Azure DevOps project 
@@ -223,7 +228,7 @@ More: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/ad
 
 ### 7.3.5 (Folder prefix 15) The Azure TeamCloud
 
-More: https://github.com/microsoft/TeamCloud
+More: <https://github.com/microsoft/TeamCloud>
 
     Instructions:
     1. Visit the github project!
