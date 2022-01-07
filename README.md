@@ -3,6 +3,8 @@ This is a technical demonstration to try out many aspects of automating Azure ma
 
 When you in front of your first  Azure project please have a look at the official Microsoft "Cloud adoption framework" first.
 
+![Azure Automation](http://partsolutions.com/wp-content/uploads/2014/03/Timo-Boll-vs.-KUKA-Robot_LG.png)
+
 # 2. Problem statement
 In huge cloud environments (i. e. a world wide distributed company) automation in IT is KEY. Automation enables efficiency and fast development cycles. Cloud is an enabler technology. Azure has tons of technologies that could help you to automate operation. This guide is a uncompleted and ever evolving tech tutorial.
 
