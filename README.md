@@ -23,20 +23,20 @@ You can work with it like a tutorial. Start with the basic steps. And work throu
 ## Topics
 
 1. Deployment basics like: scopes, ARM scripts, linked templates, secret handling, custom script extensions
-2. Where to store my deployment scripts
-3. Building a sophisticated deployment environments with an Azure function
-4. Reference to the enterprise scale landing zone
-5. Use of built in management tool like: Blueprints, Managed Apps, Custom UIs
-6. A little bit of terraform
-7. A lot of other techniques for automating Azure
+1. Where to store my deployment scripts
+1. Building a sophisticated deployment environments with an Azure function
+1. Reference to the enterprise scale landing zone
+1. Use of built in management tool like: Blueprints, Managed Apps, Custom UIs
+1. A little bit of terraform
+1. A lot of other techniques for automating Azure
 
 ### 4. How to use
 
-    1. Clone the repository to your local workstation. 
-    1. Open it with Visual Studio Code. 
-    1. "deploy.ps1" is the command center. Open deploy.ps1, every step will be rolled out with this script.
-    1. Change your subscription ID and location in the deploy.ps1
-    1. The "Folder prefix" in the heading marks accordingly the folder where the scripts exists
+    1. Clone the repository to your local workstation.
+    2. Open it with Visual Studio Code. 
+    3. "deploy.ps1" is the command center. Open deploy.ps1, every step will be rolled out with this script.
+    4. Change your subscription ID and location in the deploy.ps1
+    5. The "Folder prefix" in the heading marks accordingly the folder where the scripts exists
 
 ## 5. Contact
 
@@ -60,7 +60,7 @@ These are basic technologies to get a basic understanding of how the most underl
 
 A deployment scope is the place where the deployment is running and placing the resources your're about to deploy in Azure.
 
-More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-resource-group?tabs=azure-cli>
+[Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-resource-group?tabs=azure-cli)
 
     Instructions:    
     1. Run the commands in the powershell
@@ -69,7 +69,7 @@ More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/d
 
 This deployment deploys a VM on the resource group scope. The VM password is securely stored in a kevvault and not hardcoded in the script. First you need to deploy that keyvault and its secret. And it shows a different method of parameter handling.
 
-More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/key-vault-parameter?tabs=azure-cli>
+[Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/key-vault-parameter?tabs=azure-cli)
 
     Instructions:
     1. Run the commands in the powershell
@@ -78,7 +78,7 @@ More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/k
 
 This deployment shows a combined deployment that is beeing rolled out on different scopes at the same time. And it shows that this can be achieved with a nested ARM script. Nesting script is a way to modularize your scripts.
 
-More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/linked-templates?tabs=azure-powershell>
+[Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/linked-templates?tabs=azure-powershell)
 
     Instructions: 
     1. Run the commands in the powershell
@@ -115,7 +115,7 @@ As a central unit you can provide a self service UI for your customers.
 
 A DevTestLab in Azure is a curated environment where you as a central uni can offer your customers cloud environments in a self service fashion. Fully controlled and with budgets activated.
 
-More: <https://docs.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview>
+[Docs](https://docs.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview)
 
     Instructions:    
     TODO
@@ -124,7 +124,7 @@ More: <https://docs.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview>
 
 A managed app is a offering you can make on the Azure marketplace. You as a company can offer your software solution a managed service provider. Potential customer can deploy your solution in their subscription by a click.
 
-More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/overview>
+[Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/overview)
 
     Instructions: 
     TODO
@@ -133,7 +133,7 @@ More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-app
 
 With blueprints a central unit can provide ARM templates, assigned policies, assign roles, and assigned management groups as a UNIT. A internal "customer" can use the blueprint in order to roll out that blueprint. Blueprints are curated deployment.
 
-More: <https://docs.microsoft.com/en-us/azure/governance/blueprints/>
+[Docs](https://docs.microsoft.com/en-us/azure/governance/blueprints/)
 
     Instructions: 
     1. Run the commands in the powershell. 
@@ -143,7 +143,7 @@ More: <https://docs.microsoft.com/en-us/azure/governance/blueprints/>
 
 This deploys a VM from the script out of step 2. And a custom script extension into the VM. A CSE is a deployment script that can be used to deploy additional scripts after the deployment of the VM itself.
 
-More: <https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows>
+[Docs](https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows)
 
     Instructions: 
     1. Run the commands in the powershell
@@ -152,7 +152,7 @@ More: <https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom
 
 This uploads a template Spec to Azure and deploys it. A template spec can be used to modularize the ARM template and share it in the whole company. This demo uses the script from step 2. And it uses a nested template out of step 10. You can provide a own UI definition.
 
-More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs?tabs=azure-powershell>
+[Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs?tabs=azure-powershell)
 
     Instructions:
     1. Run the commands in the powershell.
@@ -162,7 +162,7 @@ More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/t
 
 This uploads a managed app to the service catalog of a Azure environment.
 
-More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/deploy-service-catalog-quickstart>
+[Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/deploy-service-catalog-quickstart)
 
     Instructions: 
     1. Run the commands in the powershell
@@ -197,7 +197,7 @@ Terraform is the defacto industry standard when it comes to cloud management wit
 
 [API Details](https://github.com/henrikmotzkus/AutomationDemo/blob/main/12_Terraform_Own_provider/README.md)
 
-More: <https://docs.microsoft.com/en-us/azure/developer/terraform/>
+[Docs](https://docs.microsoft.com/en-us/azure/developer/terraform/)
 
     Instructions:
     1. Install Azure CLI on your workstation
@@ -219,7 +219,7 @@ In step 4 you deployed a Azure function. The code deployment onto the Azure func
 
 You can deploy ARM script within the boundary of a development project with the help of Azure DevOps.
 
-More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/add-template-to-azure-pipelines>
+[Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/add-template-to-azure-pipelines)
 
     Instructions:
     1. Create a Azure DevOps project 
@@ -228,7 +228,7 @@ More: <https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/a
 
 ### 7.3.5 (Folder prefix 15) The Azure TeamCloud
 
-More: <https://github.com/microsoft/TeamCloud>
+[Docs](https://github.com/microsoft/TeamCloud)
 
     Instructions:
     1. Visit the github project!
