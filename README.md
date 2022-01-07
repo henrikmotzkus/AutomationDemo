@@ -176,7 +176,7 @@ Now we're entering the world of additional tools and frameworks that deliver mor
 
 This is a comprehensive showcase of deploying an ARM template that is complex. This shows a full working template deployment for big environments.
 
-More: <https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture>
+[Docs](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture)
 
     Instructions:
     Visit the github project 
@@ -191,7 +191,7 @@ Terraform is the defacto industry standard when it comes to cloud management wit
 
 **Part 3 (Folder: 12_Terraform_Own_provider):** This TF uses a custom TF provider. The custom TF provider is providing a VM name. It is a data resource. Imagine you act like a internal CMDB-manager and you like to automatically issue VM-names for the purpose of deployment. The backend REST API is implemented with a Azure function that is deployed in folder 4_FunctionCode. With this you could offer company internal cloud fashioned services. Easily write your own Terraform provider for all purposes.
 
-More: <https://boxboat.com/2020/02/04/writing-a-custom-terraform-provider/>  (I copied a lot out of this blog post.)
+[More: I copied a lot out of this blog post.](https://boxboat.com/2020/02/04/writing-a-custom-terraform-provider/)
 
 **Part 4 (Folder: 12_Terraform_Gaia):** Gaia is a UI on top of TF. With this step you could span up a AKS cluster in Azure and install Gaia on top of that. You could find the Gaia project here <https://github.com/gaia-app>
 
@@ -208,7 +208,7 @@ More: <https://docs.microsoft.com/en-us/azure/developer/terraform/>
 
 In step 4 you deployed a Azure function. The code deployment onto the Azure function is achieved with Github actions. In \.github\workflows you'll find a workflow to deploy code from Github to the function.
 
-More: <https://docs.microsoft.com/en-us/azure/developer/github/github-actions>
+[Docs](https://docs.microsoft.com/en-us/azure/developer/github/github-actions/)
 
     Instructions: 
     1. Download the publish profile from the function. Created in step 4
