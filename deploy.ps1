@@ -23,6 +23,9 @@
 
 $location = "westeurope"
 
+$PSVersionTable.PSVersion
+
+
 # Internal
 
 . "$PSScriptRoot\env.ps1"
@@ -368,6 +371,7 @@ kubectl delete service gaiaapp
 
 #>
 
+$PSVersionTable.PSVersion
 <###########################################################
 
     Step 15 What is the Azure Team Cloud?

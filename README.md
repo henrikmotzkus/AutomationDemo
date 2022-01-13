@@ -10,7 +10,7 @@ When you in front of your first  Azure project please have a look at the officia
 
 ## 2. Problem statement
 
-In huge cloud environments (i. e. a world wide distributed company IT) automation in IT is KEY. Automation enables efficiency and fast development cycles. Cloud is an enabler technology. Azure has tons of technologies that could help you to automate operation. This guide is a uncompleted but ever evolving tech tutorial. This is a result of my consulting role at my customer. 
+In huge cloud environments (i. e. a world wide distributed company IT) automation in IT is KEY. Automation enables efficiency and fast development cycles. Cloud is an enabler technology. Azure has tons of technologies that could help you to automate operation. This guide is a uncompleted but ever evolving tech tutorial. This is a result of my consulting role at my customer.
 
 ## 3. With this guide you learn about
 
@@ -22,15 +22,35 @@ You can work with it like a tutorial. Start with the basic steps. And work throu
 
 This guide is also leveraging technologies from Non-Microsoft parties. This guide isn't meant as a pro-microsoft brainwashing.
 
-### Topics
+### Technologies
 
-1. Deployment basics like: scopes, ARM scripts, linked templates, secret handling, custom script extensions
-1. Where to store my deployment scripts
-1. Building a sophisticated deployment environments with an Azure function
-1. Reference to the enterprise scale landing zone
-1. Use of built in management tool like: Blueprints, Managed Apps, Custom UIs
-1. A little bit of terraform
-1. A lot of other techniques for automating Azure
+However this is a tutorial that can be worked through from top to bottom I want to list all technologies used.
+
+1. ARM Basics
+    1. Scopes
+    1. linked templates
+    1. secret handling
+    1. custom script extensions
+    1. Referencing managed identities
+1. Azure functions
+    1. For Deployments 
+    1. As TF provider
+1. Enterprise scale landing zone
+    1. ARM 
+    1. Terraform
+1. Built in management tools
+    1. Blueprints 
+    1. Managed Apps 
+    1. Custom UIs
+1. Terraform
+    1. Gaia
+    1. Own TF provider
+    1. Modules
+    1. Cloud adoption framework
+1. Custom User interfaces for your ARM deployments
+1. Automanage fpr VM
+1. Desired State Configuration
+1. Custom script extension
 
 ## 4. How to use
 
@@ -187,20 +207,30 @@ Terraform is the defacto industry standard when it comes to cloud management wit
     2. Install terraform on your workstation
     3. Run the commands in the powershell
 
-### 7.13 (Folder prefix 13) Deployment with Github Actions
+**Part5 (Folder: 12_TerraformCAF):** The Enterprise scale landingzone (ESLZ) is a reference implementation of design principles regarding the right use of Azure in big organizations. Skip to step 16 on order to learn about the ESLZ principles. 
 
-Github action is a pipeline enginge that could be leveraged for code push to your hosting environment like Azure functions.
+[Docs TF on Azure](https://docs.microsoft.com/en-us/azure/developer/terraform/overview) 
+[Docs TF modul enterprise scale landing zone](https://registry.terraform.io/modules/Azure/caf-enterprise-scale/azurerm/latest)
 
-In step 4 you deployed a Azure function. The code deployment onto the Azure function is achieved with Github actions. In the folder **\.github\workflows** you'll find a workflow definition to deploy code from Github to the function. The file is called **main_powershelldeployfunction.yaml**
+
+
+
+### 7.13 (Folder prefix 13) Code deployment with Github Actions
+
+Github action is a pipeline enging that could be leveraged for code push to your hosting environment like Azure functions.
+
+In step 4 you deployed a Azure function. The code deployment onto the Azure function is achieved with Github actions. In the folder **\.github\workflows** you'll find a workflow definition to deploy code from Github to the function. The file is called **main_powershelldeployfunction.yaml**, In order to get it running follow the instructions.
 
 [Docs](https://docs.microsoft.com/en-us/azure/developer/github/github-actions/)
 
     Instructions: 
     1. Download the publish profile from the function. Created in step 4
-    2. Create a secret an the project with the name "AZUREAPPSERVICE_PUBLISHPROFILE_5DC798FB4A2C4E18A92AC6A29A7C3462" and insert the publish profile text into it.
-    3. Push the workflow definiton (.github/) to your github account
+    2. Create a secret in the project on github with the name "AZUREAPPSERVICE_PUBLISHPROFILE_5DC798FB4A2C4E18A92AC6A29A7C3462" and insert the publish profile text into it.
+    3. Push the workflow definiton to your github account. In our case you could push this repo to your own repo on github. 
 
-### 7.14 (Folder prefix 14) Deployment with Azure DevOps
+### 7.14 (Folder prefix 14) Cod deployment with Azure DevOps
+
+TODO 
 
 You can deploy ARM script within the boundary of a development project with the help of Azure DevOps.
 
@@ -213,6 +243,8 @@ You can deploy ARM script within the boundary of a development project with the 
 
 ### 7.15 (Folder prefix 15) The Azure TeamCloud
 
+TODO 
+
 The TeamCloud is a community project spinned up by Markus Heiliger a colleague from me. Purpose is to provide development teams a self-service for provisioning compliant cloud development environments.
 
 [Github project](https://github.com/microsoft/TeamCloud)
@@ -221,16 +253,20 @@ The TeamCloud is a community project spinned up by Markus Heiliger a colleague f
     1. Install the Azure CLI extension for TeamCloud
     1. Run the commands in the powershell
     
-### 7.16 (Folder prefix 16) Enterprise Scale Landing Zone Showcase
+### 7.16 (Folder prefix 16) Enterprise Scale Landing Zone (ESLZ)
 
-This is a comprehensive showcase of deploying an ARM template that is complex. This shows a full working template deployment for big environments.
+Every company that enters Azure need a landingzone where workload can be hosted. This is the most important preparation on front of every first Azure project. The landingzone defines Policies, Connectivity options, Structure, Billing, and many more aspects of the Azure cloud.
 
 [Docs](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture)
 
     Instructions:
-    Visit the github project 
+    [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://aka.ms/caf/ready/accelerator)
 
 ### 7.17 (Folder prefix 17) Azure Automanage for Virtual machines
 
+TODO
+    
     Instructions
-    TODO
+    
+
+### 7.18 (Folder prefix 18) Event handling with Azure Automation and Event grid
