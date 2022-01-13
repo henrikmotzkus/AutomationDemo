@@ -260,7 +260,8 @@ Every company that enters Azure need a landingzone where workload can be hosted.
 [Docs](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture)
 
     Instructions:
-    [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://aka.ms/caf/ready/accelerator)
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://aka.ms/caf/ready/accelerator)
 
 ### 7.17 (Folder prefix 17) Azure Automanage for Virtual machines
 
