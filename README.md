@@ -208,9 +208,14 @@ Terraform is the defacto industry standard when it comes to cloud management wit
     2. Install terraform on your workstation
     3. Run the commands in the powershell
 
-**Part5 (Folder: 12_TerraformCAF):** The Enterprise scale landingzone (ESLZ) is a reference implementation of design principles regarding the right use of Azure in big organizations. Skip to step 16 on order to learn about the ESLZ principles. 
+**Part5 (Folder: 12_TerraformCAF):** The Enterprise scale landingzone (ESLZ) is a reference implementation of design principles regarding the right use of Azure in big organizations. See step 16 in order to learn about the ESLZ principles.
+
 
 [Docs TF on Azure](https://docs.microsoft.com/en-us/azure/developer/terraform/overview) 
+
+
+
+
 [Docs TF modul enterprise scale landing zone](https://registry.terraform.io/modules/Azure/caf-enterprise-scale/azurerm/latest)
 
 
@@ -256,22 +261,21 @@ The TeamCloud is a community project spinned up by Markus Heiliger a colleague f
     
 ### 7.16 (Folder prefix 16) Enterprise Scale Landing Zone (ESLZ)
 
-Every company that enters Azure need a landingzone where workload can be hosted. This is the most important preparation on front of every first Azure project. The landingzone defines Policies, Connectivity options, Structure, Billing, and many more aspects of the Azure cloud.
+Every company that enters Azure needs a landingzone where workload can be hosted. This is the most important preparation on front of every first Azure project. The landingzone defines Policies, Connectivity options, Structure, Billing, and many more aspects of the Azure cloud.
 
-![ESLZ reference](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/media/ns-arch-cust-expanded.png)
+Benefits:
+1. With this methodology you as a cloud admin can provide self service capabilities to other parts of your organization.
+1. Use the code base as a starting point for your own templates.
 
 
-[Docs](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture)
+[Official Docs](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture)
 
 With the click on this button you will be redirected to the Azure management portal and submit the deployment template. The ARM template is located [here](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/wingtip/README.md). This is a starter configuration fitted to small environments. 
 
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2FeslzArm.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2Feslz-portal.json)
 
-With this methodology you as a cloud admin can provide self service capabilities to other parts of your organization.
-
 [Here](https://github.com/Azure/Enterprise-Scale) you find the whole code base.
-
 
 ### 7.17 (Folder prefix 17) Azure Automanage for Virtual machines
 
