@@ -51,6 +51,7 @@ However this is a tutorial that can be worked through from top to bottom I want 
 1. Automanage fpr VM
 1. Desired State Configuration
 1. Custom script extension
+1. The Azure deploy button
 
 ## 4. How to use
 
@@ -257,11 +258,20 @@ The TeamCloud is a community project spinned up by Markus Heiliger a colleague f
 
 Every company that enters Azure need a landingzone where workload can be hosted. This is the most important preparation on front of every first Azure project. The landingzone defines Policies, Connectivity options, Structure, Billing, and many more aspects of the Azure cloud.
 
+![ESLZ reference](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/media/ns-arch-cust-expanded.png)
+
+
 [Docs](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture)
 
-    Instructions:
+With the click on this button you will be redirected to the Azure management portal and submit the deployment template. The ARM template is located [here](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/wingtip/README.md). This is a starter configuration fitted to small environments. 
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://aka.ms/caf/ready/accelerator)
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2FeslzArm.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2Feslz-portal.json)
+
+With this methodology you as a cloud admin can provide self service capabilities to other parts of your organization.
+
+[Here](https://github.com/Azure/Enterprise-Scale) you find the whole code base.
+
 
 ### 7.17 (Folder prefix 17) Azure Automanage for Virtual machines
 
