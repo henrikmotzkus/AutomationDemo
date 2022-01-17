@@ -206,24 +206,19 @@ Terraform is the defacto industry standard when it comes to cloud/infrastructure
     2. Install terraform on your workstation
     3. Run the commands in the powershell
 
-<<<<<<< HEAD
 **Part 5 (Folder: 12_TerraformCAF):** The Enterprise scale landingzone (ESLZ) is a reference implementation of design principles regarding the right use of Azure in big organizations. See step 16 in order to learn more about the ESLZ principles.
-=======
-**Part5 (Folder: 12_TerraformCAF):** The Enterprise scale landingzone (ESLZ) is a reference implementation of design principles regarding the right use of Azure in big organizations. See step 16 in order to learn more about the ESLZ principles.
->>>>>>> 2f0fb155ad9a452766a316e0f3dc8f87ed95c8a6
 
 [Docs TF on Azure](https://docs.microsoft.com/en-us/azure/developer/terraform/overview) 
 
 [Docs TF modul enterprise scale landing zone](https://registry.terraform.io/modules/Azure/caf-enterprise-scale/azurerm/latest)
 
 With this TF module you can deploy ready to use landingzones with TF.
-<<<<<<< HEAD
 
     Instructions
     1. Go to this simple [instruction set](https://github.com/Azure/terraform-azurerm-caf-enterprise-scale/wiki/%5BExamples%5D-Deploy-Default-Configuration) and follow the deployment steps.
 
 **Part 6 (Folder: 12_TerraformWithGithubActions):**
-Github Actions is "the" hottest shit in the moment. You could leverage TF and Github Actions to roll out your Infra-Deployment in a CI/CD fashion. TF is cloud agnostic widely accepted and the standard IaC methodology. 
+Github Actions is "the" hottest shit in the moment. You could leverage TF (hottest shit as well) and Github Actions to roll out your Infra-Deployment in a CI/CD fashion. TF is cloud agnostic widely accepted and the standard IaC methodology.
 
 [Official Docs](https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=azure-cli)
 [Demo repo](https://github.com/ned1313/ado-labs-github-actions)
@@ -231,11 +226,6 @@ Github Actions is "the" hottest shit in the moment. You could leverage TF and Gi
     Instructions
     1. Setup your Personal Access token in Github
     1. Run the commands in the deploy.ps1
-=======
-
-    Instructions
-    1. Go to this simple [instruction set](https://github.com/Azure/terraform-azurerm-caf-enterprise-scale/wiki/%5BExamples%5D-Deploy-Default-Configuration) and follow the deployment steps.
->>>>>>> 2f0fb155ad9a452766a316e0f3dc8f87ed95c8a6
 
 ### 7.13 (Folder prefix 13) Code deployment with Github Actions
 
