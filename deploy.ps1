@@ -25,18 +25,12 @@ $location = "westeurope"
 
 $PSVersionTable.PSVersion
 
+# This PS module sets the stage for Azure and logs in
+Import-Module .\env.psm1
+Set-AzureEnv
 
-# Internal
 
-. "$PSScriptRoot\env.ps1"
 
-$subscriptionid = "2abc2ec1-2238-430d-bf52-40cb7dc8b652"
-
-# Visual Studio FTE
-$subscriptionid = "a70316fd-0761-4d1d-aa6a-743ef1133f7a"
-
-Connect-AzAccount
-Set-AzContext $subscriptionid
 
 <###########################################################
 
@@ -348,6 +342,32 @@ kubectl delete service gaiaapplb
 kubectl delete service gaiaapp
 
 # The login to your public service
+
+
+
+###############################
+# Deploy a TF with Guthub Actions to Azure
+# Documentation: https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=azure-cli
+
+
+### 1. Initially we need to deploy all the basic infra. Here we go with, you guessed right, Terraform!
+
+# Log into Azure and select a subscription where you will deploy resources
+az login
+az account set --s $subscriptionid
+
+# Go into the remote setup directory
+cd .\12_TerraformWithGithubActions\Setup
+
+# Initialize and apply the code
+# If you use a different repository name, you'll need to specify -var=github_repository=NAME_OF_YOUR_REPO
+terraform init
+terraform apply
+
+
+
+
+
 
 <###########################################################
 
