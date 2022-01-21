@@ -2,9 +2,9 @@
 
 ## 1. tl;dr
 
-This is a technical demonstration to try out many aspects of automating Azure management tasks. The deploy.ps1 is the command center to roll out all demo steps. This is totally tech focussed. ;-)
+This is a technical demonstration (Or tutorial) to try out many aspects of automating Azure management tasks. The deploy.ps1 is the command center to roll out all demo steps. This is totally tech focussed. ;-)
 
-When you in front of your first  Azure project please have a look at the official Microsoft "Cloud adoption framework" first.
+When you in front of your first Azure project please have a look at the official Microsoft [Cloud adoption framework](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/) first.
 
 ## 2. Problem statement
 
@@ -31,7 +31,7 @@ However this is a tutorial that can be worked through from top to bottom I want 
     1. custom script extensions
     1. Referencing managed identities
 1. Azure functions
-    1. For Deployments
+    1. For Deployments to carry out deployments
     1. As TF provider
 1. Enterprise scale landing zone
     1. ARM
@@ -39,6 +39,7 @@ However this is a tutorial that can be worked through from top to bottom I want 
 1. Built in management tools
     1. Blueprints
     1. Managed Apps
+    1. Service catalog apps
     1. Custom UIs
 1. Terraform
     1. Gaia
@@ -50,6 +51,7 @@ However this is a tutorial that can be worked through from top to bottom I want 
 1. Desired State Configuration
 1. Custom script extension
 1. The Azure deploy button
+1. Azure DevTest labs
 
 ## 4. How to use
 
@@ -126,15 +128,15 @@ As a central unit you can provide a self service UI for your customers.
 
 ### 7.6 (Folder prefix 6) Azure DevTestLabs
 
-A DevTestLab in Azure is a curated environment where you as a central uni can offer your customers cloud environments in a self service fashion. Fully controlled and with budget limits activated. DevTestLabs is a environment that is supposed to server as a lab anvironment, dev environment, training environment. User are very limited and con only consume prepared resources. 
+A DevTestLab in Azure is a curated environment where you as a central unit can offer your customers cloud environments in a self service fashion. Fully controlled and with budget limits activated. DevTestLabs can serv as a lab environment, dev environment, training environment. User are very limited and con only consume prepared resources.
 
 [Docs](https://docs.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview)
 
     Instructions:    
     1. You need to clone this repo to your own repo
-    1. Change the source repo setting in the ARM 
-    1. Run the powershell command 
-    1. Go to the portal and try out
+    2. Change the source repo setting in the ARM 
+    3. Run the powershell command 
+    4. Go to the portal and try out
 
 ### 7.7 (Folder prefix 7) Managed applications
 
@@ -153,7 +155,7 @@ With blueprints a central unit can provide ARM templates, assigned policies, ass
 
     Instructions: 
     1. Run the commands in the powershell. 
-    1. Go to the portal an assign the blueprint manually
+    2. Go to the portal an assign the blueprint manually
 
 ### 7.9 (Folder prefix 9) Deployment of a Custom script Extension
 

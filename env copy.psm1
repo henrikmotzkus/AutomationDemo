@@ -1,4 +1,5 @@
 # Here you define the sensible account secrets
+# Rename this file to env.psm1
 
 function Set-AzureEnv {
     param (

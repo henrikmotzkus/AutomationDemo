@@ -1,7 +1,7 @@
 <###########################################################
     Author: Henrik Motzkus
     Date: 11/2021
-    Description: This is a demo for all the apsects of automating Azure.
+    Description: This is a demo for all the aspects of automating Azure.
     <https://github.com/henrikmotzkus/AutomationDemo>
 #>
 
@@ -26,6 +26,9 @@ $location = "westeurope"
 $PSVersionTable.PSVersion
 
 # This PS module sets the stage for Azure and logs in
+# Rename env copy.psm1 to env.psm1 
+# Change the env.psm1 to your settings
+
 Import-Module .\env.psm1
 Set-AzureEnv
 
@@ -134,6 +137,9 @@ https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlad
     Folder prefix 6: Azure Dev Test Labs
     
 #>
+
+
+
 
 # Deploy ARM template to your Azure subscription
 Set-AzureEnv
