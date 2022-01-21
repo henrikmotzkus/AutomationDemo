@@ -9,19 +9,22 @@
             "value": "TeamBlackVault"
         },
         "DevTestLabRepo": {
-            "value": "https://dev.azure.com/hemotzku/_git/Beiersdorf_DevTestLab"
+            "value": "https://github.com/henrikmotzkus/AutomationDemo.git"
         },
         "ArtifactsfolderPath": {
-            "value": "/DevTestLab1/Artifacts"
+            "value": "/6_DevTestLabs/DevTestLab1/Artifacts"
         },
         "ArmTemplatefolderPath": {
-            "value": "/DevTestLab1/ArmTemplates"
+            "value": "/6_DevTestLabs/DevTestLab1/ArmTemplates"
         },
         "VNETaddressspace": {
             "value": "10.0.0.0/24"
         },
         "Subnetaddressspace": {
             "value": "10.0.0.0/25"
+        },
+        "pat": {
+            "value": ""
         }
       
     }

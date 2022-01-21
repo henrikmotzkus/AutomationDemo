@@ -11,14 +11,14 @@
             "type": "String"
         },
         "DevTestLabRepo": {
-            "defaultValue": "https://dev.azure.com/hemotzku/_git/Beiersdorf_DevTestLab",
+            "defaultValue": "https://github.com/henrikmotzkus/AutomationDemo/tree/main/6_DevTestLabs/DevTestLab1",
             "type": "String",
             "metadata": {
                 "description": "Url des externen Repos für dieses DTL"
             }
         },
         "ArtifactsfolderPath": {
-            "defaultValue": "/DevTestLab1/Artifacts",
+            "defaultValue": "/Artifacts",
             "type": "string",
             "metadata": {
                 "description":"Folder der Artifacts im Repo "
@@ -26,7 +26,7 @@
 
         },
         "ArmTemplatefolderPath": {
-            "defaultValue": "/DevTestLab1/ArmTemplates",
+            "defaultValue": "/ArmTemplates",
             "type": "string",
             "metadata": {
                 "description":"Folder der ARM Templates im Repo "
@@ -74,6 +74,12 @@
                     
                 }
             ]
+        },
+        "pat": {
+            "type": "string",
+            "metadata": {
+                "description": "Github Personal Access Token"
+            }
         }
     },
         "variables": {
@@ -122,20 +128,21 @@
                 "mandatoryArtifactsResourceIdsLinux": [
                 ],
                 "mandatoryArtifactsResourceIdsWindows": [
+                    "[concat(resourceId('microsoft.devtestlab/labs/artifactsources', 'teamblack', 'privaterepo'), '/artifacts/Windows-7ZIP')]"
                 ],
                 
                 "premiumDataDisks": "",
                 "environmentPermission": "",
                 "announcement": {
                     "title": "Hallo Welt",
-                    "markdown": "<h1>Hallo Welt</h1>",
+                    "markdown": "Hello World. Additional info for the user",
                     "enabled": true,
                     "expirationDate": "",
                     "expired": false
                 },
                 "support": {
                     "enabled": true,
-                    "markdown": "<h1>Support</h1>"
+                    "markdown": "Support"
                 },
                 "extendedProperties": {}
             },
@@ -348,17 +355,21 @@
                     }
                 },
                 {
-                "apiVersion": "2018-10-15-preview",
-                "name": "[concat(parameters('name'), '/', 'Public Repo')]",
-                "type": "Microsoft.DevTestLab/labs/artifactSources",
-                "location": "[resourceGroup().location]",
-                
-                "dependsOn": [
+                    "type": "microsoft.devtestlab/labs/artifactsources",
+                    "apiVersion": "2018-09-15",
+                    "name": "[concat(parameters('name'), '/privaterepo')]",
+                    "dependsOn": [
                         "[resourceId('microsoft.devtestlab/labs', parameters('name'))]"
                     ],
-                "properties": {
-                    "displayName": "Public Artifact Repo",
-                    "status": "Disabled"
+                    "properties": {
+                        "displayName": "DevTestLab",
+                        "uri": "[parameters('DevTestLabRepo')]",
+                        "sourceType": "GitHub",
+                        "folderPath": "[parameters('ArtifactsfolderPath')]",
+                        "armTemplateFolderPath": "[parameters('ArmTemplatefolderPath')]",
+                        "branchRef": "main",
+                        "status": "Enabled",
+                        "securityToken":"[parameters('pat')]"
                     }
                 }
                
@@ -444,24 +455,6 @@
                 "enabledForDiskEncryption": false,
                 "enabledForTemplateDeployment": false,
                 "enableSoftDelete": true
-            }
-        },
-        {
-            "type": "microsoft.devtestlab/labs/artifactsources",
-            "apiVersion": "2018-09-15",
-            "name": "[concat(parameters('name'), '/privaterepo')]",
-            "dependsOn": [
-                "[resourceId('microsoft.devtestlab/labs', parameters('name'))]"
-            ],
-            "properties": {
-                "displayName": "DevTestLab",
-                "uri": "[parameters('DevTestLabRepo')]",
-                "sourceType": "VsoGit",
-                "folderPath": "[parameters('ArtifactsfolderPath')]",
-                "armTemplateFolderPath": "[parameters('ArmTemplatefolderPath')]",
-                "branchRef": "master",
-                "status": "Enabled",
-                "securityToken":"vc6blbhvtmezewggo5xtlguzovxxymcbmlwsx5ypgcnpuscjtb5a"
             }
         },
         {

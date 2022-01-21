@@ -126,12 +126,15 @@ As a central unit you can provide a self service UI for your customers.
 
 ### 7.6 (Folder prefix 6) Azure DevTestLabs
 
-A DevTestLab in Azure is a curated environment where you as a central uni can offer your customers cloud environments in a self service fashion. Fully controlled and with budgets activated.
+A DevTestLab in Azure is a curated environment where you as a central uni can offer your customers cloud environments in a self service fashion. Fully controlled and with budget limits activated. DevTestLabs is a environment that is supposed to server as a lab anvironment, dev environment, training environment. User are very limited and con only consume prepared resources. 
 
 [Docs](https://docs.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview)
 
     Instructions:    
-    TODO
+    1. You need to clone this repo to your own repo
+    1. Change the source repo setting in the ARM 
+    1. Run the powershell command 
+    1. Go to the portal and try out
 
 ### 7.7 (Folder prefix 7) Managed applications
 

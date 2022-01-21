@@ -8,7 +8,8 @@ function Set-AzureEnv {
     $subscriptionid = <YOUR subscription ID>
     Connect-AzAccount
     Set-AzContext $subscriptionid
-    $Env:GITHUB_TOKEN= <YOUR GITHUB TOKEN>
+    $PAT = <YOUR GITHUB TOKEN>
+    $Env:GITHUB_TOKEN = $PAT
 
 
 }

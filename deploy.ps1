@@ -135,7 +135,18 @@ https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlad
     
 #>
 
-# TODO
+# Deploy ARM template to your Azure subscription
+Set-AzureEnv
+$rgname = "MyDevTestLab"
+New-AzResourceGroup -Name $rgname -Location $location
+New-AzResourceGroupDeployment `
+    -ResourceGroupName $rgname `
+    -TemplateFile '.\6_DevTestLabs\azuredeploy.json' `
+    -TemplateParameterFile '.\6_DevTestLabs\azuredeploy.parameters.json'
+    -pat $PAT
+
+
+
 
 <###########################################################
 
