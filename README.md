@@ -297,3 +297,6 @@ TODO
 ### 7.19 (Folder prefix 19) Managing onprem infrastructure with Arc and ARM
 
 TODO
+
+### 7.20 (Folder prefix 20) Executing PS in an ARM script
+

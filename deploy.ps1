@@ -435,3 +435,14 @@ az extension add --source https://github.com/microsoft/TeamCloud/releases/latest
     Step 17 Roll out Azure automanage
 
 #>
+
+
+
+
+<###########################################################
+
+    Step 20 Execute Powershell in an ARM template
+
+#>
+
+
