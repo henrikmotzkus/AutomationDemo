@@ -10,6 +10,9 @@
         },
         "CompanyName": {
             "value": "Contoso" // TODO: Fill in parameter value
+        },
+        "Secret": {
+            "value": "" // TODO: Fill in parameter value
         }
     }
 }

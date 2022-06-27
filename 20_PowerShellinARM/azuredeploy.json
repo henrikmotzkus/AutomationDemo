@@ -11,6 +11,9 @@
       "CompanyName": {
         "type": "string"
       },
+      "Secret": {
+        "type": "string"
+      },
       "utcValue": {
         "type": "string",
         "defaultValue": "[utcNow()]"
@@ -32,8 +35,8 @@
         "properties": {
           "forceUpdateTag": "[parameters('utcValue')]",
           "azPowerShellVersion": "6.4",
-          "primaryScriptUri": "https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/deployment-script/deploymentscript-helloworld.ps1",
-          "arguments": "[format(' -DisplayName {0} -Description {1} -CompanyName {2}', parameters('DisplayName'), parameters('Description'), parameters('CompanyName'))]",
+          "primaryScriptUri": "https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/20_PowerShellinARM/azuredeploy.ps1",
+          "arguments": "[format(' -DisplayName {0} -Description {1} -CompanyName {2} -Secret {3}', parameters('DisplayName'), parameters('Description'), parameters('CompanyName'), parameters('Secret'))]",
           "timeout": "PT1H",
           "cleanupPreference": "OnSuccess",
           "retentionInterval": "P1D"
