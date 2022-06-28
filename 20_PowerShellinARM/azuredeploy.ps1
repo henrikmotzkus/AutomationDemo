@@ -36,7 +36,7 @@ Connect-MgGraph -AccessToken $token
 
 $membershiprule = "(user.CompanyName -contains ""$CompanyName"")"
 
-New-MgGroup -DisplayName $DisplayName `
+$res = New-MgGroup -DisplayName $DisplayName `
     -Description $Description `
     -GroupTypes "DynamicMembership" `
     -membershipRule $membershiprule `
@@ -45,8 +45,8 @@ New-MgGroup -DisplayName $DisplayName `
     -MailEnabled:$False `
     -MailNickname "group"
 
-$output = "Group " + $DisplayName + " created"
+$output = $res.Id
 
 Write-Output $output
 $DeploymentScriptOutputs = @{}
-$DeploymentScriptOutputs['text'] = $output
+$DeploymentScriptOutputs['Id'] = $output
