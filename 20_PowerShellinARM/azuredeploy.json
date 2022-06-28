@@ -19,11 +19,14 @@
         "defaultValue": "[utcNow()]"
       }      
     },
+    "variables":{
+        "DeploymantScriptName": "runPowerShellInlineWithOutput2"
+    },
     "resources": [
       {
         "type": "Microsoft.Resources/deploymentScripts",
         "apiVersion": "2020-10-01",
-        "name": "runPowerShellInlineWithOutput",
+        "name": "[variables('DeploymantScriptName')]",
         "location": "[resourceGroup().location]",
         "kind": "AzurePowerShell",
         "identity": {
@@ -41,11 +44,21 @@
           "cleanupPreference": "OnSuccess",
           "retentionInterval": "P1D"
         }
+      },
+      {
+            "type": "Microsoft.Authorization/roleAssignments",
+            "dependsOn":"[resourceId('Microsoft.Resources/deploymentScripts', variables('DeploymantScriptName'))]",
+            "apiVersion": "2018-09-01-preview",
+            "name": "[guid(resourceGroup().id)]",
+            "properties": {
+                "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', 'acdd72a7-3385-48ef-bd42-f606fba81ae7')]",
+                "principalId": "[reference('runPowerShellInlineWithOutput').outputs.Id]"
+            }
       }
     ],
     "outputs": {
       "result": {
-        "value": "[reference('runPowerShellInlineWithOutput').outputs.text]",
+        "value": "[reference('runPowerShellInlineWithOutput').outputs.Id]",
         "type": "string"
       }
     }
