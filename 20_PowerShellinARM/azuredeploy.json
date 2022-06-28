@@ -17,7 +17,7 @@
       "utcValue": {
         "type": "string",
         "defaultValue": "[utcNow()]"
-      }
+      }      
     },
     "resources": [
       {
