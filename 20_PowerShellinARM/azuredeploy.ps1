@@ -30,8 +30,9 @@ $connection = Invoke-RestMethod `
 
 $token = $connection.access_token
 
-Install-Module -Name Microsoft.Graph -Force
-Import-Module -Name Microsoft.Graph -Force
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Install-Module -Name Microsoft.Graph -Force -Scope CurrentUser
+#Import-Module -Name Microsoft.Graph -Force
 
 $token
 
