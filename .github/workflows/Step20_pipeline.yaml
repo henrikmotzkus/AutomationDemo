@@ -12,7 +12,7 @@ jobs:
         # Log into Azure
       - uses: azure/login@v1
         with:
-          creds: ${{ secrets.STEP_20_SECRET }}
+          credentials: ${{ secrets.STEP_20_SECRET }}
 
         # Deploy ARM template
       - name: Run ARM deploy
