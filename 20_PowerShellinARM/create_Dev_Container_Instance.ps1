@@ -8,7 +8,7 @@ New-AzResourceGroupDeployment -resourceGroupName $resourceGroupName -TemplateFil
 
 
 
-$fileName = ".\azuredeploy.json"
+$fileName = ".\azuredeploy.ps1"
 
 $storageAccountName = "${projectName}store"
 $fileShareName = "${projectName}share"

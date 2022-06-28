@@ -1,8 +1,15 @@
-param([string] $DisplayName,
-              [string] $Description,
-              [string] $CompanyName,
-              [string] $Secret
-            )
+param([Parameter()]
+    [string]$DisplayName,
+
+    [Parameter()]
+    [string]$Description,
+
+    [Parameter()]
+    [string]$CompanyName,
+
+    [Parameter()]
+    [string] $Secret
+)
 
 $appid = '6f661cdf-e77a-4f9b-9101-8cdab5446e88'
 $tenantid = '6d5f51c7-0ab4-4284-bfe2-4de74c81f332'
@@ -25,11 +32,21 @@ $token = $connection.access_token
 Install-Module -Name Microsoft.Graph -Force
 Import-Module -Name Microsoft.Graph -Force
 
-Connect-MgGraph -Scopes "User.Read.All","Group.ReadWrite.All" -AccessToken $token
+Connect-MgGraph -AccessToken $token
 
-New-MgGroup -DisplayName $DisplayName -Description $Description -GroupTypes "DynamicMembership" -membershipRule "(user.CompanyName -contains $CompanyName)" -membershipRuleProcessingState "On" -SecurityEnabled -MailEnabled:$False -MailNickname "group"
+$membershiprule = "(user.CompanyName -contains ""$CompanyName"")"
 
-$output = "Group {0} created" -f $DisplayName
+New-MgGroup -DisplayName $DisplayName `
+    -Description $Description `
+    -GroupTypes "DynamicMembership" `
+    -membershipRule $membershiprule `
+    -membershipRuleProcessingState "On" `
+    -SecurityEnabled `
+    -MailEnabled:$False `
+    -MailNickname "group"
+
+$output = "Group " + $DisplayName + " created"
+
 Write-Output $output
 $DeploymentScriptOutputs = @{}
 $DeploymentScriptOutputs['text'] = $output

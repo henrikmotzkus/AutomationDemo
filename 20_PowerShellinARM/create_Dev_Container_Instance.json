@@ -10,7 +10,7 @@
       },
       "containerImage": {
         "type": "string",
-        "defaultValue": "mcr.microsoft.com/azuredeploymentscripts-powershell:az5.2",
+        "defaultValue": "mcr.microsoft.com/azuredeploymentscripts-powershell:az6.4",
         "metadata": {
           "description": "Specify the container image."
         }
