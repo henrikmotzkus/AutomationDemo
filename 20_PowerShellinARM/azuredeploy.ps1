@@ -8,7 +8,7 @@ param([Parameter()]
     [string[]]$CompanyName,
 
     [Parameter()]
-    [string[]] $Secret
+    [string[]]$Secret
 )
 
 $appid = '6f661cdf-e77a-4f9b-9101-8cdab5446e88'
