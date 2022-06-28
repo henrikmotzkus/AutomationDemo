@@ -18,7 +18,7 @@ jobs:
       - name: Run ARM deploy
         uses: azure/arm-deploy@v1
         with:
-          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          subscriptionId: ${{ secrets.STEP20_SUBSCRIPTION }}
           resourceGroupName: ${{ secrets.STEP_20_RG }}
           template: ./20_PowerShellinARM/azuredeploy.json
           parameters: ./20_PowerShellinARM/azuredeploy.parameters.json -Secret=${{ secrets.STEP_20_SECRET2 }}
