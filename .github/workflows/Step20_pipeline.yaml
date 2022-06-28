@@ -1,0 +1,26 @@
+on: [push]
+  name: Powershell in ARM
+  jobs:
+    build-and-deploy:
+      runs-on: ubuntu-latest
+      steps:
+
+        # Checkout code
+      - uses: actions/checkout@main
+
+        # Log into Azure
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.STEP_20_SECRET }}
+
+        # Deploy ARM template
+      - name: Run ARM deploy
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          resourceGroupName: ${{ secrets.STEP_20_RG }}
+          template: ./20_PowerShellinARM/azuredeploy.json
+          parameters: ./20_PowerShellinARM/azuredeploy.parameters.json -Secret=${{ secrets.STEP_20_SECRET2 }}
+
+        # output containerName variable from template
+      - run: echo ${{ steps.deploy.outputs.containerName }}
