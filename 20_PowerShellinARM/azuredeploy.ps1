@@ -1,13 +1,7 @@
-param([Parameter()]
+param(
     [string]$DisplayName,
-
-    [Parameter()]
     [string]$Description,
-
-    [Parameter()]
     [string]$CompanyName,
-
-    [Parameter()]
     [string]$Secret
 )
 
