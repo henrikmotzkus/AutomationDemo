@@ -33,9 +33,13 @@ $token = $connection.access_token
 Install-Module -Name Microsoft.Graph -Force
 Import-Module -Name Microsoft.Graph -Force
 
+$token
+
 Connect-MgGraph -AccessToken $token
 
 $membershiprule = "(user.CompanyName -contains ""$CompanyName"")"
+
+$membershiprule
 
 $res = New-MgGroup -DisplayName $DisplayName `
     -Description $Description `
