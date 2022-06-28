@@ -1,14 +1,14 @@
 param([Parameter()]
-    [string[]]$DisplayName,
+    [string]$DisplayName,
 
     [Parameter()]
-    [string[]]$Description,
+    [string]$Description,
 
     [Parameter()]
-    [string[]]$CompanyName,
+    [string]$CompanyName,
 
     [Parameter()]
-    [string[]]$Secret
+    [string]$Secret
 )
 
 $appid = '6f661cdf-e77a-4f9b-9101-8cdab5446e88'
