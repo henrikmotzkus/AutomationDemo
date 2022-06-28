@@ -21,13 +21,6 @@ try {
         Client_Secret = $secret
     }
 
-    Write-Output $body
-
-    $DisplayName
-    $Description
-    $CompanyName
-    $Secret
-
     $connection = Invoke-RestMethod `
         -Uri https://login.microsoftonline.com/$tenantid/oauth2/v2.0/token `
         -Method POST `
@@ -35,17 +28,12 @@ try {
 
     $token = $connection.access_token
 
-    #Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
     Install-Module -Name Microsoft.Graph.Groups -Force -Scope CurrentUser
-    #Import-Module -Name Microsoft.Graph -Force
-
-    $token
 
     Connect-MgGraph -AccessToken $token
 
     $membershiprule = "(user.CompanyName -contains ""$CompanyName"")"
 
-    $membershiprule
 
     $res = New-MgGroup -DisplayName $DisplayName `
         -Description $Description `
