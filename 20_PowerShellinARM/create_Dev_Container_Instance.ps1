@@ -1,6 +1,6 @@
 $projectName = "pstestmotzkus"
 $location = "westeurope"
-$templateFile = ".\create_Container_Instance.json"
+$templateFile = ".\create_Dev_Container_Instance.json"
 $resourceGroupName = "PSTest"
 
 New-AzResourceGroup -Location $location -name $resourceGroupName

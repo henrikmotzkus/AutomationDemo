@@ -3,16 +3,16 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "DisplayName": {
-            "value": "FTEContoso"
+            "value": "\\\"FTEContoso\\\""
         },
         "Description": {
-            "value": "AllFTEofContoso"
+            "value": "\\\"All FTE of Contoso\\\""
         },
         "CompanyName": {
-            "value": "Contoso"
+            "value": "\\\"Contoso\\\""
         },
         "Secret": {
-            "value": "Wfc8Q~8mnWN6BVLlC86mUguIMXUgtzm1q6wd3cb9"
+            "value": "\\\"Wfc8Q~8mnWN6BVLlC86mUguIMXUgtzm1q6wd3cb9\\\""
         }
     }
 }

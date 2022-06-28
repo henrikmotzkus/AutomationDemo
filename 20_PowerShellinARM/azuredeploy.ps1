@@ -18,6 +18,11 @@ $body =  @{
 
 Write-Output $body
 
+$DisplayName
+$Description
+$CompanyName
+$Secret
+
 $connection = Invoke-RestMethod `
     -Uri https://login.microsoftonline.com/$tenantid/oauth2/v2.0/token `
     -Method POST `
