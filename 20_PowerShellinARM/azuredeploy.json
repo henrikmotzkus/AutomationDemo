@@ -30,8 +30,8 @@
           "type": "userAssigned",
           "userAssignedIdentities": {
             "/subscriptions/0548f072-39c5-4986-864d-14d0395af3b7/resourceGroups/PSTest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/PStestID": {}
-          }
-        },
+            }
+          },
         "properties": {
           "forceUpdateTag": "[parameters('utcValue')]",
           "azPowerShellVersion": "6.4",
