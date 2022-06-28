@@ -21,7 +21,7 @@ jobs:
           subscriptionId: ${{ secrets.STEP20_SUBSCRIPTION }}
           resourceGroupName: ${{ secrets.STEP_20_RG }}
           template: ./20_PowerShellinARM/azuredeploy.json
-          parameters: ./20_PowerShellinARM/azuredeploy.parameters.json -Secret=${{ secrets.STEP_20_SECRET2 }}
+          parameters: ./20_PowerShellinARM/azuredeploy.parameters.json Secret=${{ secrets.STEP_20_SECRET2 }}
 
         # output containerName variable from template
       - run: echo ${{ steps.deploy.outputs.containerName }}
