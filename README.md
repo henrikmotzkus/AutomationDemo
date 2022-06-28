@@ -300,4 +300,6 @@ TODO
 
 ### 7.20 (Folder prefix 20) Executing PS in an ARM script
 
-[[HERE MORE](https://github.com/henrikmotzkus/AutomationDemo/blob/main/20_PowerShellinARM/README.md)]
+In case you're limited by the functionality of Azure ARM then think of using PowerShell scripts within your ARM script.
+
+[HERE MORE](https://github.com/henrikmotzkus/AutomationDemo/blob/main/20_PowerShellinARM/README.md)
