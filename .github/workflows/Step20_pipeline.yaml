@@ -1,6 +1,7 @@
 on: [push]
-  name: Powershell in ARM
-  jobs:
+name: Powershell in ARM
+
+jobs:
     build-and-deploy:
       runs-on: ubuntu-latest
       steps:
