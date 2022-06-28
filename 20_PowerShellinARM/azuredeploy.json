@@ -36,7 +36,7 @@
           "forceUpdateTag": "[parameters('utcValue')]",
           "azPowerShellVersion": "6.4",
           "primaryScriptUri": "https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/20_PowerShellinARM/azuredeploy.ps1",
-          "arguments": "[format(' -DisplayName {0} -Description {1} -CompanyName {2} -Secret {3}', parameters('DisplayName'), parameters('Description'), parameters('CompanyName'), parameters('Secret'))]",
+          "arguments": "[concat(' -DisplayName', ' ', parameters('DisplayName'), ' ','-Description', ' ', parameters('Description'), ' ', '-CompanyName', ' ', parameters('CompanyName'), ' ', '-Secret', ' ', parameters('Secret'))]",
           "timeout": "PT1H",
           "cleanupPreference": "OnSuccess",
           "retentionInterval": "P1D"
