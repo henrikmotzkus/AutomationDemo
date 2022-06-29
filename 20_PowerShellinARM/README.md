@@ -8,7 +8,7 @@ Okay now the solution design. You can embedd a powershell script in an arm scrip
 
 ## Instructions
 
-1. When you want to develop a ps script You need a dev environment. Beause the ps script is running in an internal Azure container instance you need to consider some environmental restrictions. Create a dev environment with the "create_Dev_Container_Instance.ps1". Here in this code base the ps script is already ready to use. 
+1. When you want to develop a ps script You need a dev environment. Beause the ps script is running in an internal Azure container instance you need to consider some environmental restrictions. Create a dev environment with the "create_Dev_Container_Instance.ps1". Here in this code base the ps script is already ready to use.
 1. The pipeline ".github\workflows\Step20_pipeline.yaml" is the coordinator of the actuall deployment in Azure with ARM. Everytime You do a push to the main branch of your repository the pipeline will be kicked of and deploy the "azuredeploy.json" to Azure. Put this pipeline to your repo.
 
 ## Documentation I used
