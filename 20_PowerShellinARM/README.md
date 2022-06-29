@@ -4,17 +4,17 @@ This demo shows the possibilities of using a powershell script embedded in an AR
 
 Use case: When you try to create a dynamic group with membership roles in AAD and assign a Azure RBAC role to it ARM doesn't provides the needed features. Creating a group with dynamic memebership rules can't be created with ARM.But with powershell.
 
-Okay now the theory. You can embedd a powershell script in an arm script with a resource of type Microsoft.Resources/deploymentScripts. This arm resource will spin up a small container in Azure where the ps script will run. Arguments will flow from the arm parameter section to the arguments section of the resource. The azuredeploy.json contains the arm script. In the arm script is a reference to a remote ps script that is hosted by a guthub repo. The azuredeploy.ps1 conains the logic. In order to spin up a complete ci/cd pipeline the file Step20_pipeline.yaml in the workflows folder contains an action workflow for guthub. Everytime a push is made to that repo main branch the pipeline will kick in.
+Okay now the solution design. You can embedd a powershell script in an arm script with a resource of type Microsoft.Resources/deploymentScripts. This arm resource will spin up a small container in Azure where the ps script will run. Arguments will flow from the arm parameter section to the arguments section of the resource. The azuredeploy.json contains the arm script. In the arm script is a reference to a remote ps script that is hosted by a github repo. The azuredeploy.ps1 conains the logic. In order to spin up a complete ci/cd pipeline the file Step20_pipeline.yaml in the workflows folder contains an action workflow for guthub. Everytime a push is made to that repo main branch the pipeline will kick in.
 
 ## Instructions
 
 1. When you want to develop a ps script You need a dev environment. Beause the ps script is running in an internal Azure container instance you need to consider some environmental restrictions. Create a dev environment with the "create_Dev_Container_Instance.ps1". Here in this code base the ps script is already ready to use. 
-1. The pipeline ".github\workflows\Step20_pipeline.yaml" is the coordinator of the actuall deployment in Azure with ARM. Everytime You do a push to the main branch of your repository the pipeline will be kicked of and deploy the "azuredeploy.json" to Azure. 
+1. The pipeline ".github\workflows\Step20_pipeline.yaml" is the coordinator of the actuall deployment in Azure with ARM. Everytime You do a push to the main branch of your repository the pipeline will be kicked of and deploy the "azuredeploy.json" to Azure. Put this pipeline to your repo.
 
 
 ## Documentation I used
 
-[DOCS for Role assignment](https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-template)
+![DOCS for Role assignment](https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-template)
 
 [Loggin into Azure with Github Actions](https://www.techielass.com/create-azure-credentials-for-use-in-github-actions/)
 
