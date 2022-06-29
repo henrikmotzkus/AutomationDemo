@@ -6,8 +6,6 @@ $resourceGroupName = "PSTest"
 New-AzResourceGroup -Location $location -name $resourceGroupName
 New-AzResourceGroupDeployment -resourceGroupName $resourceGroupName -TemplateFile $templatefile -projectName $projectName
 
-
-
 $fileName = ".\azuredeploy.ps1"
 
 $storageAccountName = "${projectName}store"
