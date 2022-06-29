@@ -302,4 +302,4 @@ TODO
 
 In case you're limited by the functionality of Azure ARM then think of using PowerShell scripts within your ARM script.
 
-[HERE MORE](https://github.com/henrikmotzkus/AutomationDemo/blob/main/20_PowerShellinARM/README.md)
+[HERE MORE](https://github.com/henrikmotzkus/AutomationDemo/blob/main/20_PowerShellinARM/)
