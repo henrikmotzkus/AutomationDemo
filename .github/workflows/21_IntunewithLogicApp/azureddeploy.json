@@ -1,0 +1,223 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "connections_teams_name": {
+            "defaultValue": "teams",
+            "type": "String"
+        },
+        "workflows_Intuneautomation1_name": {
+            "defaultValue": "Intuneautomation1",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Web/connections",
+            "apiVersion": "2016-06-01",
+            "name": "[parameters('connections_teams_name')]",
+            "location": "westeurope",
+            "kind": "V1",
+            "properties": {
+                "displayName": "admin@henrikmotzkuse5.onmicrosoft.com",
+                "statuses": [
+                    {
+                        "status": "Connected"
+                    }
+                ],
+                "customParameterValues": {},
+                "nonSecretParameterValues": {},
+                "createdTime": "2022-07-05T15:17:49.9077888Z",
+                "changedTime": "2022-07-06T05:22:24.0108508Z",
+                "api": {
+                    "name": "[parameters('connections_teams_name')]",
+                    "displayName": "Microsoft Teams",
+                    "description": "Microsoft Teams enables you to get all your content, tools and conversations in the Team workspace with Office 365.",
+                    "iconUri": "[concat('https://connectoricons-prod.azureedge.net/releases/v1.0.1585/1.0.1585.2895/', parameters('connections_teams_name'), '/icon.png')]",
+                    "brandColor": "#4B53BC",
+                    "id": "[concat('/subscriptions/0548f072-39c5-4986-864d-14d0395af3b7/providers/Microsoft.Web/locations/westeurope/managedApis/', parameters('connections_teams_name'))]",
+                    "type": "Microsoft.Web/locations/managedApis"
+                },
+                "testLinks": [
+                    {
+                        "requestUri": "[concat('https://management.azure.com:443/subscriptions/0548f072-39c5-4986-864d-14d0395af3b7/resourceGroups/IntuneAutomation/providers/Microsoft.Web/connections/', parameters('connections_teams_name'), '/extensions/proxy/beta/me/teamwork?api-version=2016-06-01')]",
+                        "method": "get"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('workflows_Intuneautomation1_name')]",
+            "location": "westeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/connections', parameters('connections_teams_name'))]"
+            ],
+            "properties": {
+                "state": "Disabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "$connections": {
+                            "defaultValue": {},
+                            "type": "Object"
+                        }
+                    },
+                    "triggers": {
+                        "Recurrence": {
+                            "recurrence": {
+                                "frequency": "Hour",
+                                "interval": 1
+                            },
+                            "evaluatedRecurrence": {
+                                "frequency": "Hour",
+                                "interval": 1
+                            },
+                            "type": "Recurrence"
+                        }
+                    },
+                    "actions": {
+                        "For_each": {
+                            "foreach": "@body('Parse_JSON')?['value']",
+                            "actions": {
+                                "Post_message_in_a_chat_or_channel": {
+                                    "runAfter": {},
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "body": {
+                                            "messageBody": "<p>@{items('For_each')}</p>",
+                                            "recipient": {
+                                                "channelId": "19:84b9af3e909447269693a59856cff39d@thread.tacv2",
+                                                "groupId": "f74dc935-388d-459c-9907-af97354b2f15"
+                                            }
+                                        },
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['teams']['connectionId']"
+                                            }
+                                        },
+                                        "method": "post",
+                                        "path": "/beta/teams/conversation/message/poster/Flow bot/location/@{encodeURIComponent('Channel')}"
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                                "Parse_JSON": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Foreach"
+                        },
+                        "HTTP": {
+                            "runAfter": {},
+                            "type": "Http",
+                            "inputs": {
+                                "authentication": {
+                                    "audience": "https://graph.microsoft.com",
+                                    "authority": "https://login.windows.net",
+                                    "clientId": "d32e61f2-58d2-46cd-aad0-0952c73acda9",
+                                    "secret": "xzl8Q~KfbehWggCjq2lN9mzXpYGrZkc7HhNPVakL",
+                                    "tenant": "6d5f51c7-0ab4-4284-bfe2-4de74c81f332",
+                                    "type": "ActiveDirectoryOAuth"
+                                },
+                                "method": "GET",
+                                "uri": "https://graph.microsoft.com/beta/deviceManagement/deviceCompliancePolicies/getDevicesScheduledToRetire"
+                            }
+                        },
+                        "Parse_JSON": {
+                            "runAfter": {
+                                "HTTP": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "ParseJson",
+                            "inputs": {
+                                "content": "@body('HTTP')",
+                                "schema": {
+                                    "properties": {
+                                        "@@odata.context": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "items": {
+                                                "properties": {
+                                                    "complianceState": {
+                                                        "type": "string"
+                                                    },
+                                                    "deviceCompliancePolicyId": {
+                                                        "type": "string"
+                                                    },
+                                                    "deviceCompliancePolicyName": {
+                                                        "type": "string"
+                                                    },
+                                                    "deviceType": {
+                                                        "type": "string"
+                                                    },
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "managedDeviceId": {
+                                                        "type": "string"
+                                                    },
+                                                    "managedDeviceName": {
+                                                        "type": "string"
+                                                    },
+                                                    "managementAgent": {
+                                                        "type": "string"
+                                                    },
+                                                    "ownerType": {
+                                                        "type": "string"
+                                                    },
+                                                    "retireAfterDateTime": {
+                                                        "type": "string"
+                                                    },
+                                                    "roleScopeTagIds": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "managedDeviceId",
+                                                    "managedDeviceName",
+                                                    "deviceType",
+                                                    "complianceState",
+                                                    "retireAfterDateTime",
+                                                    "managementAgent",
+                                                    "ownerType",
+                                                    "deviceCompliancePolicyName",
+                                                    "deviceCompliancePolicyId",
+                                                    "roleScopeTagIds"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {
+                    "$connections": {
+                        "value": {
+                            "teams": {
+                                "connectionId": "[resourceId('Microsoft.Web/connections', parameters('connections_teams_name'))]",
+                                "connectionName": "teams",
+                                "id": "/subscriptions/0548f072-39c5-4986-864d-14d0395af3b7/providers/Microsoft.Web/locations/westeurope/managedApis/teams"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

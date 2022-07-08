@@ -303,3 +303,10 @@ TODO
 In case you're limited by the functionality of Azure ARM then think of using PowerShell scripts within your ARM script.
 
 [HERE MORE](https://github.com/henrikmotzkus/AutomationDemo/blob/main/20_PowerShellinARM/)
+
+
+### 7.21 (Folder prefix 21) Intune / MEM Automation with Logic Apps
+
+Intune / MEM is a solution for managing endpoint devices. In big environments automation is crucial. When an endpoint becomes uncompliant a teams messages will be posted to a "emergency" Teams Channel.
+
+[HERE MORE](https://github.com/henrikmotzkus/AutomationDemo/blob/main/21_IntunewithLogicApp/)
