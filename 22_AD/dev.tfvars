@@ -1,0 +1,11 @@
+resourcegroup_name = "ADDSrg"
+vnet_name = "vnet-ad"
+location = "westeurope"
+network_address_space = "192.168.35.0/24"
+ad_subnet_address_prefix = "192.168.35.0/27"
+ad_subnet_address_name = "ad-subnet"
+environment = "dev1"
+admin_username = "adminlocal"
+vmnames =   ["AD-DS1", "AD-DS2"]  
+admin_password = "Password1234!!!"
+cert_password = "Password1234!!!"

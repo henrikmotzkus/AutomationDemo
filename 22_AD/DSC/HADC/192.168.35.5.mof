@@ -1,0 +1,140 @@
+/*
+@TargetNode='192.168.35.5'
+@GeneratedBy=hemotzku
+@GenerationDate=03/28/2023 12:05:06
+@GenerationHost=DESKTOP-5O3Q24H
+*/
+
+instance of MSFT_WindowsFeature as $MSFT_WindowsFeature1ref
+{
+ModuleVersion = "2.12.0.0";
+ ModuleName = "PSDscResources";
+ Name = "AD-Domain-Services";
+ SourceInfo = "C:\\Users\\hemotzku\\Github\\AutomationDemo\\22_AD\\DSC\\hadc.ps1::32::9::WindowsFeature";
+ ResourceID = "[WindowsFeature]ADDSInstall";
+ Ensure = "Present";
+ ConfigurationName = "HADC";
+};
+instance of MSFT_Credential as $MSFT_Credential1ref
+{
+UserName = "localtestdomain\\adminlocal";
+ Password = "-----BEGIN CMS-----\nMIIBogYJKoZIhvcNAQcDoIIBkzCCAY8CAQAxggFKMIIBRgIBADAuMBoxGDAWBgNVBAMMD0RFU0tU\nT1AtNU8zUTI0SAIQaU5XMALEOZtJIikOK2pdYTANBgkqhkiG9w0BAQEFAASCAQBlMbFXThz+D61i\nfJkIUr/0eVpGDYyCwCQ1uKtGnJFfyzGahGEikAEGZ0TcfwbwtyQnvi0/f1TayXj+9Q5FnS1Q3PIK\nXTHziqZxDRt7Bu6SFyTvCziFj0w5hTJLZr8AgwWAmxxlCa0/7Bf7YX9uFAc1JJ65j3DESBxmRX+w\n5kgma8u8GgxgSrBwUWNEHwk/DVE8Eaf9thOZiIO+HD23LiMi3HHTAOjGU6J3psHHtI3262745JOQ\nTwo5vX/pOwgtiGBMpzp07uhiH8YihLTLogDkU1aFKMHZw1uhGUI/j9PMva4Z/XFICdAcIWgfrXVX\njoSUpkmXxf0PugSBNuFkqTNjMDwGCSqGSIb3DQEHATAdBglghkgBZQMEASoEEAyScR25JpCnE4K2\nxj+py7WAEKjRDEV/PJ5JQA/NEh6O250=\n-----END CMS-----";
+
+};
+
+instance of MSFT_Credential as $MSFT_Credential2ref
+{
+UserName = "Administrator";
+ Password = "-----BEGIN CMS-----\nMIIBogYJKoZIhvcNAQcDoIIBkzCCAY8CAQAxggFKMIIBRgIBADAuMBoxGDAWBgNVBAMMD0RFU0tU\nT1AtNU8zUTI0SAIQaU5XMALEOZtJIikOK2pdYTANBgkqhkiG9w0BAQEFAASCAQAidQNUiEvYBVfc\nGZChXIhzyQSVNwL/vnF3bNYs6Qocz9CfOktG2Je98aWcs+jb5yWmc1rdH9iRXcA5JdjHtUnYqq9W\nl26lX9Lu55HTpz3+6NuTh6/ZT+K7fZKEhrSjiyzGl53Zm2641608Ad1NR3PUPvexZt6sVKmGXQqd\n0zroOR7gulBn/GBYP34uk+d73bMgOBv5WILJ7Ud/8Eu+hAdYQfljvyYTQHio53YnqwW20uy00Y8m\nF20l0aX5BHnTtqIxyh8ZUE2yi4446972YzXZW30LFGMVjZUY0vK26LF1ouvLc6tc2R5IJs4t2x3V\nuaaYOykZRgI9zBFSCed2X9iwMDwGCSqGSIb3DQEHATAdBglghkgBZQMEASoEEGM8jbQgW2KyEosH\nVqfpEQyAEN5fnS91JWCah780metcdeg=\n-----END CMS-----";
+
+};
+
+instance of MSFT_xADDomain as $MSFT_xADDomain1ref
+{
+ModuleVersion = "3.0.0.0";
+ LogPath = "C:\\NTDS";
+ SourceInfo = "C:\\Users\\hemotzku\\Github\\AutomationDemo\\22_AD\\DSC\\hadc.ps1::39::9::xADDomain";
+ ModuleName = "xActiveDirectory";
+ SysvolPath = "C:\\SYSVOL";
+ DomainAdministratorCredential = $MSFT_Credential1ref;
+ DatabasePath = "C:\\NTDS";
+ DomainName = "localtestdomain.local";
+ ResourceID = "[xADDomain]FirstDC";
+ SafemodeAdministratorPassword = $MSFT_Credential2ref;
+
+DependsOn = {
+    "[WindowsFeature]ADDSInstall"};
+ ConfigurationName = "HADC";
+};
+instance of MSFT_Credential as $MSFT_Credential3ref
+{
+UserName = "localtestdomain\\adminlocal";
+ Password = "-----BEGIN CMS-----\nMIIBogYJKoZIhvcNAQcDoIIBkzCCAY8CAQAxggFKMIIBRgIBADAuMBoxGDAWBgNVBAMMD0RFU0tU\nT1AtNU8zUTI0SAIQaU5XMALEOZtJIikOK2pdYTANBgkqhkiG9w0BAQEFAASCAQBrK7qEEoMCkWuS\nASkmawg3NtgwnMVmsuxoj/lL8mliqHZSjaPlyc4Cuzlal/oy2d3mOa7CD3eE1A/Z3/EdJelmW+qD\nmCJIR5dOotwRnn7HLSk51JjF2iA/jp65rCJAXNrF7Rx16eNMMBrptz/l4rRriOf6fVB3AGPcbTjQ\nJu6ShsnqfqW4hDN+d9sdr1KsT1m2fulBW+7JPjFUbBV0/LwgJydJG7BY2+pm0SHtNIcb4C4EbzMp\n5xuiKMW1YqBI0WIbxMooCSwgqJuWBiOSPMmsqm/Oi8+8rVgUdqADjSGVRFBGathWFW5jca7N5BLs\nLDlUHIwhCrKRJ2q0cLBEWnkGMDwGCSqGSIb3DQEHATAdBglghkgBZQMEASoEEAoWaQv9deQ8Bzs4\ncZF4o7CAEDPIKas4mO6szbBKOw2Dgu8=\n-----END CMS-----";
+
+};
+
+instance of MSFT_xWaitForADDomain as $MSFT_xWaitForADDomain1ref
+{
+ModuleVersion = "3.0.0.0";
+ DomainUserCredential = $MSFT_Credential3ref;
+ SourceInfo = "C:\\Users\\hemotzku\\Github\\AutomationDemo\\22_AD\\DSC\\hadc.ps1::58::9::xWaitForADDomain";
+ ModuleName = "xActiveDirectory";
+ DomainName = "localtestdomain.local";
+ RetryIntervalSec = 30;
+ ResourceID = "[xWaitForADDomain]DomainWait";
+ RetryCount = 20;
+
+DependsOn = {
+    "[xADDomain]FirstDC"};
+ ConfigurationName = "HADC";
+};
+instance of MSFT_Credential as $MSFT_Credential4ref
+{
+UserName = "localtestdomain\\adminlocal";
+ Password = "-----BEGIN CMS-----\nMIIBogYJKoZIhvcNAQcDoIIBkzCCAY8CAQAxggFKMIIBRgIBADAuMBoxGDAWBgNVBAMMD0RFU0tU\nT1AtNU8zUTI0SAIQaU5XMALEOZtJIikOK2pdYTANBgkqhkiG9w0BAQEFAASCAQAf2Axl4+/aDkzG\nBcPcGTKcjKPEOiu2+ejBi5i+cwAjQIwZ0OMt/v0oH1J/AU1/4idfn/uK0CGz0PuYLI2UmBUP6z2B\nB0RgIr3/E7w1WLcHidxCiMGnJu8IAGarUrUDkD+3qaxE40YENarpSg+xAgW2MSzi8qkoury2HbJa\nM5XO/ofK84WOzs73eRZ/L5DMjYJFc/naPxAAEUJdEFwetlyeQkccaH5ntO7JWeNEsyvz3uQA+2B7\nqXHp/mSlj2324DiG97RVI4PAgj8eVG7zU+K4q1ZYrY58c1wfLb6JGArNLXXVRc7Px6L3vOZrcDql\ncRxpykur2tnUTLL7mQ4+1H6OMDwGCSqGSIb3DQEHATAdBglghkgBZQMEASoEEBjtnTBkqoTb3M0b\nEedXE+iAEOPY0RDM1aXwHbMZPdc/8TI=\n-----END CMS-----";
+
+};
+
+instance of MSFT_xADRecycleBin as $MSFT_xADRecycleBin1ref
+{
+ModuleVersion = "3.0.0.0";
+ ModuleName = "xActiveDirectory";
+ SourceInfo = "C:\\Users\\hemotzku\\Github\\AutomationDemo\\22_AD\\DSC\\hadc.ps1::70::9::xADRecycleBin";
+ ForestFQDN = "localtestdomain.local";
+ ResourceID = "[xADRecycleBin]RecycleBin";
+ EnterpriseAdministratorCredential = $MSFT_Credential4ref;
+
+DependsOn = {
+    "[xWaitForADDomain]DomainWait"};
+ ConfigurationName = "HADC";
+};
+instance of MSFT_Credential as $MSFT_Credential5ref
+{
+UserName = "localtestdomain\\adminlocal";
+ Password = "-----BEGIN CMS-----\nMIIBogYJKoZIhvcNAQcDoIIBkzCCAY8CAQAxggFKMIIBRgIBADAuMBoxGDAWBgNVBAMMD0RFU0tU\nT1AtNU8zUTI0SAIQaU5XMALEOZtJIikOK2pdYTANBgkqhkiG9w0BAQEFAASCAQAmotGyMf+UI3KW\nW7aL+6PPSZOpau39kK43FM3CSvDJsZqrXd97vbnjZFIgMwzO/il4+VJ8oZx1sX6lhFJ1SY/kzd2d\nQiMYG8BxwP/IaM7scUMV+xhB51PD5eKLlsk3zbEbuS+Xjdvp7Q83MFxG9qAWWzhthw0WRImaX4Rd\nYFBFRJ3N5sc4I0WDpUzOF7nkpE2C3R/uzz3HXEKyoWhgwJIed42HjC/pJPQozZxvnVkLCiD3hxl0\nR6QmzxFQcBAx/H/PTSq2ntz/RaofdPsFxLeQ0FPsRCv2/zrm2jBGXlucr40bqzsdQU+onO+I29wX\nggP8XBAaJHA9BiHTSYJsepZrMDwGCSqGSIb3DQEHATAdBglghkgBZQMEASoEELTXJJ3mNUioU6/l\no/8uuq2AEN08rLyiUeWIu1IfKfsd9tc=\n-----END CMS-----";
+
+};
+
+instance of MSFT_Credential as $MSFT_Credential6ref
+{
+UserName = "Test.User";
+ Password = "-----BEGIN CMS-----\nMIIBogYJKoZIhvcNAQcDoIIBkzCCAY8CAQAxggFKMIIBRgIBADAuMBoxGDAWBgNVBAMMD0RFU0tU\nT1AtNU8zUTI0SAIQaU5XMALEOZtJIikOK2pdYTANBgkqhkiG9w0BAQEFAASCAQCqkulv954swH31\nLq4XdgB5apnvi5F2d+kOdW4RM/nx0nQVS5ulVLA4tE9F3+PZiPRhnamNs2JaHAUIfzHMRsmVws6h\ntvyAXJiQvSlKwJIGdZoeDOF+itpile83hCUO8MIDd6hdYkubkwop4PXwR706b9Fa3/LHm6Yl6Bjf\ndP8dp3YceYNcY70c+YOlGzI2/o3BSZw3Nt1gDmmDl0zFtE64dedt4tHaf/b1LHlQqmrAh6WW3HZB\nAcW0/yIz2pEH4WQm/O8ayPMa5lh24t/ipn5sWgByrTJIW06XJQBuUl/6plKGA51ykFY4vfSxsPBO\nAv3w3POi38ls96nA1wdtZluiMDwGCSqGSIb3DQEHATAdBglghkgBZQMEASoEEAptg3YxoRKp8KOH\nnkSLL5SAEHXybHjNAsYgjxc/CFhkTBw=\n-----END CMS-----";
+
+};
+
+instance of MSFT_xADUser as $MSFT_xADUser1ref
+{
+ModuleVersion = "3.0.0.0";
+ SourceInfo = "C:\\Users\\hemotzku\\Github\\AutomationDemo\\22_AD\\DSC\\hadc.ps1::80::9::xADUser";
+ DomainAdministratorCredential = $MSFT_Credential5ref;
+ ModuleName = "xActiveDirectory";
+ Ensure = "Present";
+ Password = $MSFT_Credential6ref;
+ DomainName = "localtestdomain.local";
+ UserName = "Test.User";
+ ResourceID = "[xADUser]ADUser";
+
+DependsOn = {
+    "[xWaitForADDomain]DomainWait"};
+ ConfigurationName = "HADC";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="hemotzku";
+
+                        GenerationDate="03/28/2023 12:05:06";
+
+                        GenerationHost="DESKTOP-5O3Q24H";
+
+                        ContentType="PasswordEncrypted";
+
+                        Name="HADC";
+
+                    };

@@ -1,0 +1,87 @@
+/*
+@TargetNode='192.168.35.6'
+@GeneratedBy=hemotzku
+@GenerationDate=03/28/2023 12:05:06
+@GenerationHost=DESKTOP-5O3Q24H
+*/
+
+instance of MSFT_WindowsFeature as $MSFT_WindowsFeature1ref
+{
+ModuleVersion = "2.12.0.0";
+ ModuleName = "PSDscResources";
+ Name = "AD-Domain-Services";
+ SourceInfo = "C:\\Users\\hemotzku\\Github\\AutomationDemo\\22_AD\\DSC\\hadc.ps1::103::9::WindowsFeature";
+ ResourceID = "[WindowsFeature]ADDSInstall";
+ Ensure = "Present";
+ ConfigurationName = "HADC";
+};
+instance of MSFT_Credential as $MSFT_Credential1ref
+{
+UserName = "localtestdomain\\adminlocal";
+ Password = "-----BEGIN CMS-----\nMIIBogYJKoZIhvcNAQcDoIIBkzCCAY8CAQAxggFKMIIBRgIBADAuMBoxGDAWBgNVBAMMD0RFU0tU\nT1AtNU8zUTI0SAIQaU5XMALEOZtJIikOK2pdYTANBgkqhkiG9w0BAQEFAASCAQAK1mGGL0EQYocM\nqIZHm0tD3Qv9mx9IF9wVfaqtjqXZ3toBRtrYFJZHxfFOfWnOs/Q5DBNUueTNWFxwI+e66hT2epHx\nKJchfo5w3/BN9iZt2kGEbyrCoO2zEqiGG0UyLhgOF6NGtt7A9exjBslCXMQPpv9/E9rEA0DrMtRW\nqXQxMWexQ8fGSV7oEBG9w6KSXCqc2he6Slh+gu/zPT98DaIzq+1PUyRaqyYpAmcfOplCO94Rqc1N\neYFzuP/aYLCHcthDLS9+hofe/FtJH2lsHT4DIvD0SbOr8QYw7qxQ6ixgkCK1pe3typnQUYpPL+DZ\nu18SN7luER8N7/3CNOSpH/4lMDwGCSqGSIb3DQEHATAdBglghkgBZQMEASoEEFE2y/brwKuDqkfA\nktYdqzCAEE6PDubz6y+sgLzPSOkCB6U=\n-----END CMS-----";
+
+};
+
+instance of MSFT_xWaitForADDomain as $MSFT_xWaitForADDomain1ref
+{
+ModuleVersion = "3.0.0.0";
+ DomainUserCredential = $MSFT_Credential1ref;
+ SourceInfo = "C:\\Users\\hemotzku\\Github\\AutomationDemo\\22_AD\\DSC\\hadc.ps1::110::9::xWaitForADDomain";
+ ModuleName = "xActiveDirectory";
+ DomainName = "localtestdomain.local";
+ RetryIntervalSec = 30;
+ ResourceID = "[xWaitForADDomain]DomainWait";
+ RetryCount = 20;
+
+DependsOn = {
+    "[WindowsFeature]ADDSInstall"};
+ ConfigurationName = "HADC";
+};
+instance of MSFT_Credential as $MSFT_Credential2ref
+{
+UserName = "localtestdomain\\adminlocal";
+ Password = "-----BEGIN CMS-----\nMIIBogYJKoZIhvcNAQcDoIIBkzCCAY8CAQAxggFKMIIBRgIBADAuMBoxGDAWBgNVBAMMD0RFU0tU\nT1AtNU8zUTI0SAIQaU5XMALEOZtJIikOK2pdYTANBgkqhkiG9w0BAQEFAASCAQCSFzlyi19uSOO4\ni1g0CDo8A7lnXdoc+Tp1z3SuhN70Ev2WGRpJmDMpTySOKr1Rea+q5Jbc+7EQH3BNtae47sN79GXI\nDd6E9WzdXZN4E/YkyJoi/HTI2ZqkAy6gSVsw5KfnUFc7wEJlzPIP/wQ6jx1IowY5STVDX+/XH6Yk\nTPNZ/HeHjG8tc9nrTMyzfmdpUbsmBciokVDlOj6nRT8pTYR9sahrQRTckINppy9vxiIBW9KYZrm8\ngn2s3WK9BLwQvi6xtQcc5PE21n4UkRFd5fIt7vlY1HXZ0g03GnXDiG4P5Ea8Jbpetg5iLOfRpP3t\n1V8m6Ta6wutXrJwydTUB0KKAMDwGCSqGSIb3DQEHATAdBglghkgBZQMEASoEEEOte9aiHSYrgPhQ\nHv64/YSAEMZTa6WzbkFZ/p/TZJriM38=\n-----END CMS-----";
+
+};
+
+instance of MSFT_Credential as $MSFT_Credential3ref
+{
+UserName = "Administrator";
+ Password = "-----BEGIN CMS-----\nMIIBogYJKoZIhvcNAQcDoIIBkzCCAY8CAQAxggFKMIIBRgIBADAuMBoxGDAWBgNVBAMMD0RFU0tU\nT1AtNU8zUTI0SAIQaU5XMALEOZtJIikOK2pdYTANBgkqhkiG9w0BAQEFAASCAQAxNInTEKtzB+5N\naaUkCr4NVBd6NtvHbjMUfdgZQ17hozeOxZr3ij6aFPkAy/vrayxIFo08hu5YLmAQeMEEsmtPjD7X\n58I59FLhNyvh+aPifqRjlSTg6ESVGhuSnEDU8Kg1yPsIBgIm48cJwZQ5kHcPzbMiCLuREoy4Ovh8\nrcWGHnmzVD8wkwKWws9ZGE1a7i+qirIkpEarqiMgQntPUkATaGmo4nw3vjI3MX855FN0tF9g1AcQ\nG+gnomnSdyxahrADoBJyJ2RMJVqnktyQ270qvP9uSPdihcQ7V+Tp7tdT8N2wtKPIR29V5k34g9Hb\nHfwIUhN8STDFKpJkl4JVqyd1MDwGCSqGSIb3DQEHATAdBglghkgBZQMEASoEEDnMR0QhAJqkUZg1\ny5oebgiAENqkW5oUutPHZKFKH/IatTE=\n-----END CMS-----";
+
+};
+
+instance of MSFT_xADDomainController as $MSFT_xADDomainController1ref
+{
+ModuleVersion = "3.0.0.0";
+ SourceInfo = "C:\\Users\\hemotzku\\Github\\AutomationDemo\\22_AD\\DSC\\hadc.ps1::120::9::xADDomainController";
+ ModuleName = "xActiveDirectory";
+ DomainAdministratorCredential = $MSFT_Credential2ref;
+ DomainName = "localtestdomain.local";
+ ResourceID = "[xADDomainController]SecondDC";
+ SafemodeAdministratorPassword = $MSFT_Credential3ref;
+
+DependsOn = {
+    "[xWaitForADDomain]DomainWait"};
+ ConfigurationName = "HADC";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="hemotzku";
+
+                        GenerationDate="03/28/2023 12:05:06";
+
+                        GenerationHost="DESKTOP-5O3Q24H";
+
+                        ContentType="PasswordEncrypted";
+
+                        Name="HADC";
+
+                    };

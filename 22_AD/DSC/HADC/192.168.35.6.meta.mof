@@ -1,0 +1,25 @@
+/*
+@TargetNode='192.168.35.6'
+@GeneratedBy=hemotzku
+@GenerationDate=03/28/2023 12:05:06
+@GenerationHost=DESKTOP-5O3Q24H
+*/
+
+instance of MSFT_DSCMetaConfiguration as $MSFT_DSCMetaConfiguration1ref
+{
+RebootNodeIfNeeded = True;
+ CertificateID = "C7268FD08F6156F923DE4B4067AEE153C59DBAC7";
+
+};
+
+instance of OMI_ConfigurationDocument
+{
+ Version="2.0.0";
+ MinimumCompatibleVersion = "1.0.0";
+ CompatibleVersionAdditionalProperties= { };
+ Author="hemotzku";
+ GenerationDate="03/28/2023 12:05:06";
+ GenerationHost="DESKTOP-5O3Q24H";
+ ContentType="PasswordEncrypted";
+ Name="HADC";
+};

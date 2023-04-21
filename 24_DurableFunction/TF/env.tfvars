@@ -1,0 +1,7 @@
+ResourceGroupName = "DurableFunction"
+ResourceGroupLocation = "West Europe"
+StorageAccountName = "funcapphenrikdurable"
+AppServicePlanName = "ConsumptionPlanASP"
+subscription_id = "0548f072-39c5-4986-864d-14d0395af3b7"
+tenant_id = "6d5f51c7-0ab4-4284-bfe2-4de74c81f332"
+FunctionAppName = "HenrikFuncApp1"
