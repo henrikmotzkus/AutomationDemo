@@ -1,3 +1,5 @@
+/*
+
 resource "azurerm_key_vault" "dckeyvault" {
   name                        = "kv-henrik-${var.environment}"
   location                    = azurerm_resource_group.adds_resource_group.location
@@ -42,6 +44,7 @@ resource "azurerm_key_vault" "dckeyvault" {
   }
 }
 
+
 resource "azurerm_key_vault_access_policy" "adds_policy" {
   for_each      = azurerm_windows_virtual_machine.vm
   key_vault_id  = azurerm_key_vault.dckeyvault.id
@@ -60,6 +63,7 @@ resource "azurerm_key_vault_access_policy" "adds_policy" {
       "ListIssuers", 
   ]
 }
+*/
 
 /*
 resource "azurerm_key_vault_access_policy" "client_id_policy" {
@@ -97,6 +101,7 @@ resource "azurerm_key_vault_access_policy" "client_id_policy" {
 }
 */
 
+/*
 resource "azurerm_key_vault_certificate" "dsccertificate" {
   name         = "dsccertificate"
   key_vault_id = azurerm_key_vault.dckeyvault.id
@@ -105,3 +110,5 @@ resource "azurerm_key_vault_certificate" "dsccertificate" {
     password = var.cert_password
   }
 }
+
+*/

@@ -1,3 +1,5 @@
+/*
+
 resource "azurerm_storage_account" "configurations" {
   name                     = "henrikconfigurations"
   resource_group_name      = azurerm_resource_group.adds_resource_group.name
@@ -21,3 +23,4 @@ resource "azurerm_storage_blob" "configblobs" {
   source                 = each.key
 }
 
+*/

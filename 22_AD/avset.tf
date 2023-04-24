@@ -71,17 +71,17 @@ resource "azurerm_windows_virtual_machine" "vm" {
   #   identity_ids = [azurerm_user_assigned_identity.avset_identity.id]
   # }
 
-  identity {
-    type = "SystemAssigned"
-  }
+  #identity {
+  #  type = "SystemAssigned"
+  #}
 
-  secret {
-    certificate {
-      store = "MY"
-      url = azurerm_key_vault_certificate.dsccertificate.secret_id
-    }
-    key_vault_id = azurerm_key_vault.dckeyvault.id
-  }
+  #secret {
+    #certificate {
+    #  store = "MY"
+    #  url = azurerm_key_vault_certificate.dsccertificate.secret_id
+    #}
+    #key_vault_id = azurerm_key_vault.dckeyvault.id
+  #}
 }
 
 # output "management_host_identity_object_id" {
@@ -106,6 +106,7 @@ resource "azurerm_role_assignment" "role_assignment_to_managed_id" {
 }
 */
 
+/*
 resource "azurerm_virtual_machine_extension" "gc" {
   for_each                   = azurerm_windows_virtual_machine.vm
   name                       = "AzurePolicyforWindows"
@@ -115,12 +116,12 @@ resource "azurerm_virtual_machine_extension" "gc" {
   type_handler_version       = "1.0"
   auto_upgrade_minor_version = "true"
 }
+*/
 
 
-
-resource "azurerm_virtual_machine_extension" "example" {
-  name                 = "hostname"
-  virtual_machine_id   = azurerm_virtual_machine.example.id
+resource "azurerm_virtual_machine_extension" "installadds" {
+  name                 = "installadds"
+  virtual_machine_id   = azurerm_windows_virtual_machine.vm[var.vmnames[0]].id
   publisher            = "Microsoft.Azure.Extensions"
   type                 = "CustomScript"
   type_handler_version = "2.0"
@@ -134,7 +135,7 @@ resource "azurerm_virtual_machine_extension" "example" {
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://gist.githubusercontent.com/mcasperson/c815ac880df481418ff2e199ea1d0a46/raw/5d4fc583b28ecb27807d8ba90ec5f636387b00a3/chocolatey.ps1"
+          "https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/22_AD/PS/install.ps1"
         ]
     }
   SETTINGS

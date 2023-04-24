@@ -33,6 +33,7 @@ resource "azurerm_resource_group_policy_assignment" "guest_config_policy_assignm
 */
 
 ############# DSC Config in VM deployen
+/*
 resource "azurerm_policy_virtual_machine_configuration_assignment" "dc_config" {
   for_each = azurerm_windows_virtual_machine.vm
   name                    = "dc_config_${each.value.name}"
@@ -45,3 +46,4 @@ resource "azurerm_policy_virtual_machine_configuration_assignment" "dc_config" {
     content_hash        = "${filesha256("DSC/${lower(each.key)}.zip")}"
   }
 }
+*/
