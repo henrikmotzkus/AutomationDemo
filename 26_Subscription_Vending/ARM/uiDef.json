@@ -1,0 +1,218 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
+    "handler": "Microsoft.Azure.CreateUIDef",
+    "version": "0.1.2-preview",
+    "parameters": {
+        "resourceTypes": [],
+        "basics": [
+            
+        ],
+        "steps": [
+            {
+                    "name": "basics",
+                    "label": "Basics",
+                    "elements": [
+                        {
+                            "name": "resourceScope",
+                            "type": "Microsoft.Common.ResourceScope"
+                        }
+                    ]
+            },
+            {
+                "name": "YourInfo",
+                "label": "Your personal info",
+                "elements": [
+                    {
+                        "name": "YourName",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Your Name",
+                        "subLabel": "",
+                        "defaultValue": "",
+                        "toolTip": "Your first and last name",
+                        "constraints": {
+                            "required": true,
+                            "regex": "",
+                            "validationMessage": "",
+                            "validations": []
+                        },
+                        "infoMessages": [],
+                        "visible": true
+                    },
+                    {
+                        "name": "YourEmail",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Your Email",
+                        "subLabel": "",
+                        "defaultValue": "",
+                        "toolTip": "Your business Email",
+                        "constraints": {
+                            "required": true,
+                            "regex": "",
+                            "validationMessage": "",
+                            "validations": []
+                        },
+                        "infoMessages": [],
+                        "visible": true
+                    },
+                    {
+                        "name": "enrollmentAccount",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Enrollment Account",
+                        "subLabel": "",
+                        "defaultValue": "654321",
+                        "toolTip": "EnrollmentAccount used for subscription billing",
+                        "constraints": {
+                            "required": true,
+                            "regex": "",
+                            "validationMessage": "",
+                            "validations": []
+                        },
+                        "infoMessages": [],
+                        "visible": true
+                    },
+                    {
+                        "name": "billingAccount",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Billing Account",
+                        "subLabel": "",
+                        "defaultValue": "123456",
+                        "toolTip": "BillingAccount used for subscription billing",
+                        "constraints": {
+                            "required": true,
+                            "regex": "",
+                            "validationMessage": "",
+                            "validations": []
+                        },
+                        "infoMessages": [],
+                        "visible": true
+                    },
+                    {
+                        "name": "subscriptionAlias",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Subscription Alias",
+                        "subLabel": "",
+                        "defaultValue": "",
+                        "toolTip": "The name of a subscription.",
+                        "constraints": {
+                            "required": true,
+                            "regex": "",
+                            "validationMessage": "",
+                            "validations": []
+                        },
+                        "infoMessages": [],
+                        "visible": true
+                    },
+                    {
+                        "name": "subscriptionWorkload",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "Subscription Workload",
+                        "subLabel": "",
+                        "defaultValue": "Production",
+                        "toolTip": "Workload type for the subscription",
+                        "constraints": {
+                            "required": true,
+                            "allowedValues": [
+                                {
+                                    "label": "Production",
+                                    "value": "Production"
+                                },
+                                {
+                                    "label": "DevTest",
+                                    "value": "DevTest"
+                                },
+                                {
+                                    "label": "Sandbox",
+                                    "value": "Sandbox"
+                                }
+                            ],
+                            "validations": []
+                        },
+                        "infoMessages": [],
+                        "visible": true
+                    }
+                ]
+            },
+            {
+                "name": "Billing",
+                "label": "Billing settings",
+                "elements": [
+                    {
+                        "name": "BillinInfo",
+                        "type": "Microsoft.Common.TextBlock",
+                        "visible": true,
+                        "options": {
+                            "text": "All costs resulting out of the use of this subscription must be billed to a cost center.",
+                            "link": {
+                                "label": "",
+                                "uri": ""
+                            }
+                        }
+                    },
+                    {
+                        "name": "CostCenter",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Please enter the PC code",
+                        "placeholder": "P12345678",
+                        "defaultValue": "",
+                        "toolTip": "If you don't have a PC code. Ask your manager.",
+                        "constraints": {
+                            "required": true,
+                            "regex": "^[a-z0-9A-Z]{10}$",
+                            "validationMessage": "Only alphanumeric characters are allowed, and the value must be 10 characters long."
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "MonthlyBudget",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "The monthly budget of this subscription.",
+                        "placeholder": "",
+                        "defaultValue": "",
+                        "toolTip": "You will be notified of you exceed monthly budget.",
+                        "constraints": {
+                            "required": true,
+                            "regex": "^[0-9]{1,5}$",
+                            "validationMessage": "Only numeric characters are allowed, and the value must be 1-5 characters long."
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "AutodeleteMonth",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "Delete the sandbox after x month",
+                        "defaultValue": "12",
+                        "toolTip": "Subscription will be deleted after this period of time",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "label": "1",
+                                    "value": "1"
+                                },
+                                {
+                                    "label": "6",
+                                    "value": "6"
+                                },
+                                {
+                                    "label": "12",
+                                    "value": "12"
+                                },
+                                {
+                                    "label": "24",
+                                    "value": "24"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "visible": "[equals(steps('basics').subscriptionWorkload, 'Sandbox')]"
+                    }
+                ]
+            }
+        ],
+        "outputs": {
+            "enrollmentAccount": "[basics('enrollmentAccount')]",
+            "billingAccount": "[basics('billingAccount')]",
+            "subscriptionAlias": "[basics('subscriptionAlias')]",
+            "subscriptionWorkload": "[basics('subscriptionWorkload')]"
+        }
+    }
+}

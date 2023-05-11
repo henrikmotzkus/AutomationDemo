@@ -1,0 +1,53 @@
+<VPNProfile>
+    <!--<EdpModeId>corp.contoso.com</EdpModeId>-->
+    <RememberCredentials>true</RememberCredentials>
+    <AlwaysOn>true</AlwaysOn>
+    <TrustedNetworkDetection></TrustedNetworkDetection>
+    <DeviceTunnel>false</DeviceTunnel>
+    <RegisterDNS>true</RegisterDNS>
+    <DnsSuffix>.e5testtenant.de</DnsSuffix>
+    <PluginProfile>
+        <ServerUrlList>wan.n20g8ooijzih3q0vmshdrbfp5.vpn.azure.com</ServerUrlList> 
+        <CustomConfiguration>
+            <AzVpnProfile xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/">
+                <any xmlns:d2p1="http://schemas.datacontract.org/2004/07/System.Xml" i:nil="true" />
+                <clientauth>
+                    <aad i:nil="false" />
+                    <cert>
+                        <hash i:nil="true" />
+                        <issuer>4a0a15afc52ca3b121f801ad59d62c22a0eb9014</issuer>
+                    </cert>
+                    <type>cert</type>
+                    <usernamepass i:nil="false" />
+                </clientauth>
+                <clientconfig i:nil="true">
+                    <dnsservers>
+                        <dnsserver>192.168.32.4</dnsserver>
+                    </dnsservers>
+                </clientconfig>
+                <name>P2S-VPN-VWAN</name>
+                <protocolconfig>
+                    <sslprotocolConfig>
+                        <transportprotocol>tcp</transportprotocol>
+                    </sslprotocolConfig>
+                </protocolconfig>
+                <serverlist>
+                    <ServerEntry>
+                        <displayname i:nil="true" />
+                        <fqdn>wan.n20g8ooijzih3q0vmshdrbfp5.vpn.azure.com</fqdn>
+                    </ServerEntry>
+                </serverlist>
+                <servervalidation>
+                    <Cert>
+                        <hash>A8985D3A65E5E5C4B2D7D66D40C6DD2FB19C5436</hash>
+                        <issuer i:nil="true" />
+                    </Cert>
+                    <serversecret>9fa7c6682a2b43674ace7acdde2b0890260d03d1310db1e459903b00e5cd902854cca113379579115dc4fd3369592cb86bf2d2f13fb7966152f57bf3592267ae9d96368f89fdae172faba4790070ea59ce1f6ce02ddf0ed18f320744ec2502b68f98fe3439a28f8fdb1b862d5b8b3d614718310d94d70cf1f5ad5751762656872580fb39d07bfc63db65f19663f10a83c17224742b021a01b02e9871aa690798aebc66a5bdaf1ef818ca91650926212bd974d57db546180d2cccbfb18360ea05e0229cff2d250bc52bb41fdc93da6f4eaf2d946462d16433944186d6fb08e20306d5871b123d821f54b4140764ed5d413778957093bc15a168b0a0c875710754</serversecret>
+                    <type>cert</type>
+                </servervalidation>
+                <version>1</version>
+            </AzVpnProfile>
+        </CustomConfiguration>
+        <PluginPackageFamilyName>Microsoft.AzureVpn_8wekyb3d8bbwe</PluginPackageFamilyName>
+    </PluginProfile>
+</VPNProfile>

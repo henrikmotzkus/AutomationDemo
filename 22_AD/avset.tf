@@ -122,23 +122,26 @@ resource "azurerm_virtual_machine_extension" "gc" {
 resource "azurerm_virtual_machine_extension" "installadds" {
   name                 = "installadds"
   virtual_machine_id   = azurerm_windows_virtual_machine.vm[var.vmnames[0]].id
-  publisher            = "Microsoft.Azure.Extensions"
-  type                 = "CustomScript"
-  type_handler_version = "2.0"
+  publisher            = "Microsoft.Compute"
+  type                 = "CustomScriptExtension"
+  type_handler_version = "1.10.9"
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./install.ps1; exit 0;\""
-    }
-  PROTECTED_SETTINGS
-
-  settings = <<SETTINGS
-    {
-        "fileUris": [
+      "commandToExecute": "powershell.exe -Command \"./install.ps1; exit 0;\"",
+      "fileUris": [
           "https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/22_AD/PS/install.ps1"
         ]
     }
-  SETTINGS
+  PROTECTED_SETTINGS
+
+  #settings = <<SETTINGS
+  #  {
+  #      "fileUris": [
+  #        "https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/22_AD/PS/install.ps1"
+  #      ]
+  #  }
+  #SETTINGS
 
   tags = {
     environment = var.environment
