@@ -11,6 +11,3 @@ MVP for Azure subscription creation in a landing zone
 
 https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2F26_Subscription_Vending%2FARM%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fhenrikmotzkus%2FAutomationDemo%2Fmain%2F26_Subscription_Vending%2FARM%2FuiDef.json
 
-
-
-https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/26_Subscription_Vending/ARM/azuredeploy.json
