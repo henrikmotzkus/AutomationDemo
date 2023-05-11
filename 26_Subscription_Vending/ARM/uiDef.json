@@ -11,7 +11,17 @@
                 "elements": [
                     {
                         "name": "resourceScope",
-                        "type": "Microsoft.Common.ResourceScope"
+                        "type": "Microsoft.Common.ResourceScope",
+                        "location": {
+                            "resourceTypes": [
+                                "microsoft.resources/resourcegroups"
+                            ],
+                            "allowedValues": [
+                                "australiacentral",
+                                "australiaeast",
+                                "australiasoutheast"
+                            ]
+                        }
                     }
                 ]
             },
