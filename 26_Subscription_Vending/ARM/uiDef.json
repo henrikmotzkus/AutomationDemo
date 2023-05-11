@@ -215,17 +215,18 @@
                     ]
                 }
             ]
-        }
-    },
-    "outputs":{
-        "parameters":{
-            "enrollmentAccount": "[steps('YourInfo').enrollmentAccount]",
-            "billingAccount": "[steps('YourInfo').billingAccount]",
-            "subscriptionAlias": "[steps('YourInfo').subscriptionAlias]",
-            "subscriptionWorkload": "[steps('YourInfo').subscriptionWorkload]"
         },
-        "kind": "ResourceGroup",
-        "location": "[steps('basics').resourceScope.location.name]",
-        "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]"
+        "outputs":{
+            "parameters":{
+                "enrollmentAccount": "[steps('YourInfo').enrollmentAccount]",
+                "billingAccount": "[steps('YourInfo').billingAccount]",
+                "subscriptionAlias": "[steps('YourInfo').subscriptionAlias]",
+                "subscriptionWorkload": "[steps('YourInfo').subscriptionWorkload]"
+            },
+            "kind": "ResourceGroup",
+            "location": "[steps('basics').resourceScope.location.name]",
+            "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]"
+        }
     }
+    
 }
