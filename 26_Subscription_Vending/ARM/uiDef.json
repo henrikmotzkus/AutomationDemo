@@ -8,16 +8,7 @@
             
         ],
         "steps": [
-            {
-                    "name": "basics",
-                    "label": "Basics",
-                    "elements": [
-                        {
-                            "name": "resourceScope",
-                            "type": "Microsoft.Common.ResourceScope"
-                        }
-                    ]
-            },
+           
             {
                 "name": "YourInfo",
                 "label": "Your personal info",
