@@ -255,11 +255,12 @@
         },
         "outputs":{
             "parameters":{
-                "vnetName": "[steps('VNET').VNETName]"
+                "vnetName": "[steps('VNET').VNETName]",
+                "location": "[steps('basics').resourceScope.location.name]"
             },
-            "kind": "ManagementGroup",
+            "kind": "ResourceGroup",
             "location": "[steps('basics').resourceScope.location.name]",
-            "managementGroupId": "[steps('basics').resourceScope.managementGroup.id]"
+            "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]"
         }
     }
     
