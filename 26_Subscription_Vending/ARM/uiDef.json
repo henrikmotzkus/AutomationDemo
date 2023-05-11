@@ -258,9 +258,8 @@
                 "vnetName": "[steps('VNET').VNETName]",
                 "location": "[steps('basics').resourceScope.location.name]"
             },
-            "kind": "ResourceGroup",
+            "kind": "Tenant",
             "location": "[steps('basics').resourceScope.location.name]",
-            "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]"
         }
     }
     
