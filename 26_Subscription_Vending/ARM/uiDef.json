@@ -4,9 +4,7 @@
     "version": "0.1.2-preview",
     "parameters": {
         "resourceTypes": [],
-        "basics": [
-            
-        ],
+      
         "steps": [
            
             {
