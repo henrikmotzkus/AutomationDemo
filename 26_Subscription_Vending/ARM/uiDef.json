@@ -6,14 +6,14 @@
         "basics": [],
         "steps": [
             {
-                    "name": "basics",
-                    "label": "Basics",
-                    "elements": [
-                        {
-                            "name": "resourceScope",
-                            "type": "Microsoft.Common.ResourceScope"
-                        }
-                    ]
+                "name": "basics",
+                "label": "Basics",
+                "elements": [
+                    {
+                        "name": "resourceScope",
+                        "type": "Microsoft.Common.ResourceScope"
+                    }
+                ]
             },
             {
                 "name": "YourInfo",
