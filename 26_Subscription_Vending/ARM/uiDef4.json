@@ -1,0 +1,124 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2021-09-09/uiFormDefinition.schema.json",
+    "view": {
+        "kind": "Form",
+        "properties": {
+            "title": "Test Form View",
+            "steps": [
+                {
+                    "name": "basics",
+                    "label": "Basics",
+                    "elements": [
+                        {
+                            "name": "resourceScope",
+                            "type": "Microsoft.Common.ResourceScope",
+                            "location": {
+                                "resourceTypes": []
+                            }
+                        },
+                        {
+                            "name": "enrollmentAccount",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Enrollment Account",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "EnrollmentAccount used for subscription billing",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "billingAccount",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Billing Account",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "BillingAccount used for subscription billing",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "subscriptionAlias",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Subscription Alias",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "Alias to assign to the subscription",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "subscriptionDisplayName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Subscription Display Name",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "Display name for the subscription",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "subscriptionWorkload",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Subscription Workload",
+                            "subLabel": "",
+                            "defaultValue": "Production",
+                            "toolTip": "Workload type for the subscription",
+                            "constraints": {
+                                "required": false,
+                                "allowedValues": [
+                                    {
+                                        "label": "Production",
+                                        "value": "Production"
+                                    },
+                                    {
+                                        "label": "DevTest",
+                                        "value": "DevTest"
+                                    }
+                                ],
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "outputs": {
+            "parameters": {
+                "enrollmentAccount": "[steps('basics').enrollmentAccount]",
+                "billingAccount": "[steps('basics').billingAccount]",
+                "subscriptionAlias": "[steps('basics').subscriptionAlias]",
+                "subscriptionDisplayName": "[steps('basics').subscriptionDisplayName]",
+                "subscriptionWorkload": "[steps('basics').subscriptionWorkload]"
+            },
+            "kind": "ManagementGroup",
+            "location": "[steps('basics').resourceScope.location.name]",
+            "managementGroupId": "[steps('basics').resourceScope.managementGroup.id]"
+        }
+    }
+}

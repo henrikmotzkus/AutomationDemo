@@ -13,14 +13,7 @@
                             "name": "resourceScope",
                             "type": "Microsoft.Common.ResourceScope",
                             "location": {
-                                "resourceTypes": [
-                                    "microsoft.resources/resourcegroups"
-                                ],
-                                "allowedValues": [
-                                    "australiacentral",
-                                    "australiaeast",
-                                    "australiasoutheast"
-                                ]
+                                "resourceTypes": []
                             }
                         }
                     ]
@@ -213,19 +206,60 @@
                             "visible": "[equals(steps('YourInfo').subscriptionWorkload, 'Sandbox')]"
                         }
                     ]
+                },
+                {
+                    "name":"FirstResourceGroup",
+                    "label":"The initial resource group in this subscription",
+                    "elements":[
+                        {
+                            "name": "ResourceGroupName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Name of the Resource Group",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        }
+                    ]
+                },
+                {
+                    "name":"VNET",
+                    "label":"The initial VNET",
+                    "elements":[
+                        {
+                            "name": "VNETName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Name VNET",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        }
+                    ]
                 }
             ]
         },
         "outputs":{
             "parameters":{
-                "enrollmentAccount": "[steps('YourInfo').enrollmentAccount]",
-                "billingAccount": "[steps('YourInfo').billingAccount]",
-                "subscriptionAlias": "[steps('YourInfo').subscriptionAlias]",
-                "subscriptionWorkload": "[steps('YourInfo').subscriptionWorkload]"
+                "vnetName": "[steps('VNET').VNETName]"
             },
-            "kind": "ResourceGroup",
+            "kind": "ManagementGroup",
             "location": "[steps('basics').resourceScope.location.name]",
-            "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]"
+            "managementGroupId": "[steps('basics').resourceScope.managementGroup.id]"
         }
     }
     
