@@ -209,10 +209,10 @@
             }
         ],
         "outputs": {
-            "enrollmentAccount": "[basics('enrollmentAccount')]",
-            "billingAccount": "[basics('billingAccount')]",
-            "subscriptionAlias": "[basics('subscriptionAlias')]",
-            "subscriptionWorkload": "[basics('subscriptionWorkload')]"
+            "enrollmentAccount": "[steps('basics').enrollmentAccount]",
+            "billingAccount": "[steps('basics').billingAccount]",
+            "subscriptionAlias": "[steps('basics').subscriptionAlias]",
+            "subscriptionWorkload": "[steps('basics').subscriptionWorkload]"
         }
     }
 }
