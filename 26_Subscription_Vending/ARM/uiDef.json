@@ -4,9 +4,18 @@
     "version": "0.1.2-preview",
     "parameters": {
         "resourceTypes": [],
-      
+        
         "steps": [
-           
+            {
+                    "name": "basics",
+                    "label": "Basics",
+                    "elements": [
+                        {
+                            "name": "resourceScope",
+                            "type": "Microsoft.Common.ResourceScope"
+                        }
+                    ]
+            },
             {
                 "name": "YourInfo",
                 "label": "Your personal info",
