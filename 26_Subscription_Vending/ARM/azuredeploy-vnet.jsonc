@@ -8,6 +8,18 @@
           "description": "VNet name"
         }
       },
+      "existingvnetName": {
+        "type": "string",
+        "metadata": {
+          "description": "existing VNet name"
+        }
+      },
+      "existingvnetResourceGroupName": {
+        "type": "string",
+        "metadata": {
+          "description": "existing VNet name"
+        }
+      },
       "vnetAddressPrefix": {
         "type": "string",
         "defaultValue": "10.0.0.0/16",
@@ -53,6 +65,7 @@
     },
     "resources": [
       {
+        // New VNET
         "type": "Microsoft.Network/virtualNetworks",
         "apiVersion": "2021-08-01",
         "name": "[parameters('vnetName')]",
@@ -77,6 +90,21 @@
               }
             }
           ]
+        }
+      },
+      {
+        //Peering
+        "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+        "apiVersion": "2021-02-01",
+        "name": "[format('{0}/peering-to-remote-vnet', parameters('vnetName'))]",
+        "properties": {
+          "allowVirtualNetworkAccess": true,
+          "allowForwardedTraffic": false,
+          "allowGatewayTransit": false,
+          "useRemoteGateways": false,
+          "remoteVirtualNetwork": {
+            "id": "[resourceId(parameters('existingvnetResourceGroupName'), 'Microsoft.Network/virtualNetworks', parameters('existingvnetName'))]"
+          }
         }
       }
     ]

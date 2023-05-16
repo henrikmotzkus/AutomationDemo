@@ -13,7 +13,12 @@
                             "name": "resourceScope",
                             "type": "Microsoft.Common.ResourceScope",
                             "location": {
-                                "resourceTypes": []
+                                "resourceTypes": [
+                                    "microsoft.resources/resourcegroups"
+                                ],
+                                "allowedValues": [
+                                    "westeurope"
+                                ]
                             }
                         }
                     ]
@@ -208,9 +213,9 @@
                     ]
                 },
                 {
-                    "name":"FirstResourceGroup",
-                    "label":"The initial resource group in this subscription",
-                    "elements":[
+                    "name": "FirstResourceGroup",
+                    "label": "The initial resource group in this subscription",
+                    "elements": [
                         {
                             "name": "ResourceGroupName",
                             "type": "Microsoft.Common.TextBox",
@@ -230,16 +235,28 @@
                     ]
                 },
                 {
-                    "name":"VNET",
-                    "label":"The initial VNET",
-                    "elements":[
+                    "name": "VNET",
+                    "label": "Network Configuration",
+                    "elements": [
+                        {
+                            "name": "Network COnfiguration Info",
+                            "type": "Microsoft.Common.TextBlock",
+                            "visible": true,
+                            "options": {
+                                "text": "If you need connection to an extising VNET choose it here. We creeate a peering.",
+                                "link": {
+                                    "label": "",
+                                    "uri": ""
+                                }
+                            }
+                        },
                         {
                             "name": "VNETName",
                             "type": "Microsoft.Common.TextBox",
                             "label": "Name VNET",
                             "subLabel": "",
                             "defaultValue": "",
-                            "toolTip": "",
+                            "toolTip": "Chosse a name for your first VNET in your subscription.",
                             "constraints": {
                                 "required": true,
                                 "regex": "",
@@ -248,19 +265,46 @@
                             },
                             "infoMessages": [],
                             "visible": true
+                        },
+                        {
+                            "name": "vnetResourceGroupSelector",
+                            "type": "Microsoft.Solutions.ResourceSelector",
+                            "label": "ResourceGroup of extisting VNE",
+                            "resourceType": "Microsoft.Network/ResourceGroup",
+                            "options": {
+                                "filter": {
+                                    "subscription": "onBasics",
+                                    "location": "onBasics"
+                                }
+                            }
+                        },
+                        {
+                            "name": "vnetSelector",
+                            "type": "Microsoft.Solutions.ResourceSelector",
+                            "label": "Peering to existing Virtual Network",
+                            "resourceType": "Microsoft.Network/virtualNetworks",
+                            "options": {
+                                "filter": {
+                                    "subscription": "onBasics",
+                                    "location": "onBasics"
+                                }
+                            }
                         }
                     ]
                 }
             ]
         },
-        "outputs":{
-            "parameters":{
+        "outputs": {
+            "parameters": {
                 "vnetName": "[steps('VNET').VNETName]",
-                "location": "[steps('basics').resourceScope.location.name]"
+                "location": "[steps('basics').resourceScope.location.name]",
+                "existingvnetName" :"steps('VNET').vnetSelector.name",
+                "existingvnetResourceGroupName":"steps('VNET').vnetSelector.resourceGroup"
+
             },
-            "kind": "Tenant",
+            "kind": "ResourceGroup",
             "location": "[steps('basics').resourceScope.location.name]",
+            "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]"
         }
     }
-    
 }
