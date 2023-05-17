@@ -1,10 +1,8 @@
-#Creat a Contoso Namespace
 apiVersion: v1
 kind: Namespace
 metadata:
   name: contosopos
 ---
-# Create Contoso Supermarket Service
 apiVersion: v1
 kind: Service
 metadata:
@@ -21,7 +19,6 @@ spec:
     targetPort: 5000
   type: LoadBalancer
 ---  
-# Create Contoso Supermarket Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -64,7 +61,6 @@ spec:
           ports:
             - containerPort: 5000
 ---
-# Create PostgreSQL Database Container with local storage
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -100,7 +96,6 @@ spec:
           hostPath:
             path: /var/postgresql-data
 ---
-# Postgre SQL Service
 apiVersion: v1
 kind: Service
 metadata:
