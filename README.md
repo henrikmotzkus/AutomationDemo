@@ -73,9 +73,9 @@ Disclaimer: This demo doesn't explain the concepts itself. It combines the vario
 
 Disclaimer 2: This is not an explanation of the Azure Service "Azure Automation". The service "Azure Automation" is a tool. This demo here is a comprehensive overview about all aspects of automating the Azure cloud.
 
-## 7 Demo steps
+## 7 Folder
 
-### 7.1 (Folder prefix 1) Deployment of an ARM Template on different scopes
+### Folder prefix 1: Deployment of an ARM Template on different scopes
 
 A deployment scope is the place where the deployment is running and placing the resources your're about to deploy in Azure.
 
@@ -84,7 +84,7 @@ A deployment scope is the place where the deployment is running and placing the 
     Instructions:    
     1. Run the commands in the powershell
 
-### 7.2 (Folder prefix 2) Deployment an ARM Template on the resource group level
+### Folder prefix 2: Deployment an ARM Template on the resource group level
 
 This deployment deploys a VM on the resource group scope. The VM password is securely stored in a kevvault and not hardcoded in the script. First you need to deploy that keyvault and its secret. And it shows a different method of parameter handling.
 
@@ -93,7 +93,7 @@ This deployment deploys a VM on the resource group scope. The VM password is sec
     Instructions:
     1. Run the commands in the powershell
 
-### 7.3 (Folder prefix 3) Deployment of a nested ARM template
+### Folder prefix 3: Deployment of a nested ARM template
 
 This deployment shows a combined deployment that is beeing rolled out on different scopes at the same time. And it shows that this can be achieved with a nested ARM script. Nesting script is a way to modularize your scripts.
 
@@ -102,7 +102,7 @@ This deployment shows a combined deployment that is beeing rolled out on differe
     Instructions: 
     1. Run the commands in the powershell
 
-### 7.4 (Folder prefix 4) Deployment of a script with a deployment runner like Azure function
+### Folder prefix 4: Deployment of a script with a deployment runner like Azure function
 
 This Azure function can deploy a ARM script
 
@@ -117,7 +117,7 @@ Purpose of is to demonstrate that you could leverage Azure function for nearly e
     4. Get the URL of the function
     5. Call the function via REST Call 
 
-### 7.5 (Folder prefix 5) Own UI definitions
+### Folder prefix 5: Own UI definitions
 
 Arm templates need to ingest parameters. With a UI definition you're able to create beautiful UIs on Azure to customize the customer experience. Especially in big companies a lot of information needs to be incorporated at the time of deployment.
 
@@ -126,7 +126,7 @@ As a central unit you can provide a self service UI for your customers.
     Instructions:
     1. Call the WebUrl in the deploy.ps1
 
-### 7.6 (Folder prefix 6) Azure DevTestLabs
+### Folder prefix 6: Azure DevTestLabs
 
 A DevTestLab in Azure is a curated environment where you as a central unit can offer your customers cloud environments in a self service fashion. Fully controlled and with budget limits activated. DevTestLabs can serv as a lab environment, dev environment, training environment. User are very limited and con only consume prepared resources.
 
@@ -138,7 +138,7 @@ A DevTestLab in Azure is a curated environment where you as a central unit can o
     3. Run the powershell command 
     4. Go to the portal and try out
 
-### 7.7 (Folder prefix 7) Managed applications
+### Folder prefix 7: Managed applications
 
 A managed app is a offering you can make on the Azure marketplace publicity. You as a company can offer your software solution as a managed service provider. Potential customer can deploy your solution in their subscription by a click.
 
@@ -147,7 +147,7 @@ A managed app is a offering you can make on the Azure marketplace publicity. You
     Instructions: 
     TODO
 
-### 7.8 (Folder prefix 8) Deploy a blueprint
+### Folder prefix 8: Deploy a blueprint
 
 With blueprints a central unit can provide ARM templates, assigned policies, assign roles, and assigned management groups as a UNIT. A internal "customer" can use the blueprint in order to roll out that blueprint. Blueprints are curated deployments that are beeing provided by a central cloud team for example..
 
@@ -157,7 +157,7 @@ With blueprints a central unit can provide ARM templates, assigned policies, ass
     1. Run the commands in the powershell. 
     2. Go to the portal an assign the blueprint manually
 
-### 7.9 (Folder prefix 9) Deployment of a Custom script Extension
+### Folder prefix 9: Deployment of a Custom script Extension
 
 This deploys a VM from the script out of step 2. And deploys a custom script extension (SCE) into the VM. A CSE is a deployment script that can be used to deploy additional scripts after the deployment of the VM itself. It is a imperative way of configuring the VM operating system.
 
@@ -166,7 +166,7 @@ This deploys a VM from the script out of step 2. And deploys a custom script ext
     Instructions: 
     1. Run the commands in the powershell
 
-### 7.10 (Folder prefix 10) Deployment of a template spec
+### Folder prefix 10: Deployment of a template spec
 
 A template spec can be used to modularize the ARM template and share it to the whole company via the Azure management portal. A Azure portal user can access the template spec and deploy it right away. This demo uses the script from step 2. And it uses a nested template out of step 10. Additional you can provide a own UI at deployment time. This is a beautiful method to setup a company wide self service Azure shop.
 
@@ -176,7 +176,7 @@ A template spec can be used to modularize the ARM template and share it to the w
     1. Run the commands in the powershell.
     2. Go to the portal an use the template spec there
 
-### 7.11 (Folder prefix 11) Deployment of a Managed App out of a service catalog
+### Folder prefix 11: Deployment of a Managed App out of a service catalog
 
 The service catalog is a company internal App store. Where you can place not only templates but curated apps for users. This method fits to situations where customers don't care about the apps' infrastructure but only consume the app.
 
@@ -188,7 +188,7 @@ This step uploads a managed app to the service catalog of an Azure environment.
     1. Run the commands in the powershell
     2. Go to the portal and deploy a app out of the service catalog manually
 
-### 7.12 (Folder prefix 12) Deployment in Azure with Terraform
+### Folder prefix 12: Deployment in Azure with Terraform
 
 Terraform is the defacto industry standard when it comes to cloud/infrastructure management with IaC. In this chapter I want to demo the various possibilities with Terraform and Azure.
 
@@ -232,7 +232,7 @@ Github Actions is "the" hottest shit in the moment. You could leverage TF (hotte
     1. Setup your Personal Access token in Github
     1. Run the commands in the deploy.ps1
 
-### 7.13 (Folder prefix 13) Code deployment with Github Actions
+### Folder prefix 13: Code deployment with Github Actions
 
 Github action is a pipeline enging that could be leveraged for code push to your hosting environment like Azure functions.
 
@@ -245,7 +245,7 @@ In step 4 you deployed a Azure function. The code deployment onto the Azure func
     2. Create a secret in the project on github with the name "AZUREAPPSERVICE_PUBLISHPROFILE_5DC798FB4A2C4E18A92AC6A29A7C3462" and insert the publish profile text into it.
     3. Push the workflow definiton to your github account. In our case you could push this repo to your own repo on github. 
 
-### 7.14 (Folder prefix 14) Code deployment with Azure DevOps
+### Folder prefix 14: Code deployment with Azure DevOps
 
 TODO 
 
@@ -258,7 +258,7 @@ You can deploy ARM script within the boundary of a development project with the 
     2. Upload Code
     3. Create a pipeline
 
-### 7.15 (Folder prefix 15) The Azure TeamCloud
+### Folder prefix 15: The Azure TeamCloud
 
 TODO
 
@@ -270,7 +270,7 @@ The TeamCloud is a community project spinned up by Markus Heiliger a colleague f
     1. Install the Azure CLI extension for TeamCloud
     1. Run the commands in the powershell
 
-### 7.16 (Folder prefix 16) Enterprise Scale Landing Zone (ESLZ)
+### Folder prefix 16: Enterprise Scale Landing Zone (ESLZ)
 
 Every company that enters Azure needs a landingzone where workload can be hosted. This is the most important preparation on front of every first Azure project. The landingzone defines Policies, Connectivity options, Structure, Billing, and many more aspects of the Azure cloud.
 
@@ -286,27 +286,46 @@ With the click on this button you will be redirected to the Azure management por
 
 [Here](https://github.com/Azure/Enterprise-Scale) you find the whole code base.
 
-### 7.17 (Folder prefix 17) Azure Automanage for Virtual machines
+### Folder prefix 17: Azure Automanage for Virtual machines
 
 TODO
 
-### 7.18 (Folder prefix 18) Event handling with Azure Automation and Event grid
+### Folder prefix 18: Event handling with Azure Automation and Event grid
 
 TODO
 
-### 7.19 (Folder prefix 19) Managing onprem infrastructure with Arc and ARM
+### Folder prefix 19: Managing onprem infrastructure with Arc and ARM
 
 TODO
 
-### 7.20 (Folder prefix 20) Executing PS in an ARM script
+### Folder prefix 20: Executing PS in an ARM script
 
 In case you're limited by the functionality of Azure ARM then think of using PowerShell scripts within your ARM script.
 
 [HERE MORE](https://github.com/henrikmotzkus/AutomationDemo/blob/main/20_PowerShellinARM/)
 
 
-### 7.21 (Folder prefix 21) Intune / MEM Automation with Logic Apps
+### Folder prefix 21: Intune / MEM Automation with Logic Apps
 
 Intune / MEM is a solution for managing endpoint devices. In big environments automation is crucial. When an endpoint becomes uncompliant a teams messages will be posted to a "emergency" Teams Channel.
 
 [HERE MORE](https://github.com/henrikmotzkus/AutomationDemo/blob/main/21_IntunewithLogicApp/)
+
+
+### Folder prefix 22:
+
+
+### Folder prefix 23:
+
+### Folder prefix 24:
+
+
+### Folder prefix 25:
+
+### Folder prefix 26:
+
+
+### Folder prefix 27:
+
+
+### Folder prefix 28: [Terraform deployment of a Azure subscription](https://github.com/henrikmotzkus/AutomationDemo/tree/main/28_LandingZone)
