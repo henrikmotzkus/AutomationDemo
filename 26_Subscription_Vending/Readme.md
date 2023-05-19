@@ -1,6 +1,6 @@
 # Azure Subscription Vending with TF Module
 
-MVP for Azure subscription creation in a landing zone
+>tl;dr MVP for Azure subscription creation 
 
 
 ## Demo wih TF
