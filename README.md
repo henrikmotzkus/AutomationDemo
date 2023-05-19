@@ -312,20 +312,27 @@ Intune / MEM is a solution for managing endpoint devices. In big environments au
 [HERE MORE](https://github.com/henrikmotzkus/AutomationDemo/blob/main/21_IntunewithLogicApp/)
 
 
-### Folder prefix 22:
+### Folder prefix 22:[Deploy two domain controller with TF](https://github.com/henrikmotzkus/AutomationDemo/tree/main/22_AD)
 
 
-### Folder prefix 23:
+### Folder prefix 23: [Using Azure vaulted backup ](https://github.com/henrikmotzkus/AutomationDemo/tree/main/23_Backup)
 
-### Folder prefix 24:
-
-
-### Folder prefix 25:
-
-### Folder prefix 26:
+### Folder prefix 24: [Using Azure durable functions](https://github.com/henrikmotzkus/AutomationDemo/tree/main/24_DurableFunction)
 
 
-### Folder prefix 27:
+### Folder prefix 25: [Replacing your P2S VPN with Azure](https://github.com/henrikmotzkus/AutomationDemo/tree/main/25_P2C-VPN-VWAN)
+
+
+
+### Folder prefix 26: [A Azure subscription vending machine](https://github.com/henrikmotzkus/AutomationDemo/tree/main/26_Subscription_Vending)
+
+>tl;dr Azure subscription creation with a custom UI in the Azure portal
+
+### Folder prefix 27: [Deply the ContosoPOS on a Windows 10 IoT](https://github.com/henrikmotzkus/AutomationDemo/tree/main/27_ContosoPos)
+
+> tl;dr This deploys the ContosoPOS demo solution on a AKS Edge Essential on a Windows 10 IoT Enterprise device
 
 
 ### Folder prefix 28: [Terraform deployment of a Azure subscription](https://github.com/henrikmotzkus/AutomationDemo/tree/main/28_LandingZone)
+
+>tl;dr When deploying an Azure subscription and subsequent ressources in the same script your need to tweak your code. 

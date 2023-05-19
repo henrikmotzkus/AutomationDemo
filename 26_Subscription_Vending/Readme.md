@@ -1,6 +1,6 @@
 # Azure Subscription Vending with TF Module
 
->tl;dr MVP for Azure subscription creation 
+>tl;dr Azure subscription creation 
 
 
 ## Demo wih TF
