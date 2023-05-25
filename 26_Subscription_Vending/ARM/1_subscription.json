@@ -30,25 +30,46 @@
             "metadata": {
                 "description": "Workload type for the subscription"
             }
+        },
+        "tags": {
+            "type": "object",
+            "defaultValue": {
+                "Environment": "Development",
+                "SRE-Team": "Henrik Motzkus",
+                "Cost-Center": "P123456789",
+                "Projektname": "ECE Go 2 Cloud"
+            }
+        },
+        "targetMgId": {
+            "type":"string"
         }
     },
     "resources": [
         {
             "scope": "/",
             "type": "Microsoft.Subscription/aliases",
-            "apiVersion": "2020-09-01",
+            "apiVersion": "2021-10-01",
             "name": "[parameters('subscriptionAlias')]",
             "properties": {
                 "workload": "[parameters('subscriptionWorkload')]",
                 "displayName": "[parameters('subscriptionAlias')]",
                 "billingScope": "[tenantResourceId('Microsoft.Billing/billingAccounts/enrollmentAccounts', parameters('billingAccount'), parameters('enrollmentAccount'))]"
-            }
+            },
+            "tags": "[parameters('tags')]"
+        },
+        {
+            "scope": "/",
+            "type": "Microsoft.Management/managementGroups/subscriptions",
+            "apiVersion": "2020-05-01",
+            "name": "[concat(parameters('targetMgId'), '/', reference(resourceId('Microsoft.Subscription/aliases', parameters('subscriptionAlias'))).subscriptionId]",
+            "properties": {}
         }
+       
     ],
     "outputs": {
         "subscriptionId": {
             "type": "string",
-            "value": "[reference(parameters('subscriptionAlias')).subscriptionId]"
+            "value": "[reference(resourceId('Microsoft.Subscription/aliases', parameters('subscriptionAlias'))).subscriptionId]"
         }
     }
 }

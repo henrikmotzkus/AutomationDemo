@@ -1,0 +1,35 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": { 
+        "enrollmentAccount":{
+            "value": "341847"
+          },
+          "billingAccount":{
+            "value": "8608480"
+          },
+          "subscriptionAlias":{
+            "value": "ARM-Example-2"
+          },
+          "subscriptionDisplayname":{
+            "value": "ARM Example 2"
+          },
+          "subscriptionWorkload":{
+            "value": "Production"
+          },
+          "resourceGroupName":{
+            "value":"demo2"
+          },
+          "location":{
+            "value":"westeurope"
+          },
+          "restags":{
+            "value": {
+              "Environment":"Development",
+              "SRE-Team":"Henrik Motzkus",
+              "Cost-Center":"P123456789",
+              "Projektname":"ECE Go 2 Cloud"
+            }
+          }
+    }
+  }
