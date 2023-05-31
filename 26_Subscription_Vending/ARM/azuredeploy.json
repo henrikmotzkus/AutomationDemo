@@ -1,0 +1,832 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-08-01/managementGroupDeploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "enrollmentAccount": {
+      "type": "string"
+    },
+    "billingAccount": {
+      "type": "string"
+    },
+    "subscriptionAlias": {
+      "type": "string"
+    },
+    "subscriptionDisplayName": {
+      "type": "string"
+    },
+    "subscriptionWorkload": {
+      "type": "string",
+      "allowedValues": [
+        "Production",
+        "DevTest"
+      ]
+    },
+    "resourceGroupName": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[deployment().location]"
+    },
+    "restags": {
+      "type": "object"
+    },
+    "budget": {
+      "type": "int"
+    },
+    "ContactEmail": {
+      "type": "array"
+    },
+    "targetMgId": {
+      "type": "string"
+    },
+    "principalid":{
+      "type":"string"
+    },
+    "vnetName": {
+      "type": "string"
+    },
+    "vnetAddressPrefix": {
+      "type": "string"
+    },
+    "subnet1Prefix": {
+      "type": "string"
+    },
+    "subnet1Name": {
+      "type": "string"
+    },
+    "subnet2Prefix": {
+      "type": "string"
+    },
+    "subnet2Name": {
+      "type": "string"
+    },
+    "hubvnet":{
+      "type":"string",
+      "defaultValue":"Hub"
+    },
+    "hubsubscriptionid":{
+      "type":"string",
+      "defaultValue":"0548f072-39c5-4986-864d-14d0395af3b7"
+    },
+    "hubresourcegroupname":{
+      "type":"string",
+      "defaultValue":"Network"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-10-01",
+      "name": "[format('create-{0}', parameters('subscriptionAlias'))]",
+      "location": "[deployment().location]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "Inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "billingAccount": {
+            "value": "[parameters('billingAccount')]"
+          },
+          "enrollmentAccount": {
+            "value": "[parameters('enrollmentAccount')]"
+          },
+          "subscriptionAlias": {
+            "value": "[parameters('subscriptionAlias')]"
+          },
+          "subscriptionDisplayName": {
+            "value": "[parameters('subscriptionDisplayName')]"
+          },
+          "subscriptionWorkload": {
+            "value": "[parameters('subscriptionWorkload')]"
+          },
+          "restags": {
+            "value": "[parameters('restags')]"
+          },
+          "budget": {
+            "value": "[parameters('budget')]"
+          },
+          "ContactEmail": {
+            "value": "[parameters('ContactEmail')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-08-01/managementGroupDeploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "parameters": {
+            "enrollmentAccount": {
+              "type": "string"
+            },
+            "billingAccount": {
+              "type": "string"
+            },
+            "subscriptionAlias": {
+              "type": "string"
+            },
+            "subscriptionDisplayName": {
+              "type": "string"
+            },
+            "subscriptionWorkload": {
+              "type": "string"
+            },
+            "restags": {
+              "type": "object"
+            },
+            "budget": {
+              "type": "int"
+            },
+            "ContactEmail": {
+              "type": "array"
+            }
+          },
+          "variables": {},
+          "resources": [
+            {
+              "type": "Microsoft.Subscription/aliases",
+              "apiVersion": "2020-09-01",
+              "scope": "/",
+              "name": "[parameters('subscriptionAlias')]",
+              "properties": {
+                "workload": "[parameters('subscriptionWorkload')]",
+                "displayName": "[parameters('subscriptionDisplayName')]",
+                "billingScope": "[tenantResourceId('Microsoft.Billing/billingAccounts/enrollmentAccounts', parameters('billingAccount'), parameters('enrollmentAccount'))]"
+              }
+            }
+          ],
+          "outputs": {
+            "subscriptionId": {
+              "type": "string",
+              "value": "[reference(tenantResourceId('Microsoft.Subscription/aliases', parameters('subscriptionAlias'))).subscriptionId]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-10-01",
+      "name": "[format('nested-createResourceGroup-{0}', parameters('resourceGroupName'))]",
+      "location": "[deployment().location]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "Inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "resourceGroupName": {
+            "value": "[parameters('resourceGroupName')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "subscriptionId": {
+            "value": "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Resources/deployments', format('create-{0}', parameters('subscriptionAlias')))).outputs.subscriptionId.value]"
+          },
+          "restags": {
+            "value": "[parameters('restags')]"
+          },
+          "budget": {
+            "value": "[parameters('budget')]"
+          },
+          "ContactEmail": {
+            "value": "[parameters('ContactEmail')]"
+          },
+          "subscriptionAlias": {
+            "value": "[parameters('subscriptionAlias')]"
+          },
+          "principalid": {
+            "value": "[parameters('principalid')]"
+          },
+          "vnetName": {
+            "value":"[parameters('vnetName')]"
+          },
+          "vnetAddressPrefix": {
+            "value":"[parameters('vnetAddressPrefix')]"
+          },
+          "subnet1Prefix": {
+            "value":"[parameters('subnet1Prefix')]"
+          },
+          "subnet1Name": {
+            "value":"[parameters('subnet1Name')]"
+          },
+          "subnet2Prefix": {
+            "value":"[parameters('subnet2Prefix')]"
+          },
+          "subnet2Name": {
+            "value":"[parameters('subnet2Name')]"
+          },
+          "hubvnet":{
+            "value":"[parameters('hubvnet')]"
+          },
+          "hubsubscriptionid":{
+            "value":"[parameters('hubsubscriptionid')]"
+          },
+          "hubresourcegroupname":{
+            "value":"[parameters('hubresourcegroupname')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-08-01/managementGroupDeploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "parameters": {
+            "subscriptionId": {
+              "type": "string"
+            },
+            "resourceGroupName": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[deployment().location]"
+            },
+            "restags": {
+              "type": "object"
+            },
+            "budget": {
+              "type": "int"
+            },
+            "ContactEmail": {
+              "type": "array"
+            },
+            "subscriptionAlias": {
+              "type": "string"
+            },
+            "principalid": {
+              "type": "string"
+            },
+            "vnetName": {
+              "type": "string"
+            },
+            "vnetAddressPrefix": {
+              "type": "string"
+            },
+            "subnet1Prefix": {
+              "type": "string"
+            },
+            "subnet1Name": {
+              "type": "string"
+            },
+            "subnet2Prefix": {
+              "type": "string"
+            },
+            "subnet2Name": {
+              "type": "string"
+            },
+            "hubvnet":{
+              "type":"string"
+            },
+            "hubsubscriptionid":{
+              "type":"string"
+            },
+            "hubresourcegroupname":{
+              "type":"string"
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2020-10-01",
+              "name": "create-RG",
+              "subscriptionId": "[parameters('subscriptionId')]",
+              "location": "[deployment().location]",
+              "properties": {
+                "expressionEvaluationOptions": {
+                  "scope": "inner"
+                },
+                "mode": "Incremental",
+                "parameters": {
+                  "resourceGroupName": {
+                    "value": "[parameters('resourceGroupName')]"
+                  },
+                  "location": {
+                    "value": "[parameters('location')]"
+                  },
+                  "restags": {
+                    "value": "[parameters('restags')]"
+                  }
+                },
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "parameters": {
+                    "resourceGroupName": {
+                      "type": "string",
+                      "metadata": {
+                        "description": "Name of the resourceGroup."
+                      }
+                    },
+                    "location": {
+                      "type": "string",
+                      "defaultValue": "[deployment().location]"
+                    },
+                    "restags": {
+                      "type": "object"
+                    }
+                  },
+                  "resources": [
+                    {
+                      "type": "Microsoft.Resources/resourceGroups",
+                      "apiVersion": "2021-04-01",
+                      "name": "[parameters('resourceGroupName')]",
+                      "location": "[parameters('location')]",
+                      "tags": "[parameters('restags')]"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2020-10-01",
+              "name": "create-storage",
+              "subscriptionId": "[parameters('subscriptionId')]",
+              "resourceGroup": "[parameters('resourceGroupName')]",
+              "properties": {
+                "expressionEvaluationOptions": {
+                  "scope": "inner"
+                },
+                "mode": "Incremental",
+                "parameters": {
+                  "location": {
+                    "value": "[parameters('location')]"
+                  },
+                  "restags": {
+                    "value": "[parameters('restags')]"
+                  }
+                },
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "parameters": {
+                    "location": {
+                      "type": "string",
+                      "defaultValue": "[resourceGroup().location]"
+                    },
+                    "restags": {
+                      "type": "object"
+                    }
+                  },
+                  "variables": {
+                    "storageAccountName": "[format('stor{0}', uniqueString(resourceGroup().id))]"
+                  },
+                  "resources": [
+                    {
+                      "type": "Microsoft.Storage/storageAccounts",
+                      "apiVersion": "2021-04-01",
+                      "name": "[variables('storageAccountName')]",
+                      "location": "[parameters('location')]",
+                      "kind": "StorageV2",
+                      "sku": {
+                        "name": "Standard_LRS"
+                      },
+                      "tags": "[parameters('restags')]"
+                    }
+                  ],
+                  "outputs": {
+                    "storageAccountId": {
+                      "type": "string",
+                      "value": "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2020-10-01",
+              "name": "move-sub",
+              "location": "[deployment().location]",
+              "properties": {
+                "expressionEvaluationOptions": {
+                  "scope": "Inner"
+                },
+                "mode": "Incremental",
+                "parameters": {
+                  "targetMgId": {
+                    "value": "BigBudget"
+                  },
+                  "subscriptionId": {
+                    "value": "[parameters('subscriptionId')]"
+                  }
+                },
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "parameters": {
+                    "targetMgId": {
+                      "type": "string"
+                    },
+                    "subscriptionId": {
+                      "type": "string"
+                    }
+                  },
+                  "resources": [
+                    {
+                      "scope": "/",
+                      "type": "Microsoft.Management/managementGroups/subscriptions",
+                      "apiVersion": "2020-05-01",
+                      "name": "[concat(parameters('targetMgId'), '/', parameters('subscriptionId'))]",
+                      "properties": {}
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2020-10-01",
+              "name": "ceate-budget",
+              "subscriptionId": "[parameters('subscriptionId')]",
+              "location": "[deployment().location]",
+              "properties": {
+                "expressionEvaluationOptions": {
+                  "scope": "Inner"
+                },
+                "mode": "Incremental",
+                "parameters": {
+                  "budget": {
+                    "value": "[parameters('budget')]"
+                  },
+                  "ContactEmail": {
+                    "value": "[parameters('ContactEmail')]"
+                  },
+                  "subscriptionAlias": {
+                    "value": "[parameters('subscriptionAlias')]"
+                  },
+                  "subscriptionId": {
+                    "value": "[parameters('subscriptionId')]"
+                  }
+                },
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "parameters": {
+                    "budget": {
+                      "type": "int"
+                    },
+                    "ContactEmail": {
+                      "type": "array"
+                    },
+                    "startDateUtcNow2": {
+                      "type": "string",
+                      "defaultValue": "[utcNow('u')]"
+                    },
+                    "subscriptionAlias": {
+                      "type": "string"
+                    },
+                    "subscriptionId": {
+                      "type": "string"
+                    }
+                  },
+                  "variables": {
+                    "nowplus1month": "[dateTimeAdd(parameters('startDateUtcNow2'), 'P1M')]",
+                    "startDate": "[concat(substring(variables('nowplus1month'), 0, 7), '-01')]"
+                  },
+                  "outputs": {
+                    "startDate": {
+                      "type": "string",
+                      "value": "[variables('startDate')]"
+                    }
+                  },
+                  "resources": [
+                    {
+                      "type": "Microsoft.Consumption/budgets",
+                      "apiVersion": "2021-10-01",
+                      "name": "StandardBudget",
+                      "properties": {
+                        "timePeriod": {
+                          "startDate": "[variables('startDate')]"
+                        },
+                        "timeGrain": "Monthly",
+                        "amount": "[parameters('budget')]",
+                        "category": "Cost",
+                        "notifications": {
+                          "NotificationForExceededBudget1": {
+                            "enabled": true,
+                            "operator": "GreaterThan",
+                            "threshold": "75",
+                            "contactEmails": "[parameters('ContactEmail')]"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2020-10-01",
+              "name": "create-tags",
+              "subscriptionId": "[parameters('subscriptionId')]",
+              "location": "[deployment().location]",
+              "properties": {
+                "expressionEvaluationOptions": {
+                  "scope": "Inner"
+                },
+                "mode": "Incremental",
+                "parameters": {
+                  "restags":{
+                    "value": "[parameters('restags')]"
+                  }
+                },
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "parameters": {
+                    "restags": {
+                      "type": "object"
+                    }
+                  },
+                  "variables": {
+                  },
+                  "outputs": {
+                  },
+                  "resources": [
+                    {
+                      "type": "Microsoft.Resources/tags",
+                      "apiVersion": "2020-06-01",
+                      "name": "default",
+                      "properties": {
+                          "tags": "[parameters('restags')]"
+                      }
+                  }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2020-10-01",
+              "name": "create-RoleAssigment",
+              "subscriptionId": "[parameters('subscriptionId')]",
+              "location": "[deployment().location]",
+              "properties": {
+                "expressionEvaluationOptions": {
+                  "scope": "inner"
+                },
+                "mode": "Incremental",
+                "parameters": {
+                  "principalid": {
+                    "value": "[parameters('principalid')]"
+                  }
+                },
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "parameters": {
+                    "principalid":{
+                      "type":"string"
+                    },
+                    "roleassigmentguid":{
+                      "type":"string",
+                      "defaultValue":"[newGuid()]"
+                    }
+                  },
+                  "resources": [
+                    {
+                      "type": "Microsoft.Authorization/roleAssignments",
+                      "apiVersion": "2022-04-01",
+                      "name": "[parameters('roleassigmentguid')]",
+                      "properties": {
+                          "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', 'b24988ac-6180-42a0-ab88-20f7382dd24c')]",
+                          "principalId": "[parameters('principalid')]"
+                      }
+                  }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2020-10-01",
+              "name": "create-VNET",
+              "subscriptionId": "[parameters('subscriptionId')]",
+              "resourceGroup": "[parameters('resourceGroupName')]",
+              "properties": {
+                "expressionEvaluationOptions": {
+                  "scope": "inner"
+                },
+                "mode": "Incremental",
+                  "parameters": {
+                    "vnetName": {
+                      "value":"[parameters('vnetName')]"
+                    },
+                    "vnetAddressPrefix": {
+                      "value":"[parameters('vnetAddressPrefix')]"
+                    },
+                    "subnet1Prefix": {
+                      "value":"[parameters('subnet1Prefix')]"
+                    },
+                    "subnet1Name": {
+                      "value":"[parameters('subnet1Name')]"
+                    },
+                    "subnet2Prefix": {
+                      "value":"[parameters('subnet2Prefix')]"
+                    },
+                    "subnet2Name": {
+                      "value":"[parameters('subnet2Name')]"
+                    },
+                    "location": {
+                      "value":"[deployment().location]"
+                    },
+                    "hubvnet":{
+                      "value":"[parameters('hubvnet')]"
+                    },
+                    "hubsubscriptionid":{
+                      "value":"[parameters('hubsubscriptionid')]"
+                    },
+                    "hubresourcegroupname":{
+                      "value":"[parameters('hubresourcegroupname')]"
+                    }
+                },
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "parameters": {
+                    "vnetName": {
+                      "type": "string"
+                    },
+                    "vnetAddressPrefix": {
+                      "type": "string"
+                    },
+                    "subnet1Prefix": {
+                      "type": "string"
+                    },
+                    "subnet1Name": {
+                      "type": "string"
+                    },
+                    "subnet2Prefix": {
+                      "type": "string"
+                    },
+                    "subnet2Name": {
+                      "type": "string"
+                    },
+                    "location":{
+                      "type":"string"
+                    },
+                    "hubvnet":{
+                      "type":"string"
+                    },
+                    "hubsubscriptionid":{
+                      "type":"string"
+                    },
+                    "hubresourcegroupname":{
+                      "type":"string"
+                    }
+                  },
+                  "resources": [
+                    {
+                      "type": "Microsoft.Network/virtualNetworks",
+                      "apiVersion": "2021-08-01",
+                      "name": "[parameters('vnetName')]",
+                      "location": "[parameters('location')]",
+                      "properties": {
+                        "addressSpace": {
+                          "addressPrefixes": [
+                            "[parameters('vnetAddressPrefix')]"
+                          ]
+                        },
+                        "subnets": [
+                          {
+                            "name": "[parameters('subnet1Name')]",
+                            "properties": {
+                              "addressPrefix": "[parameters('subnet1Prefix')]"
+                            }
+                          },
+                          {
+                            "name": "[parameters('subnet2Name')]",
+                            "properties": {
+                              "addressPrefix": "[parameters('subnet2Prefix')]"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+                      "apiVersion": "2020-05-01",
+                      "name": "[format('{0}/{1}', parameters('vnetName'), format('{0}-{1}', parameters('vnetName'), parameters('hubvnet')))]",
+                      "properties": {
+                        "allowVirtualNetworkAccess": true,
+                        "allowForwardedTraffic": false,
+                        "allowGatewayTransit": false,
+                        "useRemoteGateways": false,
+                        "remoteVirtualNetwork": {
+                          "id": "[concat('/subscriptions/',parameters('hubsubscriptionid'),'/resourceGroups/',parameters('hubresourcegroupname'),'/providers/Microsoft.Network/virtualNetworks/', parameters('hubvnet'))]"
+                        }
+                      },
+                      "dependsOn": [
+                        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2020-10-01",
+              "name": "create-hubvnetpeering",
+              "subscriptionId": "[parameters('hubsubscriptionid')]",
+              "resourceGroup": "[parameters('hubresourcegroupname')]",
+              "properties": {
+                "expressionEvaluationOptions": {
+                  "scope": "inner"
+                },
+                "mode": "Incremental",
+                  "parameters": {
+                    "location": {
+                      "value":"[deployment().location]"
+                    },
+                    "hubvnet":{
+                      "value":"[parameters('hubvnet')]"
+                    },
+                    "hubsubscriptionid":{
+                      "value":"[parameters('hubsubscriptionid')]"
+                    },
+                    "hubresourcegroupname":{
+                      "value":"[parameters('hubresourcegroupname')]"
+                    },
+                    "spokevnet":{
+                      "value":"[parameters('vnetName')]"
+                    },
+                    "spokesubscriptionid":{
+                      "value":"[parameters('subscriptionId')]"
+                    },
+                    "spokeresourcegroupname":{
+                      "value":"[parameters('resourceGroupName')]"
+                    }
+                },
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "parameters": {
+                    "location":{
+                      "type":"string"
+                    },
+                    "hubvnet":{
+                      "type":"string"
+                    },
+                    "hubsubscriptionid":{
+                      "type":"string"
+                    },
+                    "hubresourcegroupname":{
+                      "type":"string"
+                    },
+                    "spokevnet":{
+                      "type":"string"
+                    },
+                    "spokesubscriptionid":{
+                      "type":"string"
+                    },
+                    "spokeresourcegroupname":{
+                      "type":"string"
+                    }
+                  },
+                  "resources": [
+                    {
+                      "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+                      "apiVersion": "2020-05-01",
+                      "name": "[format('{0}/{1}', parameters('hubvnet'), format('{0}-{1}', parameters('hubvnet'), parameters('spokevnet')))]",
+                      "properties": {
+                        "allowVirtualNetworkAccess": true,
+                        "allowForwardedTraffic": false,
+                        "allowGatewayTransit": false,
+                        "useRemoteGateways": false,
+                        "remoteVirtualNetwork": {
+                          "id": "[concat('/subscriptions/',parameters('spokesubscriptionid'),'/resourceGroups/',parameters('spokeresourcegroupname'),'/providers/Microsoft.Network/virtualNetworks/', parameters('spokevnet'))]"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "outputs": {
+            "storageAccountId": {
+              "type": "string",
+              "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', parameters('subscriptionId'), parameters('resourceGroupName')), 'Microsoft.Resources/deployments', 'create-storage')).outputs.storageAccountId.value]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[extensionResourceId(managementGroup().id, 'Microsoft.Resources/deployments', format('create-{0}', parameters('subscriptionAlias')))]"
+      ]
+    }
+  ],
+  "outputs": {
+    "subscriptionId": {
+      "type": "string",
+      "value": "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Resources/deployments', format('create-{0}', parameters('subscriptionAlias')))).outputs.subscriptionId.value]"
+    },
+    "storageAccountId": {
+      "type": "string",
+      "value": "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Resources/deployments', format('nested-createResourceGroup-{0}', parameters('resourceGroupName')))).outputs.storageAccountId.value]"
+    }
+  }
+}
