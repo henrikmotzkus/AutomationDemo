@@ -38,10 +38,23 @@ Creates the Azure resources
 The subscription will inherit the policies and roles 
 
 #>
-New-AzManagementGroupDeployment `
-  -Location "westeurope" `
-  -TemplateFile ".\azuredeploy.json" `
-  -TemplateParameterFile ".\azuredeploy.parameters.json" `
-  -ManagementGroupId "BigBudget" `
-  -principalid $principalid.id
 
+function Deploy-ARM {
+  param (
+  )
+    $deploymentname = [DateTime]::UtcNow.ToString('yyMMdd-hhmm')
+    $projectprefix = "DM3XF"
+    $deploymentnameprefix = $deploymentname + "-" + $projectprefix
+    $deploymentnameprefix
+    New-AzManagementGroupDeployment `
+      -Location "westeurope" `
+      -TemplateFile ".\azuredeploy.json" `
+      -TemplateParameterFile ".\azuredeploy.parameters.json" `
+      -ManagementGroupId "BigBudget" `
+      -principalid $principalid.id `
+      -deploymentnameprefix $deploymentnameprefix `
+      -name $deploymentnameprefix `
+      -projectprefix $projectprefix
+}  
+
+Deploy-ARM

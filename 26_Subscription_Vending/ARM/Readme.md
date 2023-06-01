@@ -11,11 +11,16 @@
 7. Everything is tagged
 8. Creates a budget on the subscription
 
-
 ## Open points
 
-1. Better naming. Include a Projekt prefix into every resource
-2. VNET settings: DNS, UDR
+ok 1. Better naming. Include a Projekt prefix into every resource
+2. VNET settings:  UDR
 3. Service Health alerts/ Advisor alerts for Subscription
-4. DNS private resolver VNET link to spoke VNET
+ok4. DNS private resolver VNET link to spoke VNET
+5. Activity Logs in ein zentrales Log Analytics
+6. Resource lock on resource group (read-only)
 
+## Instructions
+
+1. Run setup.ps1. This creates a AAD group. This step is only available through powershell. 
+2. Deploy ARM script. Change parameters accordingly to your project requirements

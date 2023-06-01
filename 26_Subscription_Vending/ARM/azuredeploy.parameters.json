@@ -1,64 +1,59 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": { 
-        "enrollmentAccount":{
-            "value": "341847"
-          },
-          "billingAccount":{
-            "value": "8608480"
-          },
-          "subscriptionAlias":{
-            "value": "ARM-Example-2"
-          },
-          "subscriptionDisplayname":{
-            "value": "ARM Example 2"
-          },
-          "subscriptionWorkload":{
-            "value": "Production"
-          },
-          "resourceGroupName":{
-            "value":"demo2"
-          },
-          "location":{
-            "value":"westeurope"
-          },
-          "restags":{
-            "value": {
-              "Environment":"Development",
-              "SRE-Team":"AZR-SUB-IT-ANP_DWH-DEV",
-              "Cost-Center":"P123456789",
-              "Projektname":"ECE Go 2 Cloud",
-              "ContactEmail":"henrik.motzkus@microsoft.com"
-            }
-          },
-          "budget":{
-            "value": 2000
-          },
-          "ContactEmail":{
-            "value": ["henrik.motzkus@microsoft.com"]
-          },
-          "targetMgId":{
-            "value": "BigBudget"
-          },
-          "vnetName": {
-            "value":"workload"
-          },
-          "vnetAddressPrefix": {
-            "value":"10.0.0.0/24"
-          },
-          "subnet1Prefix": {
-            "value":"10.0.0.0/25"
-          },
-          "subnet1Name": {
-            "value":"default1"
-          },
-          "subnet2Prefix": {
-            "value":"10.0.0.128/25"
-          },
-          "subnet2Name": {
-            "value":"default2"
-          }
-
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "subscriptionAlias": {
+      "value": "ARM-Example-2"
+    },
+    "subscriptionDisplayname": {
+      "value": "ARM Example 2"
+    },
+    "subscriptionWorkload": {
+      "value": "Production"
+    },
+    "resourceGroupName": {
+      "value": "demo2"
+    },
+    "location": {
+      "value": "westeurope"
+    },
+    "restags": {
+      "value": {
+        "Environment": "Development",
+        "SRE-Team": "AZR-SUB-IT-ANP_DWH-DEV",
+        "Cost-Center": "P123456789",
+        "Projektname": "ECE Go 2 Cloud",
+        "ContactEmail": "henrik.motzkus@microsoft.com"
+      }
+    },
+    "budget": {
+      "value": 2000
+    },
+    "ContactEmail": {
+      "value": [
+        "henrik.motzkus@microsoft.com"
+      ]
+    },
+    "targetMgId": {
+      "value": "BigBudget"
+    },
+    "vnetName": {
+      "value": "workload"
+    },
+    "vnetAddressPrefix": {
+      "value": "10.0.0.0/24"
+    },
+    "subnet1Prefix": {
+      "value": "10.0.0.0/25"
+    },
+    "subnet1Name": {
+      "value": "default1"
+    },
+    "subnet2Prefix": {
+      "value": "10.0.0.128/25"
+    },
+    "subnet2Name": {
+      "value": "default2"
     }
   }
+}
