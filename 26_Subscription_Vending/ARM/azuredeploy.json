@@ -109,9 +109,6 @@
           },
           "subscriptionWorkload": {
             "value": "[parameters('subscriptionWorkload')]"
-          },
-          "projectprefix": {
-            "value": "[parameters('projectprefix')]"
           }
         },
         "template": {
@@ -132,13 +129,9 @@
             },
             "subscriptionWorkload": {
               "type": "string"
-            },
-            "projectprefix": {
-              "type": "string"
             }
           },
           "variables": {
-            "subscriptionalias": "[concat(parameters('projectprefix'),'-sub')]"
           },
           "resources": [
             {
@@ -688,9 +681,7 @@
                     "nowplus1month": "[dateTimeAdd(parameters('startDateUtcNow2'), 'P1M')]",
                     "startDate": "[concat(substring(variables('nowplus1month'), 0, 7), '-01')]",
                     "actiongroupname": "[concat('actiongroup-',parameters('projectprefix'))]",
-                    "advisorname": "[concat('advisor-',parameters('projectprefix'))]",
-                    "storageAccountName": "[concat('sa',tolower(parameters('projectprefix')))]"
-
+                    "advisorname": "[concat('advisor-',parameters('projectprefix'))]"
                   },
                   "outputs": {
                     "startDate": {
@@ -826,20 +817,8 @@
                   "projectprefix": {
                     "value": "[parameters('projectprefix')]"
                   },
-                  "location": {
-                    "value": "[deployment().location]"
-                  },
                   "hubvnet": {
                     "value": "[parameters('hubvnet')]"
-                  },
-                  "hubsubscriptionid": {
-                    "value": "[parameters('hubsubscriptionid')]"
-                  },
-                  "hubresourcegroupname": {
-                    "value": "[parameters('hubresourcegroupname')]"
-                  },
-                  "spokevnet": {
-                    "value": "[parameters('vnetName')]"
                   },
                   "spokesubscriptionid": {
                     "value": "[parameters('subscriptionId')]"
@@ -849,9 +828,6 @@
                   },
                   "vnetName": {
                     "value": "[parameters('vnetName')]"
-                  },
-                  "routes": {
-                    "value": "[parameters('routes')]"
                   }
                 },
                 "template": {
@@ -861,19 +837,7 @@
                     "projectprefix": {
                       "type": "string"
                     },
-                    "location": {
-                      "type": "string"
-                    },
                     "hubvnet": {
-                      "type": "string"
-                    },
-                    "hubsubscriptionid": {
-                      "type": "string"
-                    },
-                    "hubresourcegroupname": {
-                      "type": "string"
-                    },
-                    "spokevnet": {
                       "type": "string"
                     },
                     "spokesubscriptionid": {
@@ -888,9 +852,6 @@
                     "forwardingRulesetName": {
                       "type": "string",
                       "defaultValue": "to-onprem"
-                    },
-                    "routes": {
-                      "type": "array"
                     }
                   },
                   "variables": {

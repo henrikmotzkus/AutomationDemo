@@ -1,0 +1,89 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "linkedTemplate",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/henrikmotzkus/AutomationDemo/main/26_Subscription_Vending/ARM/azuredeploy.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "subscriptionAlias": {
+                        "value": "ARM-Example-2"
+                    },
+                    "subscriptionDisplayname": {
+                        "value": "ARM Example 2"
+                    },
+                    "subscriptionWorkload": {
+                        "value": "Production"
+                    },
+                    "location": {
+                        "value": "westeurope"
+                    },
+                    "restags": {
+                        "value": {
+                            "Environment": "Development",
+                            "SRE-Team": "AZR-SUB-IT-ANP_DWH-DEV",
+                            "Cost-Center": "P123456789",
+                            "Projektname": "ECE Go 2 Cloud",
+                            "ContactEmail": "henrik.motzkus@microsoft.com"
+                        }
+                    },
+                    "budget": {
+                        "value": 2000
+                    },
+                    "ContactEmail": {
+                        "value": [
+                            "henrik.motzkus@microsoft.com"
+                        ]
+                    },
+                    "targetmgid": {
+                        "value": "BigBudget"
+                    },
+                    "vnetAddressPrefix": {
+                        "value": "10.0.0.0/24"
+                    },
+                    "subnet1Prefix": {
+                        "value": "10.0.0.0/25"
+                    },
+                    "subnet2Prefix": {
+                        "value": "10.0.0.128/25"
+                    },
+                    "routes": {
+                        "value": [
+                            {
+                                "name": "defaulttorouter",
+                                "addressPrefix": "0.0.0.0/0",
+                                "hasBgpOverride": "true",
+                                "nextHopIpAddress": "192.168.30.1",
+                                "nextHopType": "VirtualAppliance"
+                            },
+                            {
+                                "name": "defaulttorouter2",
+                                "addressPrefix": "192.168.30.0/24",
+                                "hasBgpOverride": "true",
+                                "nextHopIpAddress": "192.168.30.1",
+                                "nextHopType": "VirtualAppliance"
+                            }
+                        ]
+                    },
+                    "projectprefix": {
+                        "value": "DM3XF"
+                    },
+                    "deploymentnameprefix": {
+                        "value": "230607-0715-DM3XF"
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {
+    }
+}
