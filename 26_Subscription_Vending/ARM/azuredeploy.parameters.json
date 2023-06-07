@@ -11,9 +11,6 @@
     "subscriptionWorkload": {
       "value": "Production"
     },
-    "resourceGroupName": {
-      "value": "demo2"
-    },
     "location": {
       "value": "westeurope"
     },
@@ -34,11 +31,8 @@
         "henrik.motzkus@microsoft.com"
       ]
     },
-    "targetMgId": {
+    "targetmgid": {
       "value": "BigBudget"
-    },
-    "vnetName": {
-      "value": "workload"
     },
     "vnetAddressPrefix": {
       "value": "10.0.0.0/24"
@@ -46,14 +40,32 @@
     "subnet1Prefix": {
       "value": "10.0.0.0/25"
     },
-    "subnet1Name": {
-      "value": "default1"
-    },
     "subnet2Prefix": {
       "value": "10.0.0.128/25"
     },
-    "subnet2Name": {
-      "value": "default2"
+    "routes":{
+      "value":[
+        {
+          "name":"defaulttorouter",
+          "addressPrefix":"0.0.0.0/0",
+          "hasBgpOverride":"true",
+          "nextHopIpAddress":"192.168.30.1",
+          "nextHopType":"VirtualAppliance"
+        },
+        {
+          "name":"defaulttorouter2",
+          "addressPrefix":"192.168.30.0/24",
+          "hasBgpOverride":"true",
+          "nextHopIpAddress":"192.168.30.1",
+          "nextHopType":"VirtualAppliance"
+        }
+      ]
+    },
+    "projectprefix": {
+        "value": "" // TODO: Fill in parameter value
+    },
+    "deploymentnameprefix": {
+        "value": "" // TODO: Fill in parameter value
     }
   }
 }

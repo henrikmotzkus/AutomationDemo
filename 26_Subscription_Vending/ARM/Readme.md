@@ -1,4 +1,5 @@
 # Subscription vending with ARM templates
+This deploys a subscription with ARM in a existing landing zone. Purpose speed and uniformity.
 
 ## Componentents that will be deployed
 
@@ -11,13 +12,13 @@
 7. Everything is tagged
 8. Creates a budget on the subscription
 
-## Open points
+## Open requirements
 
-ok 1. Better naming. Include a Projekt prefix into every resource
-2. VNET settings:  UDR
-3. Service Health alerts/ Advisor alerts for Subscription
-ok4. DNS private resolver VNET link to spoke VNET
-5. Activity Logs in ein zentrales Log Analytics
+done 1. Better naming. Include a Projekt prefix into every resource
+done 2. VNET settings:  UDR
+done 3. Service Health alerts/ Advisor alerts for Subscription
+done 4. DNS private resolver VNET link to spoke VNET
+done 5. Activity Logs in ein zentrales Log Analytics
 6. Resource lock on resource group (read-only)
 
 ## Instructions
